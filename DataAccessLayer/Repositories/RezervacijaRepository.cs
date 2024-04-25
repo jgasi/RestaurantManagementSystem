@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EntitiesLayer.Entities;
+
+namespace DataAccessLayer.Repositories
+{
+    public class RezervacijaRepository : Repository<Rezervacija>
+    {
+        public RezervacijaRepository() : base(new RestaurantDatabaseModel())
+        {
+            
+        }
+
+        public override IQueryable<Rezervacija> GetAll()
+        {
+            var query = from r in Entities
+                        select r;
+
+            return query;
+        }
+
+        public override int Add(Rezervacija entity, bool saveChanges = true)
+        {
+            var korisnik = Context.Korisnik.SingleOrDefault(k => k.id_korisnik == entity.Korisnik.id_korisnik);
+            var stol = Context.Stol.SingleOrDefault(s => s.id_stol == entity.Stol.id_stol);
+
+            var rezervacija = new Rezervacija
+            {
+                datum_vrijeme = entity.datum_vrijeme,
+                Korisnik = korisnik,
+                Stol = stol
+            };
+
+            Entities.Add(rezervacija);
+            if(saveChanges)
+            {
+                return SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public override int Update(Rezervacija entity, bool saveChanges = true)
+        {
+            var korisnik = Context.Korisnik.SingleOrDefault(k => k.id_korisnik == entity.Korisnik.id_korisnik);
+            var stol = Context.Stol.SingleOrDefault(s => s.id_stol == entity.Stol.id_stol);
+
+            var rezervacija = Entities.SingleOrDefault(r => r.id_rezervacija == entity.id_rezervacija);
+
+            rezervacija.datum_vrijeme = entity.datum_vrijeme;
+            rezervacija.Korisnik = korisnik;
+            rezervacija.Stol = stol;
+
+            if(saveChanges)
+            {
+                return SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}

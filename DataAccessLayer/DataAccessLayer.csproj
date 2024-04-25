@@ -51,6 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\InformacijeRepository.cs" />
+    <Compile Include="Repositories\InventarRepository.cs" />
+    <Compile Include="Repositories\JeloRepository.cs" />
+    <Compile Include="Repositories\KorisnikRepository.cs" />
+    <Compile Include="Repositories\NarudzbaRepository.cs" />
+    <Compile Include="Repositories\PiceRepository.cs" />
+    <Compile Include="Repositories\RecenzijaRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RezervacijaRepository.cs" />
+    <Compile Include="Repositories\StatistikaRepository.cs" />
+    <Compile Include="Repositories\Stavka_narudzbeRepository.cs" />
+    <Compile Include="Repositories\StolRepository.cs" />
     <Compile Include="RestaurantDatabaseModel.cs" />
   </ItemGroup>
   <ItemGroup>
