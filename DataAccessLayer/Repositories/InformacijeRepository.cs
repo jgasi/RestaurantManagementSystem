@@ -22,6 +22,14 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Informacije> GetInfoByName(string nazivv)
+        {
+            var query = from i in Entities
+                        where i.naziv.Contains(nazivv)
+                        select i;
+            return query;
+        }
+
         public override int Add(Informacije entity, bool saveChanges = true)
         {
             var informacije = new Informacije
