@@ -262,21 +262,28 @@
                                 HorizontalAlignment="Center"
                                 Margin="0,1,0,0">
 
-                        <TextBlock Text="Zaboravljena lozinka?"
-                               Foreground="White"
-                               FontSize="12"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               Margin="0,15,10,0"></TextBlock>
-
                         <TextBlock Text="Registracija"
                                    Foreground="White"
                                    FontSize="12"
                                    FontWeight="Medium"
                                    FontFamily="Montserrat"
-                                   Margin="0,15,0,0"></TextBlock>
-                    </StackPanel>
+                                   Margin="0,15,5,0"
+                                   MouseEnter="TextBlock_MouseEnter"
+                                   MouseLeave="TextBlock_MouseLeave"
+                                   MouseLeftButtonDown="TextBlockRegistracija_MouseLeftButtonDown"
+                                   TextDecorations="None"/>
 
+                        <TextBlock Text="Informacije"
+                                   Foreground="White"
+                                   FontSize="12"
+                                   FontWeight="Medium"
+                                   FontFamily="Montserrat"
+                                   Margin="5,15,0,0"
+                                   MouseEnter="TextBlock_MouseEnter"
+                                   MouseLeave="TextBlock_MouseLeave"
+                                   MouseLeftButtonDown="TextBlockInformacije_MouseLeftButtonDown"
+                                   TextDecorations="None"/>
+                    </StackPanel>
                 </StackPanel>
 
                 <ContentControl x:Name="contentPanel"></ContentControl>

@@ -41,5 +41,29 @@ namespace RestaurantManagementSystem
         {
             Application.Current.Shutdown();
         }
+
+        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            TextBlock textBlock = (TextBlock)sender;
+            textBlock.TextDecorations = TextDecorations.Underline;
+        }
+
+        private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            TextBlock textBlock = (TextBlock)sender;
+            textBlock.TextDecorations = null;
+        }
+
+        private void TextBlockRegistracija_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+            //tu napisi sta hoces za registraciju
+        }
+
+        private void TextBlockInformacije_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+            //tu napisi sta hoces za informacije
+        }
     }
 }
