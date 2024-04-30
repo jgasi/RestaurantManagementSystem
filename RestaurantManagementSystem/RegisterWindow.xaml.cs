@@ -11,22 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BusinessLogicLayer.Services;
+using EntitiesLayer.Entities;
 
 namespace RestaurantManagementSystem
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public LoginWindow()
+        private KorisnikServices korisnikServices = new KorisnikServices();
+
+
+        public RegisterWindow()
         {
             InitializeComponent();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
@@ -54,10 +59,10 @@ namespace RestaurantManagementSystem
             textBlock.TextDecorations = null;
         }
 
-        private void TextBlockRegistracija_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TextBlockLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
             this.Close();
         }
 
@@ -65,6 +70,20 @@ namespace RestaurantManagementSystem
         {
             Close();
             //tu napisi sta hoces za informacije
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            Korisnik korisnik = new Korisnik 
+            {
+                korime = txtKorime.Text,
+                lozinka = txtLozinka.Text,
+                ime = txtIme.Text,
+                prezime = txtPrezime.Text,
+                email = txtEmail.Text
+            };
+
+            korisnikServices.AddKorisnik(korisnik);
         }
     }
 }
