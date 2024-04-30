@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BusinessLogicLayer.Services;
 
 namespace RestaurantManagementSystem
 {
@@ -19,6 +20,9 @@ namespace RestaurantManagementSystem
     /// </summary>
     public partial class LoginWindow : Window
     {
+
+        private KorisnikServices korisnikServices = new KorisnikServices();
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -65,6 +69,33 @@ namespace RestaurantManagementSystem
         {
             Close();
             //tu napisi sta hoces za informacije
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var korime = txtKorime.Text;
+            var lozinka = txtLozinka.Password;
+            
+            var pronaden = korisnikServices.GetKorisnikByKorime(korime);
+
+            if (pronaden.Any())
+            {
+                var korisnik = pronaden.FirstOrDefault();
+                if (korisnik != null && korisnik.lozinka == lozinka)
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Korisničko ime ili lozinka nisu točni!");
+                } 
+            }
+            else
+            {
+                MessageBox.Show("Korisničko ime ili lozinka nisu točni!");
+            }
         }
     }
 }

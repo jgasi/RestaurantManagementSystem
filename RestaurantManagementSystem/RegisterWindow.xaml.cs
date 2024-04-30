@@ -80,7 +80,8 @@ namespace RestaurantManagementSystem
                 lozinka = txtLozinka.Text,
                 ime = txtIme.Text,
                 prezime = txtPrezime.Text,
-                email = txtEmail.Text
+                email = txtEmail.Text,
+                uloga = "obican_korisnik"
             };
 
             korisnikServices.AddKorisnik(korisnik);
