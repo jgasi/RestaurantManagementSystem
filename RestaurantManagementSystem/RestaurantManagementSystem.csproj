@@ -152,6 +152,15 @@
   <ItemGroup>
     <Resource Include="Slike\ime-prezime-ikona.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\menuIkona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\closeIkona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\redCloseIkona.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
