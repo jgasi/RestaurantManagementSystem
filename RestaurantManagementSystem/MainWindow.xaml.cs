@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
+using System.Runtime;
+using System.Windows.Interop;
 
 namespace RestaurantManagementSystem
 {
@@ -22,60 +25,40 @@ namespace RestaurantManagementSystem
             InitializeComponent();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
+            WindowState = WindowState.Minimized;
         }
 
-        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Shutdown();
+        }
 
-            if (Tg_Btn.IsChecked == true)
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            WindowInteropHelper helper = new WindowInteropHelper(this);
+            SendMessage(helper.Handle, 161, 2, 0);
+        }
+
+        private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+        }
+
+        private void btnMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.WindowState == WindowState.Normal) 
             {
-                tt_home.Visibility = Visibility.Collapsed;
-                tt_contacts.Visibility = Visibility.Collapsed;
-                tt_messages.Visibility = Visibility.Collapsed;
-                tt_maps.Visibility = Visibility.Collapsed;
-                tt_settings.Visibility = Visibility.Collapsed;
-                tt_signout.Visibility = Visibility.Collapsed;
+                this.WindowState = WindowState.Maximized;
             }
             else
             {
-                tt_home.Visibility = Visibility.Visible;
-                tt_contacts.Visibility = Visibility.Visible;
-                tt_messages.Visibility = Visibility.Visible;
-                tt_maps.Visibility = Visibility.Visible;
-                tt_settings.Visibility = Visibility.Visible;
-                tt_signout.Visibility = Visibility.Visible;
+                this.WindowState = WindowState.Normal;
             }
-        }
-
-        private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Tg_Btn.IsChecked = false;
-        }
-
-        private void CloseBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void StackPanel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }
