@@ -38,7 +38,7 @@
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
                         <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"></GradientStop>
-                        <GradientStop Color="{StaticResource windowBorderColor1}" Offset="1"></GradientStop>
+                        <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"></GradientStop>
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -117,8 +117,8 @@
         Grid.Column="1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                        <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"></GradientStop>
-                        <GradientStop Color="{StaticResource windowBorderColor1}" Offset="1"></GradientStop>
+                        <GradientStop Color="{StaticResource primaryBackColor3}" Offset="0"></GradientStop>
+                        <GradientStop Color="{StaticResource primaryBackColor4}" Offset="1"></GradientStop>
                     </LinearGradientBrush>
                 </Border.Background>
 

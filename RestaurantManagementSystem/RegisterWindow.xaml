@@ -24,16 +24,16 @@
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource primaryBackColor2}" Offset="0.75"/>
-                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="1"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="0.75"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor3}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="{StaticResource windowBorderColor1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource windowBorderColor2}" Offset="0.75"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor4}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor5}" Offset="0.75"/>
 
                 </LinearGradientBrush>
             </Border.Background>

@@ -2,13 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--Background Color -->
-    <Color x:Key="primaryBackColor1">#E5D3B3</Color>
-    <Color x:Key="primaryBackColor2">#D2B48C</Color>
-    <Color x:Key="secondaryBackColor1">#B99976</Color>
+    <Color x:Key="primaryBackColor1">#5a4d44</Color>
+    <Color x:Key="primaryBackColor2">#8d7c71</Color>
+    <Color x:Key="primaryBackColor3">#c1ad95</Color>
+    <Color x:Key="primaryBackColor4">#f4e0c8</Color>
+    <Color x:Key="secondaryBackColor1">#E5D3B3</Color>
+    <Color x:Key="secondaryBackColor2">#D2B48C</Color>
+    <Color x:Key="secondaryBackColor3">#B99976</Color>
+    <Color x:Key="secondaryBackColor4">#987554</Color>
+    <Color x:Key="secondaryBackColor5">#664229</Color>
 
     <!--Window border Color -->
-    <Color x:Key="windowBorderColor1">#987554</Color>
-    <Color x:Key="windowBorderColor2">#664229</Color>
+    <Color x:Key="windowBorderColor1">#d9c3a8</Color>
+    <Color x:Key="windowBorderColor2">#f5e4cf</Color>
 
     <!--Color Palette (uzmi si koje hoces tu kasnije vise njih) -->
     <SolidColorBrush x:Key="color1">#F2D9BB</SolidColorBrush>
@@ -30,8 +36,8 @@
 
     <!--Panel Color -->
     <SolidColorBrush x:Key="panelColor1">Black</SolidColorBrush>
-    <SolidColorBrush x:Key="PanelOverColor">White</SolidColorBrush>
-    <SolidColorBrush x:Key="panelActiveColor">Beige</SolidColorBrush>
+    <SolidColorBrush x:Key="PanelOverColor">#524339</SolidColorBrush>
+    <SolidColorBrush x:Key="panelActiveColor">#493c33</SolidColorBrush>
 
     <!--Button Color -->
     
