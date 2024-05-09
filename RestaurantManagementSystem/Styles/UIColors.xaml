@@ -11,8 +11,18 @@
     <Color x:Key="windowBorderColor2">#664229</Color>
 
     <!--Color Palette (uzmi si koje hoces tu kasnije vise njih) -->
-    <SolidColorBrush x:Key="color1">White</SolidColorBrush>
-    <SolidColorBrush x:Key="color2">Black</SolidColorBrush>
+    <SolidColorBrush x:Key="color1">#F2D9BB</SolidColorBrush>
+    <SolidColorBrush x:Key="color2">#D9B79A</SolidColorBrush>
+    <SolidColorBrush x:Key="color3">#A6836F</SolidColorBrush>
+    <SolidColorBrush x:Key="color4">#735E51</SolidColorBrush>
+    <SolidColorBrush x:Key="color5">#0D0D0D</SolidColorBrush>
+    <SolidColorBrush x:Key="color6">#A65D63</SolidColorBrush>
+    <SolidColorBrush x:Key="color7">#BF907E</SolidColorBrush>
+    <SolidColorBrush x:Key="color8">#F2CBBD</SolidColorBrush>
+    <SolidColorBrush x:Key="color9">#8C6056</SolidColorBrush>
+    <SolidColorBrush x:Key="color10">#260101</SolidColorBrush>
+    <SolidColorBrush x:Key="color11">White</SolidColorBrush>
+    <SolidColorBrush x:Key="color12">Black</SolidColorBrush>
 
     <!--Font Color -->
     <SolidColorBrush x:Key="titleColor1">White</SolidColorBrush>
