@@ -101,6 +101,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\CustomFonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\UIColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +128,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\AlexBrush-Regular.ttf" />
+    <Resource Include="Fonts\BakeryRoastDemoRegular.ttf" />
+    <Resource Include="Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -172,6 +179,28 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\redCloseIkona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\restaurant_logo2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\aaa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\korime-ikona3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\user-regular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\lozinka-ikona1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\email-ikona1.png" />
+    <Resource Include="Slike\ime-prezime-ikona1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

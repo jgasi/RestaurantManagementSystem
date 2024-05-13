@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantManagementSystem"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="750" Width="800"
+        Title="RegisterWindow" Height="800" Width="800"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -32,7 +33,7 @@
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="{StaticResource secondaryBackColor4}" Offset="0"/>
+                    <GradientStop Color="{StaticResource secondaryBackColor3}" Offset="0"/>
                     <GradientStop Color="{StaticResource secondaryBackColor5}" Offset="0.75"/>
 
                 </LinearGradientBrush>
@@ -57,7 +58,7 @@
                     <TextBlock Text="REGISTER"
                         Foreground="White"
                         FontSize="10"
-                        FontFamily="Montserrat"
+                        FontFamily="{StaticResource CustomFont2}"
                         Grid.Column="0"
                         VerticalAlignment="Center"
                         Margin="10,0,0,0"
@@ -68,7 +69,7 @@
                      Content="-"
                      Foreground="White"
                      FontSize="16"
-                     FontFamily="Montserrat"
+                     FontFamily="{StaticResource CustomFont2}"
                      Cursor="Hand"
                      Grid.Column="1"
                      Click="btnMinimize_Click">
@@ -78,7 +79,7 @@
                                 <Setter Property="Background" Value="Black"></Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#232b2b"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
 
@@ -104,7 +105,7 @@
                      Content="X"
                      Foreground="White"
                      FontSize="12"
-                     FontFamily="Montserrat"
+                     FontFamily="{StaticResource CustomFont2}"
                      Cursor="Hand"
                      Grid.Column="2"
                      Click="btnClose_Click">
@@ -114,7 +115,7 @@
                                 <Setter Property="Background" Value="Black"></Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#232b2b"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
 
@@ -141,16 +142,16 @@
                 <StackPanel Width="250"
                             Grid.Row="2"
                             Orientation="Vertical"
-                            Margin="0,35,0,0">
+                            Margin="0,1,0,0">
 
-                    <Image Source="/Slike/restaurant_logo.png"
-                           Width="100" Height="100"></Image>
+                    <Image Source="/Slike/logo.png"
+                           Width="200" Height="200"></Image>
 
-                    <TextBlock Text="Restaurant Name"
+                    <TextBlock Text="Restaurant"
                                Foreground="White"
                                FontSize="25"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                HorizontalAlignment="Center">
                     </TextBlock>
 
@@ -158,10 +159,10 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                TextWrapping="Wrap"
                                TextAlignment="Center"
-                               Margin="5,0,0,0">
+                               Margin="5,5,0,0">
 
                     </TextBlock>
 
@@ -169,14 +170,14 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                Margin="0,35,0,0">
                     </TextBlock>
 
                     <TextBox x:Name="txtKorime"
                              FontSize="13"
                              FontWeight="Medium"
-                             FontFamily="Montserrat"
+                             FontFamily="{StaticResource CustomFont2}"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="Black"
@@ -187,7 +188,7 @@
                              Padding="30,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Slike/korime-ikona.png"
+                            <ImageBrush ImageSource="/Slike/user-regular.png"
                                         Stretch="Uniform"
                                         AlignmentX="Left">
                             </ImageBrush>
@@ -200,14 +201,14 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                Margin="0,15,0,0">
                     </TextBlock>
 
                     <TextBox x:Name="txtLozinka"
                                  FontSize="13"
                                  FontWeight="Medium"
-                                 FontFamily="Montserrat"
+                                 FontFamily="{StaticResource CustomFont2}"
                                  Foreground="White"
                                  CaretBrush="LightGray"
                                  BorderBrush="Black"
@@ -218,7 +219,7 @@
                                  Padding="30,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Slike/lozinka-ikona.png"
+                            <ImageBrush ImageSource="/Slike/lozinka-ikona1.png"
                                         Stretch="Uniform"
                                         AlignmentX="Left">
                             </ImageBrush>
@@ -229,14 +230,14 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                Margin="0,15,0,0">
                     </TextBlock>
 
                     <TextBox x:Name="txtIme"
                              FontSize="13"
                              FontWeight="Medium"
-                             FontFamily="Montserrat"
+                             FontFamily="{StaticResource CustomFont2}"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="Black"
@@ -247,7 +248,7 @@
                              Padding="30,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Slike/ime-prezime-ikona.png"
+                            <ImageBrush ImageSource="/Slike/ime-prezime-ikona1.png"
                                         Stretch="Uniform"
                                         AlignmentX="Left">
                             </ImageBrush>
@@ -258,14 +259,14 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                Margin="0,15,0,0">
                     </TextBlock>
 
                     <TextBox x:Name="txtPrezime"
                              FontSize="13"
                              FontWeight="Medium"
-                             FontFamily="Montserrat"
+                             FontFamily="{StaticResource CustomFont2}"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="Black"
@@ -276,7 +277,7 @@
                              Padding="30,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Slike/ime-prezime-ikona.png"
+                            <ImageBrush ImageSource="/Slike/ime-prezime-ikona1.png"
                                         Stretch="Uniform"
                                         AlignmentX="Left">
                             </ImageBrush>
@@ -287,14 +288,14 @@
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
-                               FontFamily="Montserrat"
+                               FontFamily="{StaticResource CustomFont2}"
                                Margin="0,15,0,0">
                     </TextBlock>
 
                     <TextBox x:Name="txtEmail"
                              FontSize="13"
                              FontWeight="Medium"
-                             FontFamily="Montserrat"
+                             FontFamily="{StaticResource CustomFont2}"
                              Foreground="White"
                              CaretBrush="LightGray"
                              BorderBrush="Black"
@@ -305,7 +306,7 @@
                              Padding="30,0,0,0">
 
                         <TextBox.Background>
-                            <ImageBrush ImageSource="/Slike/email-ikona.png"
+                            <ImageBrush ImageSource="/Slike/email-ikona1.png"
                                         Stretch="Uniform"
                                         AlignmentX="Left">
                             </ImageBrush>
@@ -320,7 +321,7 @@
                             Content="REGISTER"
                             Foreground="White"
                             FontSize="12"
-                            FontFamily="Montserrat"
+                            FontFamily="{StaticResource CustomFont2}"
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="0,50,0,0"
@@ -331,7 +332,7 @@
                                 <Setter Property="Background" Value="Black"></Setter>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#232b2b"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
 
@@ -359,7 +360,7 @@
                                    Foreground="White"
                                    FontSize="12"
                                    FontWeight="Medium"
-                                   FontFamily="Montserrat"
+                                   FontFamily="{StaticResource CustomFont2}"
                                    Margin="0,15,5,0"
                                    MouseEnter="TextBlock_MouseEnter"
                                    MouseLeave="TextBlock_MouseLeave"
@@ -370,7 +371,7 @@
                                    Foreground="White"
                                    FontSize="12"
                                    FontWeight="Medium"
-                                   FontFamily="Montserrat"
+                                   FontFamily="{StaticResource CustomFont2}"
                                    Margin="5,15,0,0"
                                    MouseEnter="TextBlock_MouseEnter"
                                    MouseLeave="TextBlock_MouseLeave"
