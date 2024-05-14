@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Runtime;
 using System.Windows.Interop;
+using System.ComponentModel;
+using FontAwesome.Sharp;
+
 
 namespace RestaurantManagementSystem
 {
@@ -23,7 +26,9 @@ namespace RestaurantManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+            GuiManager.mainWindow = this;
         }
+
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
@@ -59,6 +64,55 @@ namespace RestaurantManagementSystem
             {
                 this.WindowState = WindowState.Normal;
             }
+        }
+
+        private void ProfilButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.User;
+            pageTitle.Text = "Profil";
+            var ucProfil = new UserControls.UcProfil();
+            GuiManager.OpenContent(ucProfil);
+        }
+
+        private void Logout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+        private void LogoutTextBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // Podcrtaj tekst kada se miš nalazi iznad teksta
+            TextBlock textBlock = sender as TextBlock;
+            if (textBlock != null)
+            {
+                textBlock.TextDecorations = TextDecorations.Underline;
+            }
+        }
+
+        private void LogoutTextBlock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // Ukloni podcrtavanje teksta kada miš napusti tekst
+            TextBlock textBlock = sender as TextBlock;
+            if (textBlock != null)
+            {
+                textBlock.TextDecorations = null;
+            }
+        }
+
+        private void LogoutIconImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+
+        private void PregledJelovnikaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.Utensils;
+            pageTitle.Text = "Pregled jelovnika";
+            var ucPregledJelovnika = new UserControls.UcPregledJelovnika();
+            GuiManager.OpenContent(ucPregledJelovnika);
         }
     }
 }

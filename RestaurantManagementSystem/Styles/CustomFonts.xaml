@@ -4,8 +4,9 @@
     <!-- CustomFont resurs -->
 
     <FontFamily x:Key="CustomFont1">/Fonts/AlexBrush-Regular.ttf#Alex Brush</FontFamily>
-    <FontFamily x:Key="CustomFont3">/Fonts/BakeryRoastDemoRegular.ttf#Bakery Roast Demo</FontFamily>
     <FontFamily x:Key="CustomFont2">/Fonts/Montserrat-Italic-VariableFont_wght.ttf#Montserrat Thin</FontFamily>
+    <FontFamily x:Key="CustomFont3">/Fonts/BakeryRoastDemoRegular.ttf#Bakery Roast Demo</FontFamily>
+    
 
 
 </ResourceDictionary>
