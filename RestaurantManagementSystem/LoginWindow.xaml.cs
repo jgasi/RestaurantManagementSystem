@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessLogicLayer.Services;
+using RestaurantManagementSystem.Autentikacija;
 
 namespace RestaurantManagementSystem
 {
@@ -83,6 +84,8 @@ namespace RestaurantManagementSystem
                 var korisnik = pronaden.FirstOrDefault();
                 if (korisnik != null && korisnik.lozinka == lozinka)
                 {
+                    CurrentUser.LoggedInUser = korisnik;
+
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     this.Close();

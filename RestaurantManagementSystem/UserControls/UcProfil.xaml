@@ -5,76 +5,63 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantManagementSystem.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Border Width="150" Height="150" BorderBrush="White" BorderThickness="1" CornerRadius="75" Margin="0,20,0,10">
-                <Image Source="/Slike/privremena-slika.png" Stretch="UniformToFill" />
+        <!-- Slika korisnika -->
+        <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10">
+            <Border Background="White" CornerRadius="10" Margin="10">
+                <Image x:Name="imgSlika" Height="200" Width="200" Stretch="Uniform"/>
             </Border>
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="John Doe" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="john.doe@example.com" FontSize="12" Foreground="White" HorizontalAlignment="Center"/>
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="+123 456 7890" FontSize="12" Foreground="White" HorizontalAlignment="Center"/>
+            <Button Content="Promijeni sliku" Style="{StaticResource btnSpremi}" Click="BtnPromijeniSliku_Click" Margin="10"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="20,0,0,0" VerticalAlignment="Top">
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Profile" FontSize="20" Foreground="White" FontWeight="Bold" Margin="0,0,0,10"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Bio" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan tortor. Nulla facilisi. Sed elementum magna non libero ultricies, in consectetur urna varius." TextWrapping="Wrap" Margin="0,0,0,10"/>
+        <!-- Podaci korisnika -->
+        <StackPanel Grid.Column="1" Margin="20">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
+                    <Setter Property="FontSize" Value="24"/>
+                    <!-- Povećajte veličinu fonta -->
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <!-- Povećajte veličinu fonta -->
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style TargetType="PasswordBox">
+                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <!-- Povećajte veličinu fonta -->
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+            </StackPanel.Resources>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Address" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="123 Main Street, Apt 4B, Springfield, Anytown 12345" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <TextBlock Text="Korisničko ime:"/>
+            <TextBox x:Name="txtKorime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Skills" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Cooking" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Baking" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Menu Planning" Margin="0,5,0,0"/>
-            </StackPanel>
+            <TextBlock Text="Lozinka:"/>
+            <TextBox x:Name="txtLozinka" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Experience" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Head Chef at Restaurant XYZ (2015 - Present)" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Sous Chef at Restaurant ABC (2010 - 2015)" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Pastry Chef at Bakery 123 (2005 - 2010)" Margin="0,5,0,0"/>
-            </StackPanel>
+            <TextBlock Text="Ime:"/>
+            <TextBox x:Name="txtIme" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Education" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Culinary Arts Degree, Culinary Institute of America (2001 - 2005)" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Advanced Baking and Pastry Certification, Le Cordon Bleu (2006)" Margin="0,5,0,0"/>
-            </StackPanel>
+            <TextBlock Text="Prezime:"/>
+            <TextBox x:Name="txtPrezime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Certifications" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="ServSafe Food Protection Manager Certification" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Certified Executive Chef (CEC) by the American Culinary Federation" Margin="0,5,0,0"/>
-            </StackPanel>
+            <TextBlock Text="Email:"/>
+            <TextBox x:Name="txtEmail" Style="{StaticResource tbPodaci}" Height="30" Margin="0,0,0,10" FontSize="18"/>
 
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Projects" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Revamped menu for Restaurant XYZ leading to a 20% increase in sales" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Organized charity event dinner for local community, raising over $10,000" Margin="0,5,0,0"/>
-            </StackPanel>
-
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Interests" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Gourmet Cooking" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Traveling" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Wine Tasting" Margin="0,5,0,0"/>
-            </StackPanel>
-
-            <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Social Media" FontSize="16" Foreground="White" FontWeight="Bold" Margin="0,10,0,5"/>
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="LinkedIn: linkedin.com/in/johndoe" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Instagram: @chefjohndoe" Margin="0,5,0,0"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" Text="Twitter: @chefjohndoe" Margin="0,5,0,0"/>
-            </StackPanel>
+            <!-- Button za spremanje promjena -->
+            <Button Content="Spremi" Style="{StaticResource btnSpremi}" Width="75" HorizontalAlignment="Right" Margin="5" Click="BtnSpremi_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>
