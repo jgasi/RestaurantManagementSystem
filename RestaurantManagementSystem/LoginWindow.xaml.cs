@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BusinessLogicLayer.Services;
+using EntitiesLayer.Entities;
 using RestaurantManagementSystem.Autentikacija;
 
 namespace RestaurantManagementSystem
@@ -23,7 +24,7 @@ namespace RestaurantManagementSystem
     {
 
         private KorisnikServices korisnikServices = new KorisnikServices();
-
+        private JeloServices jeloServices = new JeloServices();
         public LoginWindow()
         {
             InitializeComponent();
@@ -74,6 +75,19 @@ namespace RestaurantManagementSystem
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            //sam malo
+           // var jelo = new Jelo
+            //{
+            //    naziv = "Govedina s povrćem",
+            //    cijena = "14.99",
+            //    nutrivne_informacije = "Proteini: 27g, Ugljikohidrati: 25g, Masti: 15g",
+           //     alergeni = "Gluten, Soja",
+           //     Inventar_id_inventar = 1
+           // };
+           //
+           // jeloServices.AddJelo(jelo);
+
+
             var korime = txtKorime.Text;
             var lozinka = txtLozinka.Password;
             

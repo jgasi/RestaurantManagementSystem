@@ -24,7 +24,7 @@ namespace DataAccessLayer.Repositories
 
         public override int Add(Jelo entity, bool saveChanges = true)
         {
-            var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);
+            //var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);
             var jelo = new Jelo
             {
                 naziv = entity.naziv,
@@ -32,7 +32,7 @@ namespace DataAccessLayer.Repositories
                 nutrivne_informacije = entity.nutrivne_informacije,
                 alergeni = entity.alergeni,
                 slika = entity.slika,
-                Inventar = inventar
+                Inventar_id_inventar = 1
             };
 
             Entities.Add(jelo);
