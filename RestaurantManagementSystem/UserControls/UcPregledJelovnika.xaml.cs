@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 
@@ -15,7 +17,7 @@ namespace RestaurantManagementSystem.UserControls
         private List<Jelo> Jela { get; set; }
         public Jelo SelectedJelo { get; set; }
         private int currentPage = 0;
-        private int itemsPerPage = 8;
+        private int itemsPerPage = 3;
 
         public ObservableCollection<Jelo> CurrentPageJela { get; set; }
 
@@ -87,7 +89,5 @@ namespace RestaurantManagementSystem.UserControls
                 glavniGrid.Children.Add(detaljiJela);
             }
         }
-
-
     }
 }

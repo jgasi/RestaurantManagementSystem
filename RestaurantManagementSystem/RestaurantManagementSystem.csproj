@@ -172,6 +172,8 @@
     <Resource Include="Fonts\AlexBrush-Regular.ttf" />
     <Resource Include="Fonts\BakeryRoastDemoRegular.ttf" />
     <Resource Include="Fonts\Montserrat-Italic-VariableFont_wght.ttf" />
+    <Resource Include="Fonts\BASKVILL.ttf" />
+    <Resource Include="Fonts\NoyhR-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -191,7 +193,9 @@
       <Name>EntitiesLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Slike\tempbackground-jelo.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\restaurantPicture.jpg" />
   </ItemGroup>
@@ -243,6 +247,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Slike\privremena-slika.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\cookedmeat-temp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\eggtemp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Slike\mainpozadina.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

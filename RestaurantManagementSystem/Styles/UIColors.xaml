@@ -31,6 +31,7 @@
     <SolidColorBrush x:Key="color12">Black</SolidColorBrush>
     <SolidColorBrush x:Key="color13">#0e1025</SolidColorBrush>
     <SolidColorBrush x:Key="color14">#b3c3f3</SolidColorBrush>
+    <SolidColorBrush x:Key="color15">#1a2a5a</SolidColorBrush>
 
     <!--Font Color -->
     <SolidColorBrush x:Key="titleColor1">White</SolidColorBrush>

@@ -4,21 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantManagementSystem.UserControls"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Name="glavniGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Opacity="0.3" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Name="PrevButton" Content="Prethodni" Click="PrevButton_Click" Margin="5"/>
-            <Button Name="NextButton" Content="Sljedeći" Click="NextButton_Click" Margin="5"/>
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock HorizontalAlignment="Left" Text="Flavor your life with a dash of love from the kitchen." Foreground="White" FontFamily="{StaticResource CustomFont4}" FontSize="55" Width="450" Height="300" TextWrapping="Wrap"/>
         </StackPanel>
 
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding CurrentPageJela}">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10">
+            <RadioButton Name="PrevButton" Style="{StaticResource randomButton}"
+                 Tag="{StaticResource color11}"
+                 Click="PrevButton_Click"
+                 Margin="10,5,5,30"
+                 Width="60">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="ChevronLeft" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Name="NextButton" Style="{StaticResource randomButton}"
+                 Tag="{StaticResource color11}"
+                 Click="NextButton_Click"
+                 Margin="10,5,5,30"
+                 Width="60">
+                <StackPanel Orientation="Horizontal">
+                    
+                    <fa:IconImage Icon="ChevronRight" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding CurrentPageJela}" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel/>
@@ -26,12 +54,23 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="White" BorderThickness="1" Margin="5" MouseDown="Jelo_Click">
-                        <StackPanel>
-                            <!--<Image Source="{Binding slika, Converter={StaticResource ByteArrayToImageConverter}}" Width="100" Height="100"/> -->
-                            <TextBlock Foreground="White" Text="{Binding naziv}" Margin="5"/>
-                            <TextBlock Foreground="White" Text="{Binding nutrivne_informacije}" Margin="5"/>
-                        </StackPanel>
+                    <Border CornerRadius="12" Height="250" Width="400" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="20" MouseDown="Jelo_Click">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Slike/tempbackground-jelo.jpg" Opacity="0.15"/>
+                        </Border.Background>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="/Slike/eggtemp.jpg" Width="120" Height="120" Margin="5">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="Black"/>
+                                    </Image.Effect>
+                                </Image>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                                    <TextBlock Width="250" FontFamily="{StaticResource CustomFont4}" FontSize="30" Foreground="White" Text="{Binding naziv}" TextWrapping="Wrap" Margin="5,0,0,20"/>
+                                    <TextBlock Width="150" FontFamily="{StaticResource CustomFont5}" FontSize="12" Foreground="White" Text="{Binding nutrivne_informacije}" TextWrapping="Wrap" Margin="5"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

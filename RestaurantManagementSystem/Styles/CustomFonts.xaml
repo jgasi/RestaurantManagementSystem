@@ -6,7 +6,7 @@
     <FontFamily x:Key="CustomFont1">/Fonts/AlexBrush-Regular.ttf#Alex Brush</FontFamily>
     <FontFamily x:Key="CustomFont2">/Fonts/Montserrat-Italic-VariableFont_wght.ttf#Montserrat Thin</FontFamily>
     <FontFamily x:Key="CustomFont3">/Fonts/BakeryRoastDemoRegular.ttf#Bakery Roast Demo</FontFamily>
-    
-
+    <FontFamily x:Key="CustomFont4">/Fonts/BASKVILL.ttf#Baskerville Old Face</FontFamily>
+    <FontFamily x:Key="CustomFont5">/Fonts/NoyhR-Regular.ttf#Noyh R</FontFamily>
 
 </ResourceDictionary>
