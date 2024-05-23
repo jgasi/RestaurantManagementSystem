@@ -27,15 +27,42 @@ namespace RestaurantManagementSystem.UserControls
             InitializeComponent();
             DataContext = selectedJelo;
             primljenoJelo = selectedJelo;
-            UcitajPodatke();
+            PrikaziDetalje(primljenoJelo);
         }
 
-        private void UcitajPodatke()
+        public void PrikaziDetalje(Jelo jelo)
         {
-            nazivTxtBl.Text = primljenoJelo.naziv;
-            cijenaTxtBl.Text = primljenoJelo.cijena;
-            nutrivne_informacijeTxtBl.Text = primljenoJelo.nutrivne_informacije;
-            alergeniTxtBl.Text = primljenoJelo.alergeni;
+            nazivTxtBl.Text = jelo.naziv;
+            cijenaTxtBl.Text = jelo.cijena;
+
+            nutrivneInformacijeStackPanel.Children.Clear();
+            string[] nutrivneInformacije = jelo.nutrivne_informacije.Split('|');
+            foreach (var info in nutrivneInformacije)
+            {
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = info,
+                    Foreground = Brushes.White,
+                    Margin = new Thickness(0, 2, 0, 2),
+                    FontFamily = (FontFamily)FindResource("CustomFont2")
+                };
+                nutrivneInformacijeStackPanel.Children.Add(textBlock);
+            }
+
+            alergeniStackPanel.Children.Clear();
+            string[] alergeni = jelo.alergeni.Split('|');
+            foreach (var alergen in alergeni)
+            {
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = alergen,
+                    Foreground = Brushes.White,
+                    Margin = new Thickness(0, 2, 0, 2),
+                    FontFamily = (FontFamily)FindResource("CustomFont2")
+
+                };
+                alergeniStackPanel.Children.Add(textBlock);
+            }
         }
 
         // UcDetaljiJela.xaml.cs

@@ -5,21 +5,62 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="1000" d:DesignWidth="1000">
     <Grid Name="glavniGrid">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Opacity="0" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top"/>
-        </Grid.Background>
-        <StackPanel Margin="10">
+        <StackPanel Margin="20" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Foreground="White" x:Name="nazivTxtBl" FontSize="18" FontWeight="Bold"/>
-            <!--<Image Foreground="White" x:Name="slikaTxtBl" Width="200" Height="200" Margin="0 10"/>-->
-            <Label Content="Cijena:" Foreground="White"></Label>
-            <TextBlock Foreground="White" x:Name="cijenaTxtBl" FontSize="16" FontWeight="Bold"/>
-            <Label Content="Nutrivne informacije:" Foreground="White"></Label>
-            <TextBlock Foreground="White" x:Name="nutrivne_informacijeTxtBl" Margin="0 10"/>
-            <Label Content="Alergeni:" Foreground="White"></Label>
-            <TextBlock Foreground="White" x:Name="alergeniTxtBl" Margin="0 10"/>
-        </StackPanel>
+                <TextBlock FontFamily="{StaticResource CustomFont4}" FontSize="40" Foreground="White" x:Name="nazivTxtBl" TextAlignment="Center" Margin="0 0 0 10"/>
+
+            <Grid>
+                <Image Source="/Slike/cookedmeat-temp.jpg" Width="400" Height="400" Stretch="Uniform" HorizontalAlignment="Center">
+                    <Image.OpacityMask>
+                        <VisualBrush Stretch="Fill">
+                            <VisualBrush.Visual>
+                                <Grid>
+                                    <Rectangle Width="400" Height="400" RadiusX="12" RadiusY="12" Fill="White"/>
+                                </Grid>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Image.OpacityMask>
+                </Image>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal">
+
+                    <StackPanel Orientation="Vertical">
+                        <Label FontFamily="{StaticResource CustomFont2}" Content="Cijena:" Foreground="White" FontWeight="Bold" FontSize="16" Margin="20 0 100 5"/>
+                        <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" x:Name="cijenaTxtBl" FontSize="16" Margin="25 0 0 10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label FontFamily="{StaticResource CustomFont2}" Content="Nutritivne informacije na 100g:" Foreground="White" FontWeight="Bold" FontSize="16" Margin="-5 0 100 5"/>
+                        <StackPanel x:Name="nutrivneInformacijeStackPanel" Margin="0 0 0 10">
+                            <!-- Dinamički dodani TextBlockovi za nutritivne informacije -->
+                        </StackPanel>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Vertical">
+                        <Label FontFamily="{StaticResource CustomFont2}" Content="Alergeni:" Foreground="White" FontWeight="Bold" FontSize="16" Margin="-5 0 100 5"/>
+                        <StackPanel x:Name="alergeniStackPanel" Margin="0 0 0 10">
+                            <!-- Dinamički dodani TextBlockovi za alergene -->
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <!-- Polje za unos komentara -->
+                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Recenzije:" Foreground="White" FontSize="20" Margin="0,80,0,0"></TextBlock>
+                <TextBox FontFamily="{StaticResource CustomFont2}" Foreground="Black" FontSize="16" Margin="0 20" Width="300" HorizontalAlignment="Center"/>
+
+                <!-- Kontrola za odabir ocjene -->
+                <StackPanel Orientation="Horizontal" Margin="0 20">
+                    <Label FontFamily="{StaticResource CustomFont2}" Content="Ocijenite jelo:" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                    <ComboBox FontFamily="{StaticResource CustomFont2}" SelectedIndex="0" Foreground="Black" FontSize="16" Margin="10 0">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
     </Grid>
 </UserControl>

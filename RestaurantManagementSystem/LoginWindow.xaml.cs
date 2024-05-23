@@ -76,16 +76,17 @@ namespace RestaurantManagementSystem
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //sam malo
-           // var jelo = new Jelo
+            //var jelo = new Jelo
             //{
-            //    naziv = "Govedina s povrćem",
-            //    cijena = "14.99",
-            //    nutrivne_informacije = "Proteini: 27g, Ugljikohidrati: 25g, Masti: 15g",
-           //     alergeni = "Gluten, Soja",
-           //     Inventar_id_inventar = 1
-           // };
-           //
+            //    naziv = "Pileći file sa žara i riža",
+            //    cijena = "10.99",
+            //    nutrivne_informacije = "Kalorije: 295 kcal|Proteini: 33.4g|Ugljikohidrati: 28g|Masti: 3.9g|Zasićene masti: 1.1g|Vlakna: 0.4g|Šećeri: 0g|Natrij: 75mg|Kalcij: 21mg|Željezo: 2.1mg|Kalij: 291mg|Vitamin A: 13 IU|Vitamin C: 0mg|Vitamin D: 1 IU|Vitamin B6: 0.6mg|Vitamin B12: 0.3µg",
+            //    alergeni = "Pšenica|Jaja|Riba|Kikiriki|Soja|Mlijeko|Orašasti plodovi|Celer|Gorušica|Sjeme sezama|Sumporni dioksid i sulfiti|Lupin|Mekušci",
+             //   Inventar_id_inventar = 1
+            //};
+            
            // jeloServices.AddJelo(jelo);
+
 
 
             var korime = txtKorime.Text;
