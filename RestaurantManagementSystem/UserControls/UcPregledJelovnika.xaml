@@ -56,7 +56,7 @@
                 <DataTemplate>
                     <Border CornerRadius="12" Height="250" Width="400" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="20" MouseDown="Jelo_Click">
                         <Border.Background>
-                            <ImageBrush ImageSource="/Slike/tempbackground-jelo.jpg" Opacity="0.25"/>
+                            <ImageBrush ImageSource="/Slike/tempbackground-jelo.jpg" Opacity="0.22"/>
                         </Border.Background>
                         <Grid>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

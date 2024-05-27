@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace RestaurantManagementSystem.UserControls
     {
         public Korisnik TrenutniKorisnik { get; set; }
         private KorisnikServices korisnikServices = new KorisnikServices();
+        private bool isImageChanged = false;
+
 
         public UcProfil()
         {
@@ -43,6 +46,11 @@ namespace RestaurantManagementSystem.UserControls
                 txtIme.Text = TrenutniKorisnik.ime;
                 txtPrezime.Text = TrenutniKorisnik.prezime;
                 txtEmail.Text = TrenutniKorisnik.email;
+
+                if (TrenutniKorisnik.slika != null)
+                {
+                    imgSlika.Source = ByteToImage(TrenutniKorisnik.slika);
+                }
             }
         }
 
@@ -55,10 +63,18 @@ namespace RestaurantManagementSystem.UserControls
                 TrenutniKorisnik.ime = txtIme.Text;
                 TrenutniKorisnik.prezime = txtPrezime.Text;
                 TrenutniKorisnik.email = txtEmail.Text;
-                // treba dodati jos za sliku
 
-                korisnikServices.UpdateKorisnik(TrenutniKorisnik);
-                MessageBox.Show("Podaci su uspješno spremljeni!");
+                if (isImageChanged)
+                {
+                    korisnikServices.UpdateKorisnik(TrenutniKorisnik);
+                    MessageBox.Show("Podaci su uspješno spremljeni, uključujući sliku!");
+                }
+                else
+                {
+                    korisnikServices.UpdateKorisnik(TrenutniKorisnik);
+                    MessageBox.Show("Podaci su uspješno spremljeni!");
+                }
+                isImageChanged = false;
             }
         }
         private void BtnPromijeniSliku_Click(object sender, RoutedEventArgs e)
@@ -75,6 +91,44 @@ namespace RestaurantManagementSystem.UserControls
                 bitmap.UriSource = new Uri(openFileDialog.FileName, UriKind.Absolute);
                 bitmap.EndInit();
                 imgSlika.Source = bitmap;
+
+                TrenutniKorisnik.slika = ImageToByte(bitmap);
+                isImageChanged = true;
+            }
+        }
+
+        private byte[] ImageToByte(BitmapImage bitmapImage)
+        {
+            byte[] data;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BitmapEncoder encoder;
+                if (bitmapImage.UriSource.AbsolutePath.EndsWith(".png"))
+                {
+                    encoder = new PngBitmapEncoder();
+                }
+                else
+                {
+                    encoder = new JpegBitmapEncoder();
+                }
+
+                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
+
+        private BitmapImage ByteToImage(byte[] imageData)
+        {
+            using (MemoryStream ms = new MemoryStream(imageData))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = ms;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                return bitmap;
             }
         }
     }
