@@ -17,16 +17,48 @@ using System.Runtime;
 using System.Windows.Interop;
 using System.ComponentModel;
 using FontAwesome.Sharp;
+using EntitiesLayer.Entities;
+using System.IO;
 
 
 namespace RestaurantManagementSystem
 {
     public partial class MainWindow : Window
     {
+        private Korisnik TrenutniKorisnik;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public MainWindow(Korisnik korisnik) : this()
+        {
             GuiManager.mainWindow = this;
+            TrenutniKorisnik = korisnik;
+            UcitajSlikuProfila();
+        }
+
+        private void UcitajSlikuProfila()
+        {
+            if (TrenutniKorisnik.slika != null)
+            {
+                BitmapImage bitmap = ByteToImage(TrenutniKorisnik.slika);
+                profileImageBrush.ImageSource = bitmap;
+            }
+        }
+
+        private BitmapImage ByteToImage(byte[] imageData)
+        {
+            using (MemoryStream ms = new MemoryStream(imageData))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = ms;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                return bitmap;
+            }
         }
 
 

@@ -101,7 +101,7 @@ namespace RestaurantManagementSystem
                 {
                     CurrentUser.LoggedInUser = korisnik;
 
-                    MainWindow mainWindow = new MainWindow();
+                    MainWindow mainWindow = new MainWindow(korisnik);
                     mainWindow.Show();
                     this.Close();
                 }
