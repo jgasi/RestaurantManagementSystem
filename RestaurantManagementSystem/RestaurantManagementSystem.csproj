@@ -257,6 +257,18 @@
   <ItemGroup>
     <Resource Include="Slike\mainpozadina.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TempSlike\govedina-s-povrcem.jpg" />
+    <Resource Include="TempSlike\losossrizom.png" />
+    <Resource Include="TempSlike\omlette-s-povrcem.jpg" />
+    <Resource Include="TempSlike\pileci-sa-zara-i-riza.jpg" />
+    <Resource Include="TempSlike\piletina-s-povrcem.jpeg" />
+    <Resource Include="TempSlike\rizotosgljivama.jpg" />
+    <Resource Include="TempSlike\Salata-od-piletine.jpg" />
+    <Resource Include="TempSlike\sendvic-s-tunjevinom.jpeg" />
+    <Resource Include="TempSlike\tjesteninasmesombolognese.jpg" />
+    <Resource Include="TempSlike\vege-pizza.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

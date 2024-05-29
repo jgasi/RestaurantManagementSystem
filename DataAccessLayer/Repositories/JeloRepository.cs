@@ -48,7 +48,7 @@ namespace DataAccessLayer.Repositories
 
         public override int Update(Jelo entity, bool saveChanges = true)
         {
-            var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);
+            //var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);
             var jelo = Entities.SingleOrDefault(j => j.id_jelo == entity.id_jelo);
 
             jelo.naziv = entity.naziv;
@@ -56,7 +56,7 @@ namespace DataAccessLayer.Repositories
             jelo.nutrivne_informacije = entity.nutrivne_informacije;
             jelo.alergeni = entity.alergeni;
             jelo.slika = entity.slika;
-            jelo.Inventar = inventar;
+            jelo.Inventar_id_inventar = 1;
 
             if(saveChanges) 
             {

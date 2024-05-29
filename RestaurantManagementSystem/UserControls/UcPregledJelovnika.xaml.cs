@@ -35,6 +35,7 @@ namespace RestaurantManagementSystem.UserControls
             Jela = jeloServices.GetAllJela();
         }
 
+        //ova funkcija potencijalno jako sporo postavlja stranicu!!!!!!
         private void PrikaziStranicu()
         {
             CurrentPageJela.Clear();

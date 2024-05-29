@@ -4,27 +4,30 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-public class ByteArrayToImageConverter : IValueConverter
+namespace RestaurantManagementSystem.Helpers
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public class ByteArrayToImageSourceConverter : IValueConverter
     {
-        if (value is byte[] byteArray && byteArray.Length > 0)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            using (var stream = new MemoryStream(byteArray))
+            if (value is byte[] byteArray)
             {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = stream;
-                image.EndInit();
-                return image;
+                var imageSource = new BitmapImage();
+                using (var stream = new MemoryStream(byteArray))
+                {
+                    imageSource.BeginInit();
+                    imageSource.StreamSource = stream;
+                    imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                    imageSource.EndInit();
+                }
+                return imageSource;
             }
+            return null;
         }
-        return null;
-    }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
