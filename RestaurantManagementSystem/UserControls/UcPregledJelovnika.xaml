@@ -45,6 +45,7 @@
             </RadioButton>
         </StackPanel>
 
+        <TextBlock x:Name="loadingText" Grid.Row="2" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Visible"/>
 
         <ItemsControl Grid.Row="2" ItemsSource="{Binding CurrentPageJela}" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>

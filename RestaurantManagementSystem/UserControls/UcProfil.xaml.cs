@@ -1,39 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 using RestaurantManagementSystem.Autentikacija;
 
 namespace RestaurantManagementSystem.UserControls
 {
-    /// <summary>
-    /// Interaction logic for UcProfil.xaml
-    /// </summary>
     public partial class UcProfil : UserControl
     {
         public Korisnik TrenutniKorisnik { get; set; }
         private KorisnikServices korisnikServices = new KorisnikServices();
         private bool isImageChanged = false;
 
-
         public UcProfil()
         {
             InitializeComponent();
             UcitajPodatke();
         }
+
+        public delegate void ProfileImageChangedEventHandler(object sender, EventArgs e);
+        public static event ProfileImageChangedEventHandler ProfileImageChanged;
 
         private void UcitajPodatke()
         {
@@ -68,6 +57,7 @@ namespace RestaurantManagementSystem.UserControls
                 {
                     korisnikServices.UpdateKorisnik(TrenutniKorisnik);
                     MessageBox.Show("Podaci su uspješno spremljeni, uključujući sliku!");
+                    ProfileImageChanged?.Invoke(this, EventArgs.Empty);
                 }
                 else
                 {
@@ -77,6 +67,7 @@ namespace RestaurantManagementSystem.UserControls
                 isImageChanged = false;
             }
         }
+
         private void BtnPromijeniSliku_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new Microsoft.Win32.OpenFileDialog

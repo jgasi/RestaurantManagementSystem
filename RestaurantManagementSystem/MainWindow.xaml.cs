@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices;
-using System.Runtime;
-using System.Windows.Interop;
-using System.ComponentModel;
 using FontAwesome.Sharp;
 using EntitiesLayer.Entities;
-using System.IO;
-
+using RestaurantManagementSystem.UserControls;
 
 namespace RestaurantManagementSystem
 {
@@ -30,6 +20,7 @@ namespace RestaurantManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+            UcProfil.ProfileImageChanged += OnProfileImageChanged;
         }
 
         public MainWindow(Korisnik korisnik) : this()
@@ -61,7 +52,6 @@ namespace RestaurantManagementSystem
             }
         }
 
-
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -88,7 +78,7 @@ namespace RestaurantManagementSystem
 
         private void btnMaximize_Click(object sender, RoutedEventArgs e)
         {
-            if(this.WindowState == WindowState.Normal) 
+            if (this.WindowState == WindowState.Normal)
             {
                 this.WindowState = WindowState.Maximized;
             }
@@ -102,7 +92,7 @@ namespace RestaurantManagementSystem
         {
             pageIcon.Icon = IconChar.User;
             pageTitle.Text = "Profil";
-            var ucProfil = new UserControls.UcProfil();
+            var ucProfil = new UcProfil();
             GuiManager.OpenContent(ucProfil);
         }
 
@@ -112,6 +102,7 @@ namespace RestaurantManagementSystem
             loginWindow.Show();
             this.Close();
         }
+
         private void LogoutTextBlock_MouseEnter(object sender, MouseEventArgs e)
         {
             // Podcrtaj tekst kada se miš nalazi iznad teksta
@@ -143,8 +134,14 @@ namespace RestaurantManagementSystem
         {
             pageIcon.Icon = IconChar.Utensils;
             pageTitle.Text = "Pregled jelovnika";
-            var ucPregledJelovnika = new UserControls.UcPregledJelovnika();
+            var ucPregledJelovnika = new UcPregledJelovnika();
             GuiManager.OpenContent(ucPregledJelovnika);
+        }
+
+        private void OnProfileImageChanged(object sender, EventArgs e)
+        {
+            // Update profile image when changed
+            UcitajSlikuProfila();
         }
     }
 }

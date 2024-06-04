@@ -22,6 +22,24 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Jelo> GetJeloById(int givenId)
+        {
+            var query = from j in Entities
+                        where j.id_jelo == givenId
+                        select j;
+
+            return query;
+        }
+
+        public IQueryable<Jelo> GetJelaByPage(int pageNumber, int itemsPerPage)
+        {
+            var query = Entities
+                         .OrderBy(j => j.id_jelo)
+                         .Skip(pageNumber * itemsPerPage)
+                         .Take(itemsPerPage);
+            return query;
+        }
+
         public override int Add(Jelo entity, bool saveChanges = true)
         {
             //var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);

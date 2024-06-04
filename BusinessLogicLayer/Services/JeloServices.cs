@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
 using EntitiesLayer.Entities;
+using System.Data.Entity;
 
 namespace BusinessLogicLayer.Services
 {
@@ -16,6 +17,31 @@ namespace BusinessLogicLayer.Services
             {
                 List<Jelo> jelo = repo.GetAll().ToList();
                 return jelo;
+            }
+        }
+
+        public async Task<List<Jelo>> GetAllJelaAsync()
+        {
+            using (var repo = new JeloRepository())
+            {
+                List<Jelo> jelo = await repo.GetAll().ToListAsync();
+                return jelo;
+            }
+        }
+
+        public async Task<List<Jelo>> GetJelaByPageAsync(int pageNumber, int itemsPerPage)
+        {
+            using (var repo = new JeloRepository())
+            {
+                return await repo.GetJelaByPage(pageNumber, itemsPerPage).ToListAsync();
+            }
+        }
+
+        public async Task<List<Jelo>> GetFirstThreeJelaAsync(int id)
+        {
+            using (var repo = new JeloRepository())
+            {
+                return await repo.GetJeloById(id).ToListAsync();
             }
         }
 
