@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace DataAccessLayer.Repositories
         {
             var query = from j in Entities
                         select j;
-            
+
             return query;
         }
 

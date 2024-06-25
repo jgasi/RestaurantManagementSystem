@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace RestaurantManagementSystem.UserControls
 {
     public partial class UcPregledJelovnika : UserControl
     {
+        private static IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
         private JeloServices jeloServices = new JeloServices();
         public Jelo SelectedJelo { get; set; }
-        public List<Jelo> SvaJela;
         private int currentPage = 0;
         private int itemsPerPage = 3;
         private bool isLoading = false;
@@ -45,7 +47,11 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var item in allItems)
             {
-                CurrentPageJela.Add(item);
+                if (!IsJeloCached(item.id_jelo))
+                {
+                    CurrentPageJela.Add(item);
+                    AddJeloToCache(item);
+                }
             }
             loadingText.Visibility = Visibility.Collapsed;
         }
@@ -56,12 +62,30 @@ namespace RestaurantManagementSystem.UserControls
 
             try
             {
-                SvaJela = await jeloServices.GetAllJelaAsync();
+                if (!cache.TryGetValue("SvaJelaCache", out List<Jelo> SvaJelaCache))
+                {
+                    SvaJelaCache = await jeloServices.GetAllJelaAsync();
+                    cache.Set("SvaJelaCache", SvaJelaCache, TimeSpan.FromMinutes(30));
+                }
             }
             finally
             {
                 isLoading = false;
-                PrikaziStranicu(); // Poziv funkcije za prikaz stranice nakon što su sva jela učitana
+                PrikaziStranicu();
+            }
+        }
+
+        private bool IsJeloCached(int jeloId)
+        {
+            return cache.TryGetValue("SvaJelaCache", out List<Jelo> SvaJelaCache) && SvaJelaCache.Any(j => j.id_jelo == jeloId);
+        }
+
+        private void AddJeloToCache(Jelo jelo)
+        {
+            if (cache.TryGetValue("SvaJelaCache", out List<Jelo> SvaJelaCache))
+            {
+                SvaJelaCache.Add(jelo);
+                cache.Set("SvaJelaCache", SvaJelaCache, TimeSpan.FromMinutes(30));
             }
         }
 
@@ -73,12 +97,11 @@ namespace RestaurantManagementSystem.UserControls
                 return;
             }
 
-            List<Jelo> items = null;
             CurrentPageJela.Clear();
 
-            if (SvaJela != null)
+            if (cache.TryGetValue("SvaJelaCache", out List<Jelo> SvaJelaCache))
             {
-                items = SvaJela.Skip(currentPage * itemsPerPage).Take(itemsPerPage).ToList();
+                var items = SvaJelaCache.Skip(currentPage * itemsPerPage).Take(itemsPerPage).ToList();
 
                 foreach (var item in items)
                 {
@@ -89,9 +112,8 @@ namespace RestaurantManagementSystem.UserControls
             }
             else
             {
-                // Prikaži "loading..." ako još uvijek nisu učitana sva jela
                 loadingText.Visibility = Visibility.Visible;
-                CurrentPageJela.Clear(); // Obriši trenutna jela
+                CurrentPageJela.Clear();
             }
 
             UpdateButtons();
@@ -100,7 +122,7 @@ namespace RestaurantManagementSystem.UserControls
         private void UpdateButtons()
         {
             PrevButton.IsEnabled = currentPage > 0;
-            NextButton.IsEnabled = (currentPage + 1) * itemsPerPage < (SvaJela?.Count ?? 0);
+            NextButton.IsEnabled = (currentPage + 1) * itemsPerPage < (cache.Get<List<Jelo>>("SvaJelaCache")?.Count ?? 0);
         }
 
         private void PrevButton_Click(object sender, RoutedEventArgs e)

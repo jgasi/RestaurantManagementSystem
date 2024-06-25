@@ -61,7 +61,7 @@
                         </Border.Background>
                         <Grid>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image Source="/Slike/eggtemp.jpg" Width="120" Height="120" Margin="5">
+                                <Image Source="{Binding slika}" Width="120" Height="120" Margin="5">
                                     <Image.Effect>
                                         <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="Black"/>
                                     </Image.Effect>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
 using EntitiesLayer.Entities;
 using System.Data.Entity;
+using System.Diagnostics;
 
 namespace BusinessLogicLayer.Services
 {
@@ -16,6 +17,7 @@ namespace BusinessLogicLayer.Services
             using (var repo = new JeloRepository())
             {
                 List<Jelo> jelo = repo.GetAll().ToList();
+
                 return jelo;
             }
         }

@@ -17,6 +17,7 @@ namespace RestaurantManagementSystem
     {
         private Korisnik TrenutniKorisnik;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -140,7 +141,6 @@ namespace RestaurantManagementSystem
 
         private void OnProfileImageChanged(object sender, EventArgs e)
         {
-            // Update profile image when changed
             UcitajSlikuProfila();
         }
     }
