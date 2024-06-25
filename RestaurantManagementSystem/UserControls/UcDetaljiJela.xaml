@@ -25,42 +25,31 @@
                 </Image>
             </Grid>
 
+            <!-- Button to navigate to comments -->
+            <Button Content="Komentari" Click="CommentsButton_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,30"/>
+
+
             <StackPanel Orientation="Horizontal">
 
-                    <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical">
                     <Label FontFamily="{StaticResource CustomFont2}" Content="Cijena:" Foreground="White" FontWeight="Bold" FontSize="25" Margin="20 0 100 5"/>
-                        <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" x:Name="cijenaTxtBl" FontSize="18" Margin="25 0 0 10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Foreground="White" x:Name="cijenaTxtBl" FontSize="18" Margin="25 0 0 10"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
                     <Label FontFamily="{StaticResource CustomFont2}" Content="Nutritivne informacije na 100g:" Foreground="White" FontWeight="Bold" FontSize="25" Margin="-5 0 100 5"/>
-                        <StackPanel x:Name="nutrivneInformacijeStackPanel" Margin="0 0 0 10">
-                            <!-- Dinamički dodani TextBlockovi za nutritivne informacije -->
-                        </StackPanel>
-                    </StackPanel>
-
-
-                    <StackPanel Orientation="Vertical">
-                    <Label FontFamily="{StaticResource CustomFont2}" Content="Alergeni:" Foreground="White" FontWeight="Bold" FontSize="25" Margin="-5 0 100 5"/>
-                        <StackPanel x:Name="alergeniStackPanel" Margin="0 0 0 10">
-                            <!-- Dinamički dodani TextBlockovi za alergene -->
-                        </StackPanel>
+                    <StackPanel x:Name="nutrivneInformacijeStackPanel" Margin="0 0 0 10">
+                        <!-- Dinamički dodani TextBlockovi za nutritivne informacije -->
                     </StackPanel>
                 </StackPanel>
-                <!-- Polje za unos komentara -->
-                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Recenzije:" Foreground="White" FontSize="20" Margin="0,80,0,0"></TextBlock>
-                <TextBox FontFamily="{StaticResource CustomFont2}" Foreground="Black" FontSize="16" Margin="0 20" Width="300" HorizontalAlignment="Center"/>
 
-                <!-- Kontrola za odabir ocjene -->
-                <StackPanel Orientation="Horizontal" Margin="0 20">
-                    <Label FontFamily="{StaticResource CustomFont2}" Content="Ocijenite jelo:" Foreground="White" FontWeight="Bold" FontSize="16"/>
-                    <ComboBox FontFamily="{StaticResource CustomFont2}" SelectedIndex="0" Foreground="Black" FontSize="16" Margin="10 0">
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
-                        <ComboBoxItem Content="5"/>
-                    </ComboBox>
+
+                <StackPanel Orientation="Vertical">
+                    <Label FontFamily="{StaticResource CustomFont2}" Content="Alergeni:" Foreground="White" FontWeight="Bold" FontSize="25" Margin="-5 0 100 5"/>
+                    <StackPanel x:Name="alergeniStackPanel" Margin="0 0 0 10">
+                        <!-- Dinamički dodani TextBlockovi za alergene -->
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

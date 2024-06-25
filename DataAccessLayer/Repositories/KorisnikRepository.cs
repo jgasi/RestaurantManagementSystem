@@ -30,6 +30,14 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public Korisnik GetKorisnikById(int id)
+        {
+            var query = from k in Entities
+                        where k.id_korisnik == id
+                        select k;
+            return query.FirstOrDefault();
+        }
+
         public override int Add(Korisnik entity, bool saveChanges = true)
         {
             var korisnik = new Korisnik

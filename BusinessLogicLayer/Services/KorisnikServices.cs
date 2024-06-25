@@ -30,6 +30,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public Korisnik GetKorisnikById(int id)
+        {
+            using (var repo = new KorisnikRepository())
+            {
+                Korisnik korisnik = repo.GetKorisnikById(id);
+
+                return korisnik;
+            }
+        }
+
         public bool AddKorisnik(Korisnik korisnik)
         {
             bool isSuccesful = false;

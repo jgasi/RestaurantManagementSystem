@@ -139,6 +139,9 @@
     <Compile Include="UserControls\UcDetaljiJela.xaml.cs">
       <DependentUpon>UcDetaljiJela.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcKomentariJela.xaml.cs">
+      <DependentUpon>UcKomentariJela.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcPregledJelovnika.xaml.cs">
       <DependentUpon>UcPregledJelovnika.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UcDetaljiJela.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcKomentariJela.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

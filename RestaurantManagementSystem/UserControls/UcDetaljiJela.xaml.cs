@@ -39,25 +39,6 @@ namespace RestaurantManagementSystem.UserControls
             nazivTxtBl.Text = jelo.naziv;
             cijenaTxtBl.Text = jelo.cijena;
             slikaJela.Source = ByteToImage(jelo.slika);
-            if(jelo.slika == null)
-            {
-                //ovdje samo ime slike promjeni i idi dalje sejvaj
-                var slikaa = slikaJela.Source = new BitmapImage(new Uri("/TempSlike/pileci-sa-zara-i-riza.jpg", UriKind.Relative));
-
-                Jelo updejt = new Jelo
-                {
-                    //PROMJENI ID JELA KOJEG MIJENJAS BTW POGLEDAJ NA AZURE KOJI JE ID ZA KOJE JELO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    id_jelo = 12,
-                    naziv = jelo.naziv,
-                    cijena = jelo.cijena,
-                    nutrivne_informacije = jelo.nutrivne_informacije,
-                    alergeni = jelo.alergeni,
-                    slika = ConvertImageToBytes(slikaa),
-                    Inventar_id_inventar = 1
-                };
-
-                jeloServices.UpdateJelo(updejt);
-            }
 
             nutrivneInformacijeStackPanel.Children.Clear();
             string[] nutrivneInformacije = jelo.nutrivne_informacije.Split('|');
@@ -89,6 +70,13 @@ namespace RestaurantManagementSystem.UserControls
                 };
                 alergeniStackPanel.Children.Add(textBlock);
             }
+        }
+
+        private void CommentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            UcKomentariJela ucKomentariJela = new UcKomentariJela(primljenoJelo);
+            glavniGrid.Children.Clear();
+            glavniGrid.Children.Add(ucKomentariJela);
         }
 
         private BitmapImage ByteToImage(byte[] imageData)
@@ -123,16 +111,6 @@ namespace RestaurantManagementSystem.UserControls
                 encoder.Save(memoryStream);
                 return memoryStream.ToArray();
             }
-        }
-
-        // UcDetaljiJela.xaml.cs
-
-        private void Povratak_Click(object sender, RoutedEventArgs e)
-        {
-            // Kada se pritisne tipka "povratak", vratite se na UcPregledJelovnika
-            UcPregledJelovnika pregledJelovnika = new UcPregledJelovnika();
-            glavniGrid.Children.Clear();
-            glavniGrid.Children.Add(pregledJelovnika);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
