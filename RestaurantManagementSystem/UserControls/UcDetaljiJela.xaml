@@ -12,12 +12,12 @@
                 <TextBlock FontFamily="{StaticResource CustomFont4}" FontSize="40" Foreground="White" x:Name="nazivTxtBl" TextAlignment="Center" Margin="0 0 0 10"/>
 
             <Grid>
-                <Image x:Name="slikaJela" Source="/Slike/cookedmeat-temp.jpg" Width="400" Height="400" Stretch="Uniform" HorizontalAlignment="Center">
+                <Image x:Name="slikaJela" Width="380" Height="380" Stretch="Uniform" HorizontalAlignment="Center">
                     <Image.OpacityMask>
                         <VisualBrush Stretch="Fill">
                             <VisualBrush.Visual>
                                 <Grid>
-                                    <Rectangle Width="400" Height="400" RadiusX="12" RadiusY="12" Fill="White"/>
+                                    <Rectangle Width="380" Height="380" RadiusX="12" RadiusY="12" Fill="White"/>
                                 </Grid>
                             </VisualBrush.Visual>
                         </VisualBrush>
@@ -26,7 +26,7 @@
             </Grid>
 
             <!-- Button to navigate to comments -->
-            <Button Content="Komentari" Click="CommentsButton_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,30"/>
+            <Button Style="{StaticResource btnDoKomentara}" Content="Komentari" Click="CommentsButton_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,25"/>
 
 
             <StackPanel Orientation="Horizontal">

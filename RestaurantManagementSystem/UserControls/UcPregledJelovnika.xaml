@@ -68,7 +68,7 @@
                                 </Image>
                                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5">
                                     <TextBlock Width="250" FontFamily="{StaticResource CustomFont4}" FontSize="30" Foreground="White" Text="{Binding naziv}" TextWrapping="Wrap" Margin="5,0,0,20"/>
-                                    <TextBlock Width="150" FontFamily="{StaticResource CustomFont5}" FontSize="12" Foreground="White" Text="{Binding nutrivne_informacije}" TextWrapping="Wrap" Margin="5"/>
+                                    <TextBlock Width="150" FontFamily="{StaticResource CustomFont4}" FontSize="30" Foreground="White" Text="{Binding cijena, StringFormat=€{0}}" TextWrapping="Wrap" Margin="5"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

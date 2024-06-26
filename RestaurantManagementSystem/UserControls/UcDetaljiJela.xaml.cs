@@ -49,7 +49,7 @@ namespace RestaurantManagementSystem.UserControls
                     Text = info,
                     Foreground = Brushes.White,
                     Margin = new Thickness(0, 2, 0, 2),
-                    FontSize = 16,
+                    FontSize = 14,
                     FontFamily = (FontFamily)FindResource("CustomFont2")
                 };
                 nutrivneInformacijeStackPanel.Children.Add(textBlock);
@@ -64,7 +64,7 @@ namespace RestaurantManagementSystem.UserControls
                     Text = alergen,
                     Foreground = Brushes.White,
                     Margin = new Thickness(0, 2, 0, 2),
-                    FontSize = 16,
+                    FontSize = 14,
                     FontFamily = (FontFamily)FindResource("CustomFont2")
 
                 };
