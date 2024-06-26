@@ -98,7 +98,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}">
+                                 Tag="{StaticResource color11}"
+                                 Click="KontaktInfoButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Phone" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Kontakt informacije" Style="{StaticResource menuButtonText}"></TextBlock>

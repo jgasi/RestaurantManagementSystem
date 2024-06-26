@@ -143,5 +143,13 @@ namespace RestaurantManagementSystem
         {
             UcitajSlikuProfila();
         }
+
+        private void KontaktInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.Phone;
+            pageTitle.Text = "Kontakt informacije";
+            var ucKontaktInfo = new UcKontaktInformacije();
+            GuiManager.OpenContent(ucKontaktInfo);
+        }
     }
 }
