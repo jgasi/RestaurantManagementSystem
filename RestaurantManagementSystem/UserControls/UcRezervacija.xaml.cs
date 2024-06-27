@@ -215,8 +215,9 @@ namespace RestaurantManagementSystem.UserControls
             // Retrieve all reservations within the selected time slot
             var sveRezervacije = await _rezervacijaServices.GetAllRezervacijeAsync();
             var overlappingReservations = sveRezervacije
-                .Where(r => r.datum_vrijeme >= selectedDateTime && r.datum_vrijeme < endTime)
+                .Where(r => r.datum_vrijeme < endTime && r.datum_vrijeme.Value.AddHours(2) > selectedDateTime)
                 .ToList();
+
 
             // Get available tables (stolovi)
             var stolovi = await _stolServices.GetSlobodneStolove();
