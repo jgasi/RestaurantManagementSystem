@@ -31,6 +31,14 @@ namespace DataAccessLayer.Repositories
 
             return query;
         }
+        public IQueryable<Jelo> GetJeloByName(string name)
+        {
+            var query = from j in Entities
+                        where j.naziv.Contains(name)
+                        select j;
+
+            return query;
+        }
 
         public IQueryable<Jelo> GetJelaByPage(int pageNumber, int itemsPerPage)
         {

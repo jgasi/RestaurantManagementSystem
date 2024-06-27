@@ -22,6 +22,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Pice> GetAllByName(string name)
+        {
+            var query = from p in Entities
+                        where p.naziv.Contains(name)
+                        select p;
+
+            return query;
+        }
+
         public override int Add(Pice entity, bool saveChanges = true)
         {
             var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,15 @@ namespace BusinessLogicLayer.Services
             using(var repo = new RezervacijaRepository()) 
             {
                 List<Rezervacija> rezervacije = repo.GetAll().ToList();
+                return rezervacije;
+            }
+        }
+
+        public async Task<List<Rezervacija>> GetAllRezervacijeAsync()
+        {
+            using (var repo = new RezervacijaRepository())
+            {
+                List<Rezervacija> rezervacije = await repo.GetAll().ToListAsync();
                 return rezervacije;
             }
         }

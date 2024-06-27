@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,24 @@ namespace BusinessLogicLayer.Services
             using (var repo = new PiceRepository())
             {
                 List<Pice> pica = repo.GetAll().ToList();
+                return pica;
+            }
+        }
+
+        public async Task<List<Pice>> GetAllPicaAsync()
+        {
+            using (var repo = new PiceRepository())
+            {
+                List<Pice> pica = await repo.GetAll().ToListAsync();
+                return pica;
+            }
+        }
+
+        public async Task<List<Pice>> GetAllPicaByNameAsync(string name)
+        {
+            using (var repo = new PiceRepository())
+            {
+                List<Pice> pica = await repo.GetAllByName(name).ToListAsync();
                 return pica;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,15 @@ namespace BusinessLogicLayer.Services
             using (var repo = new StolRepository())
             {
                 List<Stol> stolovi = repo.GetAll().ToList();
+                return stolovi;
+            }
+        }
+
+        public async Task<List<Stol>> GetSlobodneStolove()
+        {
+            using (var repo = new StolRepository())
+            {
+                List<Stol> stolovi = await repo.GetSlobodneStolove().ToListAsync();
                 return stolovi;
             }
         }

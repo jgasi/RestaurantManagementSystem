@@ -90,7 +90,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}">
+                                 Tag="{StaticResource color11}"
+                                 Click="RezervacijaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="CalendarDays" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Rezervacija" Style="{StaticResource menuButtonText}"></TextBlock>

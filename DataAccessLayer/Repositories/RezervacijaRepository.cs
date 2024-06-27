@@ -24,14 +24,14 @@ namespace DataAccessLayer.Repositories
 
         public override int Add(Rezervacija entity, bool saveChanges = true)
         {
-            var korisnik = Context.Korisnik.SingleOrDefault(k => k.id_korisnik == entity.Korisnik.id_korisnik);
-            var stol = Context.Stol.SingleOrDefault(s => s.id_stol == entity.Stol.id_stol);
+            var korisnik = entity.Korisnik_id_korisnik;
+            var stol = entity.Stol_id_stol;
 
             var rezervacija = new Rezervacija
             {
                 datum_vrijeme = entity.datum_vrijeme,
-                Korisnik = korisnik,
-                Stol = stol
+                Korisnik_id_korisnik = korisnik,
+                Stol_id_stol = stol
             };
 
             Entities.Add(rezervacija);

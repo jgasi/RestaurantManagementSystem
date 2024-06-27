@@ -151,5 +151,13 @@ namespace RestaurantManagementSystem
             var ucKontaktInfo = new UcKontaktInformacije();
             GuiManager.OpenContent(ucKontaktInfo);
         }
+
+        private void RezervacijaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.CalendarDays;
+            pageTitle.Text = "Rezervacija";
+            var ucRezervacija = new UcRezervacija(TrenutniKorisnik);
+            GuiManager.OpenContent(ucRezervacija);
+        }
     }
 }

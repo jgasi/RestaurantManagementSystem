@@ -22,6 +22,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Stol> GetSlobodneStolove()
+        {
+            var query = from s in Entities
+                        where s.status == "slobodan"
+                        select s;
+
+            return query;
+        }
+
         public override int Add(Stol entity, bool saveChanges = true)
         {
             var stol = new Stol
