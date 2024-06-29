@@ -19,6 +19,8 @@ namespace RestaurantManagementSystem.UserControls
         private PiceServices _piceServices = new PiceServices();
         private RezervacijaServices _rezervacijaServices = new RezervacijaServices();
         private StolServices _stolServices = new StolServices();
+        private NarudzbaServices _narudzbaServices = new NarudzbaServices();
+        private Stavka_narudzbeServices _stavka_narudzbeServices = new Stavka_narudzbeServices();
         private List<Jelo> _filteredFoodItems;
         private List<Pice> _filteredDrinkItems;
         private List<Jelo> _selectedFoodItems = new List<Jelo>();
@@ -237,6 +239,7 @@ namespace RestaurantManagementSystem.UserControls
             if (tableId == null)
             {
                 // No available table found for the selected time slot
+                System.Windows.Forms.MessageBox.Show("Nema dostupnog stola za odabrani termin.");
                 return;
             }
 
@@ -250,6 +253,46 @@ namespace RestaurantManagementSystem.UserControls
 
             _rezervacijaServices.AddRezervaciju(novaRezervacija);
 
+            //spremi narudzbu
+            Narudzba narudzba = new Narudzba
+            {
+                datum_vrijeme = selectedDateTime.Value,
+                racun = GenerateRacun(),
+                status = "Zaprimljeno",
+                Korisnik_id_korisnik = korisnik.id_korisnik
+            };
+
+            Narudzba narudzbaNova = await _narudzbaServices.AddNarudzbuAsync(narudzba);
+
+            //Narudzba narudbaNova = _narudzbaServices.GetLastNarudzbaByKorisnik(narudzba.Korisnik_id_korisnik);
+
+
+            foreach (var jelo in _selectedFoodItems)
+            {
+                Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
+                {
+                    kolicina = "1",
+                    prilagodbe = null,
+                    Narudzba_id_narudzba = narudzbaNova.id_narudzba,
+                    Jelo_id_jelo = jelo.id_jelo,
+                    Pice_id_pice = null
+                };
+                _stavka_narudzbeServices.AddStavkeNarudzbe(stavka_Narudzbe);
+            }
+
+            foreach (var pice in _selectedDrinkItems)
+            {
+                Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
+                {
+                    kolicina = "1",
+                    prilagodbe = null,
+                    Narudzba_id_narudzba = narudzbaNova.id_narudzba,
+                    Jelo_id_jelo = null,
+                    Pice_id_pice = pice.id_pice
+                };
+                _stavka_narudzbeServices.AddStavkeNarudzbe(stavka_Narudzbe);
+            }
+
             System.Windows.Forms.MessageBox.Show("Rezervacija je kreirana. Vidimo se!");
 
             _ukupnaCijena = 0;
@@ -258,10 +301,26 @@ namespace RestaurantManagementSystem.UserControls
             // Clear selected items after successful reservation
             _selectedFoodItems.Clear();
             _selectedDrinkItems.Clear();
-            SelectedFoodItemsControl.ItemsSource = null; // Clear ItemsSource
-            SelectedDrinkItemsControl.ItemsSource = null; // Clear ItemsSource
+            SelectedFoodItemsControl.ItemsSource = null;
+            SelectedDrinkItemsControl.ItemsSource = null;
 
             // Optionally, you can perform any post-reservation logic here
+        }
+
+        private string GenerateRacun()
+        {
+            var racunDetails = new System.Text.StringBuilder();
+            racunDetails.AppendLine("Narudžba:");
+            foreach (var jelo in _selectedFoodItems)
+            {
+                racunDetails.AppendLine($"{jelo.naziv} - {jelo.cijena} EUR");
+            }
+            foreach (var pice in _selectedDrinkItems)
+            {
+                racunDetails.AppendLine($"{pice.naziv} - {pice.cijena} EUR");
+            }
+            racunDetails.AppendLine($"Ukupna cijena: {_ukupnaCijena} EUR");
+            return racunDetails.ToString();
         }
 
 

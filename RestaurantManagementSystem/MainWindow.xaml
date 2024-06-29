@@ -82,7 +82,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}">
+                                 Tag="{StaticResource color11}"
+                                 Click="PovijestNarudzbiButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ClockRotateLeft" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Povijest narudžbi" Style="{StaticResource menuButtonText}"></TextBlock>

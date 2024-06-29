@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,24 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Narudzba>> GetAllNarudzbeByKorisnikAsync(int korisnikId)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                List<Narudzba> narudzbe = await repo.GetAllById(korisnikId).ToListAsync();
+                return narudzbe;
+            }
+        }
+
+        public Narudzba GetLastNarudzbaByKorisnik(int korisnikId)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                Narudzba narudzba = repo.GetLastNarudzbaByKorisnik(korisnikId);
+                return narudzba;
+            }
+        }
+
         public bool AddNarudzbu(Narudzba narudzba)
         {
             bool isSuccessful = true;
@@ -31,6 +50,20 @@ namespace BusinessLogicLayer.Services
 
             return isSuccessful;
         }
+
+        public async Task<Narudzba> AddNarudzbuAsync(Narudzba narudzba)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                await repo.AddAsync(narudzba);
+                await repo.SaveChangesAsync();
+
+                return narudzba;
+            }
+        }
+
+
+
 
         public bool UpdateNarudzbu(Narudzba narudzba)
         {
@@ -56,6 +89,14 @@ namespace BusinessLogicLayer.Services
             }
 
             return isSuccessful;
+        }
+
+        public void SpremiPromjene()
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                SpremiPromjene();
+            }
         }
     }
 }

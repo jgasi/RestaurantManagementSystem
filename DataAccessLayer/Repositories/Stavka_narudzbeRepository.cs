@@ -24,19 +24,19 @@ namespace DataAccessLayer.Repositories
 
         public override int Add(Stavka_narudzbe entity, bool saveChanges = true)
         {
-            var narudzba = Context.Narudzba.SingleOrDefault(n => n.id_narudzba == entity.Narudzba.id_narudzba);
-            var statistika = Context.Statistika.SingleOrDefault(s => s.id_statistika == entity.Statistika.id_statistika);
-            var jelo = Context.Jelo.SingleOrDefault(j => j.id_jelo == entity.Jelo.id_jelo);
-            var pice = Context.Pice.SingleOrDefault(p => p.id_pice == entity.Pice.id_pice);
+            //var narudzba = Context.Narudzba.SingleOrDefault(n => n.id_narudzba == entity.Narudzba.id_narudzba);
+            //var statistika = Context.Statistika.SingleOrDefault(s => s.id_statistika == entity.Statistika.id_statistika);
+            //var jelo = Context.Jelo.SingleOrDefault(j => j.id_jelo == entity.Jelo.id_jelo);
+            //var pice = Context.Pice.SingleOrDefault(p => p.id_pice == entity.Pice.id_pice);
 
             var stavka_narudzbe = new Stavka_narudzbe
             {
                 kolicina = entity.kolicina,
                 prilagodbe = entity.prilagodbe,
-                Narudzba = narudzba,
-                Statistika = statistika,
-                Jelo = jelo,
-                Pice = pice
+                Narudzba_id_narudzba = entity.Narudzba_id_narudzba,
+                Statistika_id_statistika = entity.Statistika_id_statistika,
+                Jelo_id_jelo = entity.Jelo_id_jelo,
+                Pice_id_pice = entity.Pice_id_pice
             };
 
             Entities.Add(stavka_narudzbe);
@@ -47,6 +47,34 @@ namespace DataAccessLayer.Repositories
             else
             {
                 return 0;
+            }
+        }
+
+        public override Task<int> AddAsync(Stavka_narudzbe entity, bool saveChanges = true)
+        {
+            //var narudzba = Context.Narudzba.SingleOrDefault(n => n.id_narudzba == entity.Narudzba.id_narudzba);
+            //var statistika = Context.Statistika.SingleOrDefault(s => s.id_statistika == entity.Statistika.id_statistika);
+            //var jelo = Context.Jelo.SingleOrDefault(j => j.id_jelo == entity.Jelo.id_jelo);
+            //var pice = Context.Pice.SingleOrDefault(p => p.id_pice == entity.Pice.id_pice);
+
+            var stavka_narudzbe = new Stavka_narudzbe
+            {
+                kolicina = entity.kolicina,
+                prilagodbe = entity.prilagodbe,
+                Narudzba_id_narudzba = entity.Narudzba_id_narudzba,
+                Statistika_id_statistika = null,
+                Jelo_id_jelo = entity.Jelo_id_jelo,
+                Pice_id_pice = entity.Pice_id_pice
+            };
+
+            Entities.Add(stavka_narudzbe);
+            if (saveChanges)
+            {
+                return Task.FromResult(SaveChanges());
+            }
+            else
+            {
+                return Task.FromResult(0);
             }
         }
 

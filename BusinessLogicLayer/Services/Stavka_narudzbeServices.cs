@@ -32,6 +32,19 @@ namespace BusinessLogicLayer.Services
             return isSuccessful;
         }
 
+        public async Task<bool> AddStavkeNarudzbeAsync(Stavka_narudzbe stavkaNarudzbe)
+        {
+            bool isSuccessful = false;
+
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                int affectedRows = await repo.AddAsync(stavkaNarudzbe);
+                isSuccessful = affectedRows > 0;
+            }
+
+            return isSuccessful;
+        }
+
         public bool UpdateStavkeNarudzbe(Stavka_narudzbe stavkaNarudzbe)
         {
             bool isSuccessful = false;

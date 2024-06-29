@@ -172,6 +172,9 @@
     <Compile Include="UserControls\UcKontaktInformacije.xaml.cs">
       <DependentUpon>UcKontaktInformacije.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcPovijestNarudzbi.xaml.cs">
+      <DependentUpon>UcPovijestNarudzbi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcPregledJelovnika.xaml.cs">
       <DependentUpon>UcPregledJelovnika.xaml</DependentUpon>
     </Compile>
@@ -226,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UcKontaktInformacije.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcPovijestNarudzbi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

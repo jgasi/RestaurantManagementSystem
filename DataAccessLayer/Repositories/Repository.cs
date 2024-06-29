@@ -30,6 +30,11 @@ namespace DataAccessLayer.Repositories
             return Context.SaveChanges();
         }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await Context.SaveChangesAsync();
+        }
+
         public virtual int Add(T entity, bool saveChanges = true)
         {
             Entities.Add(entity);
@@ -42,6 +47,21 @@ namespace DataAccessLayer.Repositories
                 return 0;
             }
         }
+
+        public virtual async Task<int> AddAsync(T entity, bool saveChanges = true)
+        {
+            Entities.Add(entity);
+
+            if (saveChanges)
+            {
+                return await Context.SaveChangesAsync();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
 
         public abstract int Update(T entity, bool saveChanges = true);
 
