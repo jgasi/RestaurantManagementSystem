@@ -167,5 +167,13 @@ namespace RestaurantManagementSystem
             var ucPovijestNarudzbi = new UcPovijestNarudzbi(TrenutniKorisnik);
             GuiManager.OpenContent(ucPovijestNarudzbi);
         }
+
+        private void MojeRezervacijeButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.CalendarDays;
+            pageTitle.Text = "Moje rezervacije";
+            var ucMojeRezervacije = new UcMojeRezervacije(TrenutniKorisnik);
+            GuiManager.OpenContent(ucMojeRezervacije);
+        }
     }
 }
