@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,20 +77,6 @@ namespace RestaurantManagementSystem
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //sam malo
-            //var jelo = new Jelo
-            //{
-            //    naziv = "Pileći file sa žara i riža",
-            //    cijena = "10.99",
-            //    nutrivne_informacije = "Kalorije: 295 kcal|Proteini: 33.4g|Ugljikohidrati: 28g|Masti: 3.9g|Zasićene masti: 1.1g|Vlakna: 0.4g|Šećeri: 0g|Natrij: 75mg|Kalcij: 21mg|Željezo: 2.1mg|Kalij: 291mg|Vitamin A: 13 IU|Vitamin C: 0mg|Vitamin D: 1 IU|Vitamin B6: 0.6mg|Vitamin B12: 0.3µg",
-            //    alergeni = "Pšenica|Jaja|Riba|Kikiriki|Soja|Mlijeko|Orašasti plodovi|Celer|Gorušica|Sjeme sezama|Sumporni dioksid i sulfiti|Lupin|Mekušci",
-             //   Inventar_id_inventar = 1
-            //};
-            
-           // jeloServices.AddJelo(jelo);
-
-
-
             var korime = txtKorime.Text;
             var lozinka = txtLozinka.Password;
             
@@ -101,9 +89,19 @@ namespace RestaurantManagementSystem
                 {
                     CurrentUser.LoggedInUser = korisnik;
 
-                    MainWindow mainWindow = new MainWindow(korisnik);
-                    mainWindow.Show();
-                    this.Close();
+                    if(korisnik.uloga == "obican korisnik")
+                    {
+                        MainWindow mainWindow = new MainWindow(korisnik);
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                    else if(korisnik.uloga == "administrator")
+                    {
+                        AdminWindow adminWindow = new AdminWindow(korisnik);
+                        adminWindow.Show();
+                        GuiManager.SetAdminWindow(adminWindow);
+                        this.Close();
+                    } 
                 }
                 else
                 {
@@ -113,6 +111,27 @@ namespace RestaurantManagementSystem
             else
             {
                 MessageBox.Show("Korisničko ime ili lozinka nisu točni!");
+            }
+        }
+
+        private byte[] LoadImage(string imagePath)
+        {
+            try
+            {
+                // Čitanje slike iz datoteke i pretvaranje u byte[] format
+                BitmapImage bitmap = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    JpegBitmapEncoder encoder = new JpegBitmapEncoder(); // Prilagodite kodera ovisno o vrsti slike
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(ms);
+                    return ms.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška prilikom učitavanja slike: {ex.Message}");
+                return null;
             }
         }
     }
