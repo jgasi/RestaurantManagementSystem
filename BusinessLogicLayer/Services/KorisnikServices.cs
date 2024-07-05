@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,15 @@ namespace BusinessLogicLayer.Services
             using(var repo = new KorisnikRepository()) 
             {
                 List<Korisnik> korisnici = repo.GetAll().ToList();
+                return korisnici;
+            }
+        }
+
+        public async Task<List<Korisnik>> GetAllKorisnikeAsync()
+        {
+            using (var repo = new KorisnikRepository())
+            {
+                List<Korisnik> korisnici = await repo.GetAll().ToListAsync();
                 return korisnici;
             }
         }

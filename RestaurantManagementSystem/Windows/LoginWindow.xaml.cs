@@ -89,13 +89,13 @@ namespace RestaurantManagementSystem
                 {
                     CurrentUser.LoggedInUser = korisnik;
 
-                    if(korisnik.uloga == "obican korisnik")
+                    if(korisnik.uloga == "Običan korisnik")
                     {
                         MainWindow mainWindow = new MainWindow(korisnik);
                         mainWindow.Show();
                         this.Close();
                     }
-                    else if(korisnik.uloga == "administrator")
+                    else if(korisnik.uloga == "Administrator")
                     {
                         AdminWindow adminWindow = new AdminWindow(korisnik);
                         adminWindow.Show();

@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="RestaurantManagementSystem.UserControls.UcUpravljanjeKorisnicima"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantManagementSystem.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!-- Optional: Define styles or other resources here -->
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title TextBlock -->
+        <TextBlock Foreground="White" FontFamily="{StaticResource CustomFont2}" Text="Upravljanje Korisnicima" FontSize="24" Margin="0,0,0,10" />
+
+        <!-- Grid with Background Image -->
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
+            </Grid.Background>
+
+            <!-- Border Around DataGrid -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                <!-- DataGrid with Transparent Background -->
+                <DataGrid x:Name="dgKorisnici" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" 
+                          GridLinesVisibility="None" HeadersVisibility="Column"
+                          ColumnHeaderHeight="30" Background="Transparent" RowHeaderWidth="0"
+                          SelectionMode="Single" SelectionUnit="FullRow" RowHeight="50">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <!-- Text color -->
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Border Padding="{TemplateBinding Padding}"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                SnapsToDevicePixels="True">
+                                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Resources>
+                        <!-- Style for DataGridColumnHeader to modernize headers -->
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="{StaticResource color13}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="FontFamily" Value="{StaticResource CustomFont2}" />
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Padding" Value="10,5" />
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="BorderBrush" Value="Gray" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Korisničko Ime" Binding="{Binding korime}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Ime" Binding="{Binding ime}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Prezime" Binding="{Binding prezime}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Header="Uloga" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- TextBlock for role description -->
+                                        <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding uloga}" Margin="0,0,5,0" FontFamily="{StaticResource CustomFont2}"/>
+
+                                        <!-- Radio buttons for roles -->
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <RadioButton Content="Običan korisnik" Click="RadioButton_Checked" Margin="0" FontFamily="{StaticResource CustomFont2}"/>
+                                            <RadioButton Content="Administrator" Click="RadioButton_Checked" Margin="0" FontFamily="{StaticResource CustomFont2}"/>
+                                            <RadioButton Content="Osoblje" Click="RadioButton_Checked" Margin="0" FontFamily="{StaticResource CustomFont2}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Akcije" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Obriši" Click="DeleteUser_Click" BorderThickness="0" Margin="20,0,0,0" FontFamily="{StaticResource CustomFont2}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="#1a2a5a"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border Background="{TemplateBinding Background}">
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#0d1630"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <!-- Loading indicator -->
+            <TextBlock x:Name="loadingText" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Collapsed"/>
+        </Grid>
+    </Grid>
+</UserControl>

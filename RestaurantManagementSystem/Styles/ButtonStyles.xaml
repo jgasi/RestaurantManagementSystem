@@ -219,7 +219,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Spremi button icon-->
+    <!--Kometari button icon-->
     <Style x:Key="btnDoKomentara" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource color15}"/>
         <Setter Property="Foreground" Value="White"/>
