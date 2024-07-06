@@ -71,7 +71,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
-                                 >
+                                 Click="UpravljanjeJelovnikomButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Utensils" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Upravljanje jelovnikom" Style="{StaticResource menuButtonText}"></TextBlock>

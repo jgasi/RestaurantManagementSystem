@@ -144,5 +144,13 @@ namespace RestaurantManagementSystem
             var ucUpravljanjeKorisnicima = new UcUpravljanjeKorisnicima();
             GuiManager.OpenContent(ucUpravljanjeKorisnicima);
         }
+
+        private void UpravljanjeJelovnikomButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.Utensils;
+            pageTitle.Text = "Upravljanje jelovnikom";
+            var ucUpravljanjeJelovnikom = new UcUpravljanjeJelovnikom();
+            GuiManager.OpenContent(ucUpravljanjeJelovnikom);
+        }
     }
 }
