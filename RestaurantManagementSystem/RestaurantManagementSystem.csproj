@@ -158,6 +158,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UcStatistika.xaml.cs">
+      <DependentUpon>UcStatistika.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcUpravljanjeJelovnikom.xaml.cs">
       <DependentUpon>UcUpravljanjeJelovnikom.xaml</DependentUpon>
     </Compile>
@@ -196,6 +199,10 @@
     <Compile Include="UserControls\UcRezervacija.xaml.cs">
       <DependentUpon>UcRezervacija.xaml</DependentUpon>
     </Compile>
+    <Page Include="UserControls\UcStatistika.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcUpravljanjeJelovnikom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -313,6 +320,10 @@
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
       <Project>{240a5398-8b40-4e6d-8e84-bbd250fb0aba}</Project>
       <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{A3575BAD-658A-4C0C-8831-CB3F984B5F7C}</Project>
+      <Name>DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\EntitiesLayer\EntitiesLayer.csproj">
       <Project>{bd6fa57e-5d9b-40c5-b0e1-a2a294fdfb9a}</Project>

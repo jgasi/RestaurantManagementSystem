@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,15 @@ namespace BusinessLogicLayer.Services
             using(var repo = new Stavka_narudzbeRepository())
             {
                 List<Stavka_narudzbe> stavkeNarudzbe = repo.GetAll().ToList();
+                return stavkeNarudzbe;
+            }
+        }
+
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeAsync()
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetAll().ToListAsync();
                 return stavkeNarudzbe;
             }
         }

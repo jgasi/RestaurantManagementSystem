@@ -22,6 +22,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Pice> GetPiceById(int givenId)
+        {
+            var query = from p in Entities
+                        where p.id_pice == givenId
+                        select p;
+
+            return query;
+        }
+
         public IQueryable<Pice> GetAllByName(string name)
         {
             var query = from p in Entities
@@ -57,7 +66,6 @@ namespace DataAccessLayer.Repositories
 
         public override int Update(Pice entity, bool saveChanges = true)
         {
-            var inventar = Context.Inventar.SingleOrDefault(i => i.id_inventar == entity.Inventar.id_inventar);
             var pice = Entities.SingleOrDefault(p => p.id_pice == entity.id_pice);
 
             pice.naziv = entity.naziv;
@@ -65,7 +73,7 @@ namespace DataAccessLayer.Repositories
             pice.nutrivne_informacije = entity.nutrivne_informacije;
             pice.alergeni = entity.alergeni;
             pice.slika = entity.slika;
-            pice.Inventar = inventar;
+            pice.Inventar_id_inventar = 1;
 
             if (saveChanges)
             {

@@ -32,6 +32,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Narudzba> GetByDate(DateTime? startDate, DateTime? endDate)
+        {
+            var query = from n in Entities
+                        where n.datum_vrijeme >= startDate && n.datum_vrijeme <= endDate
+                        select n;
+
+            return query;
+        }
+
         public Narudzba GetLastNarudzbaByKorisnik(int korisnikId)
         {
             var query = Entities

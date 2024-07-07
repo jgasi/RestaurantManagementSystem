@@ -20,11 +20,29 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Recenzija>> GetAllRecenzijeAsync()
+        {
+            using (var repo = new RecenzijaRepository())
+            {
+                List<Recenzija> recenzije = await repo.GetAll().ToListAsync();
+                return recenzije;
+            }
+        }
+
         public async Task<List<Recenzija>> GetRecenzijeByIdAsync(int id)
         {
             using (var repo = new RecenzijaRepository())
             {
                 List<Recenzija> recenzije = await repo.GetRecenzijeById(id).ToListAsync();
+                return recenzije;
+            }
+        }
+
+        public async Task<List<Recenzija>> GetRecenzijePicaByIdAsync(int id)
+        {
+            using (var repo = new RecenzijaRepository())
+            {
+                List<Recenzija> recenzije = await repo.GetRecenzijePicaById(id).ToListAsync();
                 return recenzije;
             }
         }

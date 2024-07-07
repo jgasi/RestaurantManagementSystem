@@ -20,6 +20,15 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Narudzba>> GetNarudzbeByDateAsync(DateTime? startDate, DateTime? endDate)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                List<Narudzba> narudzbe = await repo.GetByDate(startDate, endDate).ToListAsync();
+                return narudzbe;
+            }
+        }
+
         public async Task<List<Narudzba>> GetAllNarudzbeByKorisnikAsync(int korisnikId)
         {
             using (var repo = new NarudzbaRepository())

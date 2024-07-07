@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -14,6 +16,9 @@ namespace RestaurantManagementSystem.UserControls
         public Korisnik TrenutniKorisnik { get; set; }
         private KorisnikServices korisnikServices = new KorisnikServices();
         private bool isImageChanged = false;
+
+        //samo za dodavanje slika za pića
+        //private PiceServices piceServices = new PiceServices();
 
         public UcProfil()
         {
@@ -85,8 +90,22 @@ namespace RestaurantManagementSystem.UserControls
 
                 TrenutniKorisnik.slika = ImageToByte(bitmap);
                 isImageChanged = true;
+
+                //samo za dodavanje slika za pića
+               // spremiPice(bitmap);
+                
             }
         }
+
+        //samo za dodavanje slika za pića
+        //private async void spremiPice(BitmapImage bitmap)
+        //{
+           // List<Pice> kola = await piceServices.GetPiceByIdAsync(1);
+
+           // Pice prvoKola = kola.FirstOrDefault();
+           // prvoKola.slika = ImageToByte(bitmap);
+           // piceServices.UpdatePice(prvoKola);
+       // }
 
         private byte[] ImageToByte(BitmapImage bitmapImage)
         {

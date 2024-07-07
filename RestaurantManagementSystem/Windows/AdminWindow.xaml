@@ -80,7 +80,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
-                                 >
+                                 Click="StatistikaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ChartBar" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Statistika" Style="{StaticResource menuButtonText}"></TextBlock>

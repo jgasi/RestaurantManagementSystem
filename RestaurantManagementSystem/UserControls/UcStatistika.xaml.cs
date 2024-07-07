@@ -1,0 +1,345 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using BusinessLogicLayer.Services;
+using EntitiesLayer.Entities;
+
+namespace RestaurantManagementSystem.UserControls
+{
+    public partial class UcStatistika : UserControl
+    {
+        private NarudzbaServices _narudzbaServices = new NarudzbaServices();
+        private RecenzijaServices recenzijaServices = new RecenzijaServices();
+        private Stavka_narudzbeServices stavka_NarudzbeServices = new Stavka_narudzbeServices();
+        private JeloServices jeloServices = new JeloServices();
+        private PiceServices piceServices = new PiceServices();
+
+        public int najprodavanijeJeloId = 0;
+        public int najprodavanijePiceId = 0;
+
+
+        public UcStatistika()
+        {
+            InitializeComponent();
+            UcitajNajprodavanijeJelo();
+            UcitajNajprodavanijePice();
+        }
+
+        private async void GenerateStatisticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime? startDate = dpStartDate.SelectedDate;
+            DateTime? endDate = dpEndDate.SelectedDate;
+
+            if (startDate == null || endDate == null)
+            {
+                MessageBox.Show("Molimo odaberite početni i krajnji datum.");
+                return;
+            }
+
+            var orders = await _narudzbaServices.GetNarudzbeByDateAsync(startDate, endDate);
+
+            if (orders.Count == 0)
+            {
+                MessageBox.Show("Nema narudžbi u odabranom periodu.");
+                return;
+            }
+
+            decimal totalRevenue = 0;
+            int totalSoldUnits = 0;
+
+            foreach (var order in orders)
+            {
+                string[] parts = order.racun.Split(new string[] { "EUR" }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var part in parts)
+                {
+                    if (part.Contains("Ukupna cijena:"))
+                    {
+                        decimal totalPrice;
+                        if (decimal.TryParse(part.Replace("Ukupna cijena:", "").Trim(), out totalPrice))
+                        {
+                            totalRevenue += totalPrice;
+                        }
+                    }
+                    else
+                    {
+                        // Brojimo naručene jedinice tako što brojimo znakove "-"
+                        int unitsInThisPart = part.Count(c => c == '-');
+                        totalSoldUnits += unitsInThisPart;
+                    }
+                }
+            }
+
+            var sveRecenzije = await recenzijaServices.GetAllRecenzijeAsync();
+            
+            int zbrojOcjena = 0;
+            int kolikoOcjena = 0;
+            
+            foreach(var recenzija in sveRecenzije)
+            {
+                if(int.TryParse(recenzija.ocjena, out int trenutnaOcjena))
+                {
+                    kolikoOcjena++;
+                    zbrojOcjena += trenutnaOcjena;
+                }
+            }
+            decimal prosjekOcjena = kolikoOcjena > 0 ? (decimal)zbrojOcjena / kolikoOcjena : 0;
+
+            totalSoldUnits -= 2;
+            tbUkupniPrihod.Text = $"{totalRevenue:C}";
+            tbBrojProdanihJedinica.Text = totalSoldUnits.ToString();
+            tbProsjecnaOcjena.Text = $"{prosjekOcjena:F2}";
+        }
+
+        private async void UcitajNajprodavanijeJelo()
+        {
+            try
+            {
+                var stavkeNarudzbe = await stavka_NarudzbeServices.GetAllStavkeNarudzbeAsync();
+
+                // Filtriranje stavki koje imaju Jelo_id_jelo različit od null
+                List<Stavka_narudzbe> jeloStavke = stavkeNarudzbe
+                    .Where(s => s.Jelo_id_jelo != null)
+                    .ToList();
+
+                // Grupiranje po Jelo_id_jelo i brojanje ponavljanja
+                var najcesciId = jeloStavke
+                    .GroupBy(s => s.Jelo_id_jelo)
+                    .OrderByDescending(g => g.Count())
+                    .Select(g => new { JeloId = g.Key, BrojPonavljanja = g.Count() })
+                    .FirstOrDefault();
+
+                if (najcesciId != null)
+                {
+                    int jeloId = najcesciId.JeloId.GetValueOrDefault();
+                    List<Jelo> najprodavanijeJeloList = await jeloServices.GetJeloByIdAsync(jeloId);
+
+                    najprodavanijeJeloId = jeloId;
+
+                    UcitajOcjeneJela();
+
+                    Jelo pravoJelo = najprodavanijeJeloList.FirstOrDefault();
+
+                    // Prikaz slike, naziva i cijene najprodavanijeg proizvoda
+                    if (pravoJelo != null)
+                    {
+                        byte[] imageData = pravoJelo.slika; // Pretpostavka da imate byte[] polje za sliku u Jelo objektu
+                        BitmapImage bitmapImage = ByteToImage(imageData);
+
+                        // Postavljanje slike u XAML kontrolu
+                        imgNajprodavanijeJelo.Source = bitmapImage; // imgNajprodavanijiProizvod je ime vaše Image XAML kontrolu
+
+                        // Postavljanje naziva i cijene proizvoda
+                        tbNajprodavanijeJeloNaziv.Text = pravoJelo.naziv;
+                        tbNajprodavanijeJeloCijena.Text = $"{pravoJelo.cijena:C} €";
+                    }
+                    else
+                    {
+                        tbNajprodavanijeJeloNaziv.Text = "Nema podataka";
+                        tbNajprodavanijeJeloCijena.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    tbNajprodavanijeJeloNaziv.Text = "Nema podataka";
+                    tbNajprodavanijeJeloCijena.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju najprodavanijeg proizvoda: {ex.Message}");
+            }
+        }
+
+        private async void UcitajOcjeneJela()
+        {
+            try
+            {
+                List<Recenzija> recenzijeJela = await recenzijaServices.GetRecenzijeByIdAsync(najprodavanijeJeloId);
+
+                if (recenzijeJela.Any())
+                {
+                    // Izračun prosječne ocjene
+                    double prosjecnaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Average(r => int.Parse(r.ocjena));
+
+                    tbNajprodavanijeJeloProsjecnaOcjena.Text = prosjecnaOcjena.ToString();
+
+                    // Najveća ocjena
+                    int najvecaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Max(r => int.Parse(r.ocjena));
+
+                    // Najmanja ocjena
+                    int najmanjaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Min(r => int.Parse(r.ocjena));
+
+                    // Ažuriranje TextBlock-ova za najveću i najmanju ocjenu
+                    tbNajprodavanijeJeloNajboljaOcjena.Text = najvecaOcjena.ToString();
+                    tbNajprodavanijeJeloNajgoraOcjena.Text = najmanjaOcjena.ToString();
+                }
+                else
+                {
+                    // Ako nema recenzija
+                    tbNajprodavanijeJeloProsjecnaOcjena.Text = "Nema recenzija";
+                    tbNajprodavanijeJeloNajboljaOcjena.Text = "Nema recenzija";
+                    tbNajprodavanijeJeloNajgoraOcjena.Text = "Nema recenzija";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju ocjena jela: {ex.Message}");
+            }
+        }
+
+
+        private async void UcitajNajprodavanijePice()
+        {
+            try
+            {
+                var stavkeNarudzbe = await stavka_NarudzbeServices.GetAllStavkeNarudzbeAsync();
+
+                // Filtriranje stavki koje imaju Pice_id_pice različit od null
+                List<Stavka_narudzbe> piceStavke = stavkeNarudzbe
+                    .Where(s => s.Pice_id_pice != null)
+                    .ToList();
+
+                // Grupiranje po Pice_id_pice i brojanje ponavljanja
+                var najcesciId = piceStavke
+                    .GroupBy(s => s.Pice_id_pice)
+                    .OrderByDescending(g => g.Count())
+                    .Select(g => new { PiceId = g.Key, BrojPonavljanja = g.Count() })
+                    .FirstOrDefault();
+
+                if (najcesciId != null)
+                {
+                    int piceId = najcesciId.PiceId.GetValueOrDefault();
+                    List<Pice> najprodavanijePiceList = await piceServices.GetPiceByIdAsync(piceId);
+
+                    najprodavanijePiceId = piceId;
+
+                    UcitajOcjenePica();
+
+                    Pice pravoPice = najprodavanijePiceList.FirstOrDefault();
+
+                    // Prikaz slike, naziva i cijene najprodavanijeg pića
+                    if (pravoPice != null)
+                    {
+                        byte[] imageData = pravoPice.slika; // Pretpostavka da imate byte[] polje za sliku u Pice objektu
+                        BitmapImage bitmapImage = ByteToImage(imageData);
+
+                        // Postavljanje slike u XAML kontrolu
+                        imgNajprodavanijePice.Source = bitmapImage; // imgNajprodavanijePice je ime vaše Image XAML kontrolu
+
+                        // Postavljanje naziva i cijene pića
+                        tbNajprodavanijePiceNaziv.Text = pravoPice.naziv;
+                        tbNajprodavanijePiceCijena.Text = $"{pravoPice.cijena:C} €";
+                    }
+                    else
+                    {
+                        tbNajprodavanijePiceNaziv.Text = "Nema podataka";
+                        tbNajprodavanijePiceCijena.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    tbNajprodavanijePiceNaziv.Text = "Nema podataka";
+                    tbNajprodavanijePiceCijena.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju najprodavanijeg pića: {ex.Message}");
+            }
+        }
+
+        private async void UcitajOcjenePica()
+        {
+            try
+            {
+                List<Recenzija> recenzijePica = await recenzijaServices.GetRecenzijePicaByIdAsync(najprodavanijePiceId);
+
+                if (recenzijePica.Any())
+                {
+                    // Izračun prosječne ocjene
+                    double prosjecnaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Average(r => int.Parse(r.ocjena));
+
+                    tbNajprodavanijePiceProsjecnaOcjena.Text = prosjecnaOcjena.ToString();
+
+                    // Najveća ocjena
+                    int najvecaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Max(r => int.Parse(r.ocjena));
+
+                    // Najmanja ocjena
+                    int najmanjaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Min(r => int.Parse(r.ocjena));
+
+                    // Ažuriranje TextBlock-ova za najveću i najmanju ocjenu
+                    tbNajprodavanijePiceNajboljaOcjena.Text = najvecaOcjena.ToString();
+                    tbNajprodavanijePiceNajgoraOcjena.Text = najmanjaOcjena.ToString();
+                }
+                else
+                {
+                    // Ako nema recenzija
+                    tbNajprodavanijePiceProsjecnaOcjena.Text = "Nema recenzija";
+                    tbNajprodavanijePiceNajboljaOcjena.Text = "Nema recenzija";
+                    tbNajprodavanijePiceNajgoraOcjena.Text = "Nema recenzija";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju ocjena pića: {ex.Message}");
+            }
+        }
+
+
+
+
+
+        private byte[] ImageToByte(BitmapImage bitmapImage)
+        {
+            byte[] data;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BitmapEncoder encoder;
+                if (bitmapImage.UriSource.AbsolutePath.EndsWith(".png"))
+                {
+                    encoder = new PngBitmapEncoder();
+                }
+                else
+                {
+                    encoder = new JpegBitmapEncoder();
+                }
+
+                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
+
+        private BitmapImage ByteToImage(byte[] imageData)
+        {
+            using (MemoryStream ms = new MemoryStream(imageData))
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = ms;
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                return bitmap;
+            }
+        }
+
+    }
+}
