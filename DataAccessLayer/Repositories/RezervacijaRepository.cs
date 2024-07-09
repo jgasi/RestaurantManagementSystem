@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using EntitiesLayer.Entities;
@@ -59,6 +61,21 @@ namespace DataAccessLayer.Repositories
             if(saveChanges)
             {
                 return SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public async Task<int> RemoveByDateAndIdAsync(DateTime? vrijeme, int korisnikId)
+        {
+            var rezervacija = await Entities.FirstOrDefaultAsync(r => r.datum_vrijeme == vrijeme && r.Korisnik_id_korisnik == korisnikId);
+
+            if (rezervacija != null)
+            {
+                Entities.Remove(rezervacija);
+                return await SaveChangesAsync();
             }
             else
             {

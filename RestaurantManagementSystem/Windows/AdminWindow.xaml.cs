@@ -160,5 +160,13 @@ namespace RestaurantManagementSystem
             var ucStatistika = new UcStatistika();
             GuiManager.OpenContent(ucStatistika);
         }
+
+        private void UpravljanjeZalihamaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.Truck;
+            pageTitle.Text = "Upravljanje zalihama";
+            var ucUpravljanjeZalihama = new UcUpravljanjeZalihama();
+            GuiManager.OpenContent(ucUpravljanjeZalihama);
+        }
     }
 }

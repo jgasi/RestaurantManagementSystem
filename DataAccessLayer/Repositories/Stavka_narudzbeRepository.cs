@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +98,21 @@ namespace DataAccessLayer.Repositories
             if (saveChanges)
             {
                 return SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public async Task<int> RemoveByIdAsync(int id)
+        {
+            var stavka_narudzbe = await Entities.Where(sn => sn.Narudzba_id_narudzba == id).ToListAsync();
+
+            if (stavka_narudzbe.Any())
+            {
+                Entities.RemoveRange(stavka_narudzbe);
+                return await SaveChangesAsync();
             }
             else
             {

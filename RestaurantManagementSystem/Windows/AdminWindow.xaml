@@ -89,7 +89,7 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
-                                 >
+                                 Click="UpravljanjeZalihamaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Truck" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Upravljanje zalihama" Style="{StaticResource menuButtonText}"></TextBlock>

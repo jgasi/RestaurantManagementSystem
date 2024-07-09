@@ -94,6 +94,15 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
+                        <!-- New Cancel Button Column -->
+                        <DataGridTemplateColumn Header="Akcije">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Margin="0" Width="80" Content="Otkaži" Click="OtkaziButton_Click" Style="{StaticResource btnDoKomentara}">
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>

@@ -68,5 +68,18 @@ namespace BusinessLogicLayer.Services
 
             return isSuccessful;
         }
+
+        public async Task<bool> RemoveRezervacijuPoDatumAndIdAsync(DateTime? vrijeme, int id)
+        {
+            bool isSuccessful = false;
+
+            using (var repo = new RezervacijaRepository())
+            {
+                int affectedRows = await repo.RemoveByDateAndIdAsync(vrijeme, id);
+                isSuccessful = affectedRows > 0;
+            }
+
+            return isSuccessful;
+        }
     }
 }

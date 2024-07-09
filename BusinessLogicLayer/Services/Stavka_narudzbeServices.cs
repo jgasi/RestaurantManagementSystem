@@ -80,5 +80,18 @@ namespace BusinessLogicLayer.Services
 
             return isSuccessful;
         }
+
+        public async Task<bool> RemoveStavkeNarudzbeByIdAsync(int id)
+        {
+            bool isSuccessful = false;
+
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                int affectedRows = await repo.RemoveByIdAsync(id);
+                isSuccessful = affectedRows > 0;
+            }
+
+            return isSuccessful;
+        }
     }
 }
