@@ -92,7 +92,7 @@ namespace RestaurantManagementSystem.UserControls
                 isImageChanged = true;
 
                 //samo za dodavanje slika za pića
-               // spremiPice(bitmap);
+                //spremiPice(bitmap);
                 
             }
         }
@@ -100,8 +100,8 @@ namespace RestaurantManagementSystem.UserControls
         //samo za dodavanje slika za pića
         //private async void spremiPice(BitmapImage bitmap)
         //{
-           // List<Pice> kola = await piceServices.GetPiceByIdAsync(1);
-
+          //  List<Pice> kola = await piceServices.GetPiceByIdAsync(6);
+          //
            // Pice prvoKola = kola.FirstOrDefault();
            // prvoKola.slika = ImageToByte(bitmap);
            // piceServices.UpdatePice(prvoKola);

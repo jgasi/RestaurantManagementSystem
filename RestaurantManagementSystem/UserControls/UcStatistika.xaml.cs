@@ -20,6 +20,8 @@ namespace RestaurantManagementSystem.UserControls
 
         public int najprodavanijeJeloId = 0;
         public int najprodavanijePiceId = 0;
+        public int najgoreJeloId = 0;
+        public int najgorePiceId = 0;
 
 
         public UcStatistika()
@@ -27,6 +29,8 @@ namespace RestaurantManagementSystem.UserControls
             InitializeComponent();
             UcitajNajprodavanijeJelo();
             UcitajNajprodavanijePice();
+            UcitajNajgoreJelo();
+            UcitajNajgorePice();
         }
 
         private async void GenerateStatisticsButton_Click(object sender, RoutedEventArgs e)
@@ -302,7 +306,185 @@ namespace RestaurantManagementSystem.UserControls
             }
         }
 
+        private async void UcitajNajgoreJelo()
+        {
+            try
+            {
+                var sveRecenzije = await recenzijaServices.GetAllRecenzijeAsync();
+                var recenzijeJela = sveRecenzije
+                    .Where(r => r.Jelo_id_jelo != null)
+                    .ToList();
 
+                var najgoraOcjenaJelo = recenzijeJela
+                    .GroupBy(r => r.Jelo_id_jelo)
+                    .OrderBy(g => g.Average(r => int.Parse(r.ocjena)))
+                    .Select(g => new { JeloId = g.Key, ProsjecnaOcjena = g.Average(r => int.Parse(r.ocjena)) })
+                    .FirstOrDefault();
+
+                if (najgoraOcjenaJelo != null)
+                {
+                    int jeloId = najgoraOcjenaJelo.JeloId.GetValueOrDefault();
+                    List<Jelo> najgoreJeloList = await jeloServices.GetJeloByIdAsync(jeloId);
+
+                    najgoreJeloId = jeloId;
+
+                    UcitajOcjeneNajgoregJela();
+
+                    Jelo pravoJelo = najgoreJeloList.FirstOrDefault();
+
+                    if (pravoJelo != null)
+                    {
+                        byte[] imageData = pravoJelo.slika;
+                        BitmapImage bitmapImage = ByteToImage(imageData);
+                        imgNajgoreJelo.Source = bitmapImage;
+                        tbNajgoreJeloNaziv.Text = pravoJelo.naziv;
+                        tbNajgoreJeloCijena.Text = $"{pravoJelo.cijena:C} €";
+                    }
+                    else
+                    {
+                        tbNajgoreJeloNaziv.Text = "Nema podataka";
+                        tbNajgoreJeloCijena.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    tbNajgoreJeloNaziv.Text = "Nema podataka";
+                    tbNajgoreJeloCijena.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju najgoreg jela: {ex.Message}");
+            }
+        }
+
+        private async void UcitajOcjeneNajgoregJela()
+        {
+            try
+            {
+                List<Recenzija> recenzijeJela = await recenzijaServices.GetRecenzijeByIdAsync(najgoreJeloId);
+
+                if (recenzijeJela.Any())
+                {
+                    double prosjecnaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Average(r => int.Parse(r.ocjena));
+
+                    tbNajgoreJeloProsjecnaOcjena.Text = prosjecnaOcjena.ToString();
+
+                    int najvecaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Max(r => int.Parse(r.ocjena));
+
+                    int najmanjaOcjena = recenzijeJela
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Min(r => int.Parse(r.ocjena));
+
+                    tbNajgoreJeloNajboljaOcjena.Text = najvecaOcjena.ToString();
+                    tbNajgoreJeloNajgoraOcjena.Text = najmanjaOcjena.ToString();
+                }
+                else
+                {
+                    tbNajgoreJeloProsjecnaOcjena.Text = "Nema recenzija";
+                    tbNajgoreJeloNajboljaOcjena.Text = "Nema recenzija";
+                    tbNajgoreJeloNajgoraOcjena.Text = "Nema recenzija";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju ocjena jela: {ex.Message}");
+            }
+        }
+
+        private async void UcitajNajgorePice()
+        {
+            try
+            {
+                var sveRecenzije = await recenzijaServices.GetAllRecenzijeAsync();
+                var recenzijePica = sveRecenzije
+                    .Where(r => r.Pice_id_pice != null)
+                    .ToList();
+
+                var najgoraOcjenaPice = recenzijePica
+                    .GroupBy(r => r.Pice_id_pice)
+                    .OrderBy(g => g.Average(r => int.Parse(r.ocjena)))
+                    .Select(g => new { PiceId = g.Key, ProsjecnaOcjena = g.Average(r => int.Parse(r.ocjena)) })
+                    .FirstOrDefault();
+
+                if (najgoraOcjenaPice != null)
+                {
+                    int piceId = najgoraOcjenaPice.PiceId.GetValueOrDefault();
+                    List<Pice> najgorePiceList = await piceServices.GetPiceByIdAsync(piceId);
+
+                    najgorePiceId = piceId;
+
+                    UcitajOcjeneNajgoregPica();
+
+                    Pice pravoPice = najgorePiceList.FirstOrDefault();
+
+                    if (pravoPice != null)
+                    {
+                        byte[] imageData = pravoPice.slika;
+                        BitmapImage bitmapImage = ByteToImage(imageData);
+                        imgNajgorePice.Source = bitmapImage;
+                        tbNajgorePiceNaziv.Text = pravoPice.naziv;
+                        tbNajgorePiceCijena.Text = $"{pravoPice.cijena:C} €";
+                    }
+                    else
+                    {
+                        tbNajgorePiceNaziv.Text = "Nema podataka";
+                        tbNajgorePiceCijena.Text = string.Empty;
+                    }
+                }
+                else
+                {
+                    tbNajgorePiceNaziv.Text = "Nema podataka";
+                    tbNajgorePiceCijena.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju najgoreg pića: {ex.Message}");
+            }
+        }
+
+        private async void UcitajOcjeneNajgoregPica()
+        {
+            try
+            {
+                List<Recenzija> recenzijePica = await recenzijaServices.GetRecenzijePicaByIdAsync(najgorePiceId);
+
+                if (recenzijePica.Any())
+                {
+                    double prosjecnaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Average(r => int.Parse(r.ocjena));
+
+                    tbNajgorePiceProsjecnaOcjena.Text = prosjecnaOcjena.ToString();
+
+                    int najvecaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Max(r => int.Parse(r.ocjena));
+
+                    int najmanjaOcjena = recenzijePica
+                        .Where(r => int.TryParse(r.ocjena, out _))
+                        .Min(r => int.Parse(r.ocjena));
+
+                    tbNajgorePiceNajboljaOcjena.Text = najvecaOcjena.ToString();
+                    tbNajgorePiceNajgoraOcjena.Text = najmanjaOcjena.ToString();
+                }
+                else
+                {
+                    tbNajgorePiceProsjecnaOcjena.Text = "Nema recenzija";
+                    tbNajgorePiceNajboljaOcjena.Text = "Nema recenzija";
+                    tbNajgorePiceNajgoraOcjena.Text = "Nema recenzija";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju ocjena pića: {ex.Message}");
+            }
+        }
 
 
 
