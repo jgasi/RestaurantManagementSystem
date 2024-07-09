@@ -20,16 +20,18 @@ namespace RestaurantManagementSystem.UserControls
         private int currentPage = 0;
         private int itemsPerPage = 3;
         private bool isLoading = false;
+        private Korisnik trenutniKorisnik;
 
         public ObservableCollection<Jelo> CurrentPageJela { get; set; }
 
-        public UcPregledJelovnika()
+        public UcPregledJelovnika(Korisnik korisnik)
         {
             InitializeComponent();
             CurrentPageJela = new ObservableCollection<Jelo>();
             DataContext = this;
             PrikaziStranicuFirstThree();
             UcitajSvaJelaAsync();
+            trenutniKorisnik = korisnik;
         }
 
         private async void PrikaziStranicuFirstThree()
@@ -155,7 +157,7 @@ namespace RestaurantManagementSystem.UserControls
 
             if (SelectedJelo != null)
             {
-                UcDetaljiJela detaljiJela = new UcDetaljiJela(SelectedJelo);
+                UcDetaljiJela detaljiJela = new UcDetaljiJela(SelectedJelo, trenutniKorisnik);
                 detaljiJela.DataContext = SelectedJelo;
                 glavniGrid.Children.Clear();
                 glavniGrid.Children.Add(detaljiJela);

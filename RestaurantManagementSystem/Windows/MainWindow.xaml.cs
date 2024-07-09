@@ -135,7 +135,7 @@ namespace RestaurantManagementSystem
         {
             pageIcon.Icon = IconChar.Utensils;
             pageTitle.Text = "Pregled jelovnika";
-            var ucPregledJelovnika = new UcPregledJelovnika();
+            var ucPregledJelovnika = new UcPregledJelovnika(TrenutniKorisnik);
             GuiManager.OpenContent(ucPregledJelovnika);
         }
 

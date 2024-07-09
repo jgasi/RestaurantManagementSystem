@@ -18,20 +18,20 @@ using EntitiesLayer.Entities;
 
 namespace RestaurantManagementSystem.UserControls
 {
-    /// <summary>
-    /// Interaction logic for UcDetaljiJela.xaml
-    /// </summary>
     public partial class UcDetaljiJela : UserControl
     {
         private JeloServices jeloServices = new JeloServices();
+        private RecenzijaServices recenzijaServices = new RecenzijaServices();
+        private Korisnik trenutniKorisnik;
 
         public Jelo primljenoJelo;
-        public UcDetaljiJela(Jelo selectedJelo)
+        public UcDetaljiJela(Jelo selectedJelo, Korisnik korisnik)
         {
             InitializeComponent();
             DataContext = selectedJelo;
             primljenoJelo = selectedJelo;
             PrikaziDetalje(primljenoJelo);
+            trenutniKorisnik = korisnik;
         }
 
         public void PrikaziDetalje(Jelo jelo)
@@ -113,9 +113,46 @@ namespace RestaurantManagementSystem.UserControls
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DodajKomentarButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show(primljenoJelo.naziv);
+            popupKomentari.IsOpen = true;
+        }
+
+        private void Odustani_Click(object sender, RoutedEventArgs e)
+        {
+            popupKomentari.IsOpen = false;
+        }
+
+        private void SpremiKomentar_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtBoxKomentar.Text))
+            {
+                MessageBox.Show("Molimo unesite tekst komentara.");
+                return;
+            }
+
+            int odabranaOcjena = int.Parse((ocjenaComboBox.SelectedItem as ComboBoxItem)?.Content.ToString());
+
+            Recenzija noviKomentar = new Recenzija
+            {
+                ocjena = odabranaOcjena.ToString(),
+                komentar = txtBoxKomentar.Text,
+                Korisnik_id_korisnik = trenutniKorisnik.id_korisnik,
+                Jelo_id_jelo = primljenoJelo.id_jelo
+            };
+
+            // Dodajte novi komentar kroz servis ili izravno u bazu
+            bool uspjesnoDodan = recenzijaServices.AddRecenziju(noviKomentar);
+
+            if (uspjesnoDodan)
+            {
+                MessageBox.Show("Komentar uspješno dodan.");
+                popupKomentari.IsOpen = false;
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške prilikom dodavanja komentara.");
+            }
         }
     }
 }
