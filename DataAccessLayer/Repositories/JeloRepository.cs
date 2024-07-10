@@ -59,7 +59,7 @@ namespace DataAccessLayer.Repositories
                 nutrivne_informacije = entity.nutrivne_informacije,
                 alergeni = entity.alergeni,
                 slika = entity.slika,
-                Inventar_id_inventar = 1
+                Inventar_id_inventar = entity.Inventar_id_inventar
             };
 
             Entities.Add(jelo);
@@ -83,7 +83,7 @@ namespace DataAccessLayer.Repositories
             jelo.nutrivne_informacije = entity.nutrivne_informacije;
             jelo.alergeni = entity.alergeni;
             jelo.slika = entity.slika;
-            jelo.Inventar_id_inventar = 1;
+            jelo.Inventar_id_inventar = entity.Inventar_id_inventar;
 
             if(saveChanges) 
             {

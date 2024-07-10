@@ -52,5 +52,11 @@ namespace RestaurantManagementSystem
                 OpenContent(previousContent);
             }
         }
+
+        public static void Logout()
+        {
+            mainWindow = null;
+            adminWindow = null;
+        }
     }
 }

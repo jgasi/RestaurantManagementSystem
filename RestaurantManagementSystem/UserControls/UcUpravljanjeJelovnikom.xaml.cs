@@ -66,7 +66,7 @@ namespace RestaurantManagementSystem.UserControls
                 cijena = tbCijena.Text,
                 nutrivne_informacije = tbNutrivneInformacije.Text,
                 alergeni = tbAlergeni.Text,
-                Inventar_id_inventar = 1
+                Inventar_id_inventar = int.Parse(tbInventar.Text)
             };
 
             if (isImageChanged)
@@ -159,6 +159,7 @@ namespace RestaurantManagementSystem.UserControls
             tbCijenaUredi.Text = globalnoJeloEdit.cijena;
             tbNutrivneInformacijeUredi.Text = RestoreNutritionalInfoFormat(globalnoJeloEdit.nutrivne_informacije);
             tbAlergeniUredi.Text = RestoreAllergensFormat(globalnoJeloEdit.alergeni);
+            tbInventarUredi.Text = globalnoJeloEdit.Inventar_id_inventar.ToString();
 
             if (globalnoJeloEdit.slika != null && globalnoJeloEdit.slika.Length > 0)
             {
@@ -233,7 +234,7 @@ namespace RestaurantManagementSystem.UserControls
             globalnoJeloEdit.cijena = tbCijenaUredi.Text;
             globalnoJeloEdit.nutrivne_informacije = tbNutrivneInformacijeUredi.Text;
             globalnoJeloEdit.alergeni = tbAlergeniUredi.Text;
-            globalnoJeloEdit.Inventar_id_inventar = 1;
+            globalnoJeloEdit.Inventar_id_inventar = int.Parse(tbInventarUredi.Text);
 
             if (isImageChanged)
             {

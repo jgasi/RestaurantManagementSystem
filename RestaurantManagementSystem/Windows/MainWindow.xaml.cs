@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using FontAwesome.Sharp;
 using EntitiesLayer.Entities;
 using RestaurantManagementSystem.UserControls;
+using RestaurantManagementSystem.Autentikacija;
 
 namespace RestaurantManagementSystem
 {
@@ -93,12 +94,13 @@ namespace RestaurantManagementSystem
         {
             pageIcon.Icon = IconChar.User;
             pageTitle.Text = "Profil";
-            var ucProfil = new UcProfil();
+            var ucProfil = new UcProfil(TrenutniKorisnik);
             GuiManager.OpenContent(ucProfil);
         }
 
         private void Logout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            GuiManager.Logout();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();

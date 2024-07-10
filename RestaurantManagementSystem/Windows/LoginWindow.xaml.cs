@@ -87,12 +87,13 @@ namespace RestaurantManagementSystem
                 var korisnik = pronaden.FirstOrDefault();
                 if (korisnik != null && korisnik.lozinka == lozinka)
                 {
-                    CurrentUser.LoggedInUser = korisnik;
+                    //CurrentUser.LoggedInUser = korisnik;
 
                     if(korisnik.uloga == "Običan korisnik")
                     {
                         MainWindow mainWindow = new MainWindow(korisnik);
                         mainWindow.Show();
+                        GuiManager.SetMainWindow(mainWindow);
                         this.Close();
                     }
                     else if(korisnik.uloga == "Administrator")

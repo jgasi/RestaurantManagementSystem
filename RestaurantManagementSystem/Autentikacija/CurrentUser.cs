@@ -11,5 +11,9 @@ namespace RestaurantManagementSystem.Autentikacija
     {
         public static Korisnik LoggedInUser { get; set; }
 
+        public static void Logout()
+        {
+            LoggedInUser = null;
+        }
     }
 }

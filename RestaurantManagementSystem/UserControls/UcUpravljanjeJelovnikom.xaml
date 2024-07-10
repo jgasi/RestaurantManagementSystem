@@ -120,6 +120,14 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
+                        <DataGridTextColumn Header="Inventar ID" Binding="{Binding Inventar_id_inventar}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         <DataGridTemplateColumn Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -161,6 +169,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <!-- Naziv jela -->
@@ -180,14 +189,18 @@
                     <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela: " Grid.Row="7"/>
                     <TextBox x:Name="tbAlergeni" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
+                    <!-- Inventar -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Inventar ID: " Grid.Row="9"/>
+                    <TextBox x:Name="tbInventar" FontFamily="{StaticResource CustomFont2}" Grid.Row="10" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
                     <!-- Slika -->
-                    <StackPanel Grid.Row="9" Orientation="Vertical" Margin="5">
+                    <StackPanel Grid.Row="11" Orientation="Vertical" Margin="5">
                         <Image x:Name="imgSlika" Stretch="Uniform" Width="200" Height="200" Margin="10"/>
                         <Button Content="Odaberi sliku" Style="{StaticResource btnDoKomentara}" Click="btnOdaberiSliku_Click"/>
                     </StackPanel>
 
                     <!-- Tipke Spremi i Zatvori -->
-                    <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Style="{StaticResource btnDoKomentara}" Content="Spremi" Click="btnSpremi_Click" Margin="5"/>
                         <Button Style="{StaticResource btnDoKomentara}" Content="Zatvori" Click="btnZatvori_Click" Margin="5"/>
                     </StackPanel>
@@ -230,15 +243,19 @@
                     <!-- Alergeni -->
                     <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela: " Grid.Row="7"/>
                     <TextBox x:Name="tbAlergeniUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                   
+                    <!-- Inventar -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Inventar ID: " Grid.Row="9"/>
+                    <TextBox x:Name="tbInventarUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="10" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Slika -->
-                    <StackPanel Grid.Row="9" Orientation="Vertical" Margin="5">
+                    <StackPanel Grid.Row="11" Orientation="Vertical" Margin="5">
                         <Image x:Name="imgSlikaUredi" Stretch="Uniform" Width="200" Height="200" Margin="10"/>
                         <Button Content="Odaberi sliku" Style="{StaticResource btnDoKomentara}" Click="btnOdaberiSlikuUredi_Click"/>
                     </StackPanel>
 
                     <!-- Tipke Spremi i Zatvori -->
-                    <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Style="{StaticResource btnDoKomentara}" Content="Spremi" Click="btnSpremiUredi_Click" Margin="5"/>
                         <Button Style="{StaticResource btnDoKomentara}" Content="Zatvori" Click="btnZatvoriUredi_Click" Margin="5"/>
                     </StackPanel>

@@ -20,9 +20,10 @@ namespace RestaurantManagementSystem.UserControls
         //samo za dodavanje slika za pića
         //private PiceServices piceServices = new PiceServices();
 
-        public UcProfil()
+        public UcProfil(Korisnik korisnik)
         {
             InitializeComponent();
+            TrenutniKorisnik = korisnik;
             UcitajPodatke();
         }
 
@@ -31,8 +32,6 @@ namespace RestaurantManagementSystem.UserControls
 
         private void UcitajPodatke()
         {
-            TrenutniKorisnik = CurrentUser.LoggedInUser;
-
             if (TrenutniKorisnik != null)
             {
                 txtKorime.Text = TrenutniKorisnik.korime;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,15 @@ namespace BusinessLogicLayer.Services
             using (var repo = new InventarRepository())
             {
                 List<Inventar> inventar = repo.GetAll().ToList();
+                return inventar;
+            }
+        }
+
+        public async Task<List<Inventar>> GetAllInventareAsync()
+        {
+            using (var repo = new InventarRepository())
+            {
+                List<Inventar> inventar = await repo.GetAll().ToListAsync();
                 return inventar;
             }
         }
