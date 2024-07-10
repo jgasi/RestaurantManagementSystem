@@ -50,6 +50,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<int> GetKorisnikCountAsync() 
+        {
+            using (var repo = new KorisnikRepository())
+            {
+                int brojKorisnika = await repo.GetBrojKorisnika();
+
+                return brojKorisnika;
+            }
+        }
+
         public bool AddKorisnik(Korisnik korisnik)
         {
             bool isSuccesful = false;

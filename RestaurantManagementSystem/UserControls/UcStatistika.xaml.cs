@@ -17,6 +17,7 @@ namespace RestaurantManagementSystem.UserControls
         private Stavka_narudzbeServices stavka_NarudzbeServices = new Stavka_narudzbeServices();
         private JeloServices jeloServices = new JeloServices();
         private PiceServices piceServices = new PiceServices();
+        private KorisnikServices korisnikServices = new KorisnikServices();
 
         public int najprodavanijeJeloId = 0;
         public int najprodavanijePiceId = 0;
@@ -31,6 +32,9 @@ namespace RestaurantManagementSystem.UserControls
             UcitajNajprodavanijePice();
             UcitajNajgoreJelo();
             UcitajNajgorePice();
+            UcitajBrojKorisnika();
+            UcitajBrojJela();
+            UcitajBrojPica();
         }
 
         private async void GenerateStatisticsButton_Click(object sender, RoutedEventArgs e)
@@ -483,6 +487,45 @@ namespace RestaurantManagementSystem.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show($"Greška pri dohvaćanju ocjena pića: {ex.Message}");
+            }
+        }
+
+        private async void UcitajBrojKorisnika()
+        {
+            try
+            {
+                var brojKorisnika = await korisnikServices.GetKorisnikCountAsync();
+                tbBrojKorisnika.Text = brojKorisnika.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju broja korisnika: {ex.Message}");
+            }
+        }
+
+        private async void UcitajBrojJela()
+        {
+            try
+            {
+                var brojJela = await jeloServices.GetJeloCountAsync();
+                tbBrojJela.Text = brojJela.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju broja korisnika: {ex.Message}");
+            }
+        }
+
+        private async void UcitajBrojPica()
+        {
+            try
+            {
+                var brojPica = await piceServices.GetPiceCountAsync();
+                tbBrojPica.Text = brojPica.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Greška pri dohvaćanju broja korisnika: {ex.Message}");
             }
         }
 

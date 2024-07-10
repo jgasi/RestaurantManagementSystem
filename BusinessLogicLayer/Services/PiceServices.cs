@@ -47,6 +47,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<int> GetPiceCountAsync()
+        {
+            using (var repo = new PiceRepository())
+            {
+                int brojPica = await repo.GetBrojPica();
+
+                return brojPica;
+            }
+        }
+
         public bool AddPice(Pice pice)
         {
             bool isSuccessful = false;

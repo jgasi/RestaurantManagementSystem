@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,15 @@ namespace DataAccessLayer.Repositories
                         select k;
             return query;
         }
+
+        public async Task<int> GetBrojKorisnika()
+        {
+            var query = from k in Entities
+                        select k;
+
+            return await query.CountAsync();
+        }
+
 
         public Korisnik GetKorisnikById(int id)
         {

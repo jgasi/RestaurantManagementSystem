@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,14 @@ namespace DataAccessLayer.Repositories
                         select j;
 
             return query;
+        }
+
+        public async Task<int> GetBrojJela()
+        {
+            var query = from j in Entities
+                        select j;
+
+            return await query.CountAsync();
         }
 
         public IQueryable<Jelo> GetJeloById(int givenId)

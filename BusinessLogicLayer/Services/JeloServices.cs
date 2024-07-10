@@ -64,6 +64,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<int> GetJeloCountAsync()
+        {
+            using (var repo = new JeloRepository())
+            {
+                int brojJela = await repo.GetBrojJela();
+
+                return brojJela;
+            }
+        }
+
         public bool AddJelo(Jelo jelo)
         {
             bool isSuccessful = false;

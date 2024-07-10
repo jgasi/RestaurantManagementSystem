@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,14 @@ namespace DataAccessLayer.Repositories
                         select p;
 
             return query;
+        }
+
+        public async Task<int> GetBrojPica()
+        {
+            var query = from p in Entities
+                        select p;
+
+            return await query.CountAsync();
         }
 
         public IQueryable<Pice> GetPiceById(int givenId)

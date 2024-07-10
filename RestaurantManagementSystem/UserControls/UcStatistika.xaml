@@ -29,6 +29,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -164,6 +166,20 @@
                     <TextBlock FontSize="22" x:Name="tbNajgorePiceNajgoraOcjena" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
                 </StackPanel>
 
+                <StackPanel Grid.Row="14" Orientation="Horizontal" Margin="10,30,10,10" HorizontalAlignment="Center">
+                    <TextBlock FontSize="27" Text="Broj korisnika u aplikaciji:   " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="22" x:Name="tbBrojKorisnika" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="15" Orientation="Horizontal" Margin="10,10,10,10" HorizontalAlignment="Center">
+                    <TextBlock FontSize="27" Text="Broj različitih jela:   " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="22" x:Name="tbBrojJela" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="16" Orientation="Horizontal" Margin="10,10,10,10" HorizontalAlignment="Center">
+                    <TextBlock FontSize="27" Text="Broj različitih pića:   " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="22" x:Name="tbBrojPica" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </ScrollViewer>
     </Grid>
