@@ -29,6 +29,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Pice>> GetFirstThreePicaAsync()
+        {
+            using (var repo = new PiceRepository())
+            {
+                List<Pice> pica = await repo.GetFirstThreePica().ToListAsync();
+
+                return pica;
+            }
+        }
+
         public async Task<List<Pice>> GetPiceByIdAsync(int id)
         {
             using (var repo = new PiceRepository())

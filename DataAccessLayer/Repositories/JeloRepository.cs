@@ -40,6 +40,7 @@ namespace DataAccessLayer.Repositories
 
             return query;
         }
+
         public IQueryable<Jelo> GetJeloByName(string name)
         {
             var query = from j in Entities

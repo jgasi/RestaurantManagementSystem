@@ -74,6 +74,15 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
+             Tag="{StaticResource color11}"
+             Click="PregledPicaButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="WineBottle" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock Text="Pregled pića" Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
                                  Click="MojeRezervacijeButton_Click">
                         <StackPanel Orientation="Horizontal">

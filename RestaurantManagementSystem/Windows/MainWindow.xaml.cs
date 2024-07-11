@@ -141,6 +141,14 @@ namespace RestaurantManagementSystem
             GuiManager.OpenContent(ucPregledJelovnika);
         }
 
+        private void PregledPicaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.WineBottle;
+            pageTitle.Text = "Pregled pića";
+            var ucPregledPica = new UcPregledPica(TrenutniKorisnik);
+            GuiManager.OpenContent(ucPregledPica);
+        }
+
         private void OnProfileImageChanged(object sender, EventArgs e)
         {
             UcitajSlikuProfila();

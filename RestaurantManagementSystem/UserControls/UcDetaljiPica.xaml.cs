@@ -18,30 +18,30 @@ using EntitiesLayer.Entities;
 
 namespace RestaurantManagementSystem.UserControls
 {
-    public partial class UcDetaljiJela : UserControl
+    public partial class UcDetaljiPica : UserControl
     {
-        private JeloServices jeloServices = new JeloServices();
+        private PiceServices piceServices = new PiceServices();
         private RecenzijaServices recenzijaServices = new RecenzijaServices();
         private Korisnik trenutniKorisnik;
 
-        public Jelo primljenoJelo;
-        public UcDetaljiJela(Jelo selectedJelo, Korisnik korisnik)
+        public Pice primljenoPice;
+        public UcDetaljiPica(Pice selectedPice, Korisnik korisnik)
         {
             InitializeComponent();
-            DataContext = selectedJelo;
-            primljenoJelo = selectedJelo;
-            PrikaziDetalje(primljenoJelo);
+            DataContext = selectedPice;
+            primljenoPice = selectedPice;
+            PrikaziDetalje(primljenoPice);
             trenutniKorisnik = korisnik;
         }
 
-        public void PrikaziDetalje(Jelo jelo)
+        public void PrikaziDetalje(Pice pice)
         {
-            nazivTxtBl.Text = jelo.naziv;
-            cijenaTxtBl.Text = jelo.cijena;
-            slikaJela.Source = ByteToImage(jelo.slika);
+            nazivTxtBl.Text = pice.naziv;
+            cijenaTxtBl.Text = pice.cijena;
+            slikaPica.Source = ByteToImage(pice.slika);
 
             nutrivneInformacijeStackPanel.Children.Clear();
-            string[] nutrivneInformacije = jelo.nutrivne_informacije.Split(',');
+            string[] nutrivneInformacije = pice.nutrivne_informacije.Split(',');
             foreach (var info in nutrivneInformacije)
             {
                 TextBlock textBlock = new TextBlock
@@ -56,7 +56,7 @@ namespace RestaurantManagementSystem.UserControls
             }
 
             alergeniStackPanel.Children.Clear();
-            string[] alergeni = jelo.alergeni.Split(',');
+            string[] alergeni = pice.alergeni.Split(',');
             foreach (var alergen in alergeni)
             {
                 TextBlock textBlock = new TextBlock
@@ -74,17 +74,16 @@ namespace RestaurantManagementSystem.UserControls
 
         private void CommentsButton_Click(object sender, RoutedEventArgs e)
         {
-            UcKomentariJela ucKomentariJela = new UcKomentariJela(primljenoJelo);
+            UcKomentariPica ucKomentariPica = new UcKomentariPica(primljenoPice);
             glavniGrid.Children.Clear();
-            glavniGrid.Children.Add(ucKomentariJela);
+            glavniGrid.Children.Add(ucKomentariPica);
         }
 
         private BitmapImage ByteToImage(byte[] imageData)
         {
-            if(imageData == null)
+            if (imageData == null)
             {
                 System.Windows.Forms.MessageBox.Show("Slika je null!");
-
                 return null;
             }
             else
@@ -98,7 +97,7 @@ namespace RestaurantManagementSystem.UserControls
                     bitmap.EndInit();
                     return bitmap;
                 }
-            }  
+            }
         }
 
         byte[] ConvertImageToBytes(ImageSource imageSource)
@@ -138,7 +137,7 @@ namespace RestaurantManagementSystem.UserControls
                 ocjena = odabranaOcjena.ToString(),
                 komentar = txtBoxKomentar.Text,
                 Korisnik_id_korisnik = trenutniKorisnik.id_korisnik,
-                Jelo_id_jelo = primljenoJelo.id_jelo
+                Pice_id_pice = primljenoPice.id_pice
             };
 
             bool uspjesnoDodan = recenzijaServices.AddRecenziju(noviKomentar);

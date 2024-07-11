@@ -158,6 +158,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UcDetaljiPica.xaml.cs">
+      <DependentUpon>UcDetaljiPica.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcKomentariPica.xaml.cs">
+      <DependentUpon>UcKomentariPica.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcPregledPica.xaml.cs">
+      <DependentUpon>UcPregledPica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcStatistika.xaml.cs">
       <DependentUpon>UcStatistika.xaml</DependentUpon>
     </Compile>
@@ -202,6 +211,18 @@
     <Compile Include="UserControls\UcRezervacija.xaml.cs">
       <DependentUpon>UcRezervacija.xaml</DependentUpon>
     </Compile>
+    <Page Include="UserControls\UcDetaljiPica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcKomentariPica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcPregledPica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UcStatistika.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

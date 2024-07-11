@@ -40,6 +40,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Pice> GetFirstThreePica()
+        {
+            var query = Entities.OrderBy(p => p.id_pice)
+                                .Take(3);
+
+            return query;
+        }
+
+
         public IQueryable<Pice> GetAllByName(string name)
         {
             var query = from p in Entities
