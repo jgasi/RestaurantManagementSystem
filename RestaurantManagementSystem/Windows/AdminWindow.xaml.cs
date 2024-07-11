@@ -155,6 +155,14 @@ namespace RestaurantManagementSystem
             GuiManager.OpenContent(ucUpravljanjeJelovnikom);
         }
 
+        private void UpravljanjePicaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.WineBottle;
+            pageTitle.Text = "Upravljanje pića";
+            var ucUpravljanjePica = new UcUpravljanjePica();
+            GuiManager.OpenContent(ucUpravljanjePica);
+        }
+
         private void StatistikaButton_Click(object sender, RoutedEventArgs e)
         {
             pageIcon.Icon = IconChar.ChartBar;

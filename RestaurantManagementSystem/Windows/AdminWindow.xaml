@@ -80,6 +80,15 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
+                                 Click="UpravljanjePicaButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="WineBottle" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock Text="Upravljanje pića" Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color11}"
                                  Click="StatistikaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ChartBar" Style="{StaticResource menuButtonIcon}"></fa:IconImage>

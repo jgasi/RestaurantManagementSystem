@@ -1,0 +1,266 @@
+﻿<UserControl x:Class="RestaurantManagementSystem.UserControls.UcUpravljanjePica"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RestaurantManagementSystem.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title TextBlock -->
+        <TextBlock Foreground="White" FontFamily="{StaticResource CustomFont2}" Text="Upravljanje Pića" FontSize="24" Margin="0,0,0,10" />
+
+        <!-- Search bar and New Item Button -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <TextBox x:Name="tbSearch" Width="400" Margin="0,0,10,0" 
+                     VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <Button  Style="{StaticResource btnDoKomentara}" x:Name="btnSearchItem" Content="Pretraži" Width="100" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Click="btnSearchPice_Click"/>
+            <Button  Style="{StaticResource btnDoKomentara}" x:Name="btnNewItem" Content="Novo piće" Width="100" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Click="btnNovoPice_Click"/>
+        </StackPanel>
+
+        <!-- Grid with Background Image -->
+        <Grid Grid.Row="2" Margin="5">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
+            </Grid.Background>
+
+            <!-- Border Around DataGrid -->
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                <!-- DataGrid with Transparent Background -->
+                <DataGrid x:Name="dgPica" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" 
+                          GridLinesVisibility="None" HeadersVisibility="Column"
+                          ColumnHeaderHeight="30" Background="Transparent" RowHeaderWidth="0"
+                          SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="BorderBrush" Value="LightGray" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <!-- Text color -->
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Border Padding="{TemplateBinding Padding}"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                SnapsToDevicePixels="True">
+                                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.Resources>
+                        <!-- Style for DataGridColumnHeader to modernize headers -->
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="{StaticResource color13}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="FontFamily" Value="{StaticResource CustomFont2}" />
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="Padding" Value="10,5" />
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            <Setter Property="BorderBrush" Value="Gray" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <!-- Column for Image -->
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding slika}" Width="250" Height="250" Stretch="UniformToFill"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Naziv pića" Binding="{Binding naziv}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Cijena" Binding="{Binding cijena}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Nutritivne informacije" Binding="{Binding nutrivne_informacije}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Alergeni" Binding="{Binding alergeni}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Inventar ID" Binding="{Binding Inventar_id_inventar}" FontFamily="{StaticResource CustomFont2}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource btnDoKomentara}" Click="EditButton_Click" Content="Uredi" Height="50" Width="50" Margin="0,0,5,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource btnDoKomentara}" Click="DeleteButton_Click" Content="Obriši" Height="50" Width="50" Margin="0,0,10,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <!-- Loading indicator -->
+            <TextBlock x:Name="loadingText" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Collapsed"/>
+        </Grid>
+        <Popup x:Name="popupNovoPice" Placement="Center" AllowsTransparency="True" StaysOpen="True">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Naziv pića -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Unesite informacije za novo piće:" Grid.Row="0"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Naziv pića: " Grid.Row="1"/>
+                    <TextBox x:Name="tbNazivPica" FontFamily="{StaticResource CustomFont2}" Grid.Row="2" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Cijena -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Cijena pića: " Grid.Row="3"/>
+                    <TextBox x:Name="tbCijena" FontFamily="{StaticResource CustomFont2}" Grid.Row="4" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Nutritivne informacije -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije pića: " Grid.Row="5"/>
+                    <TextBox x:Name="tbNutrivneInformacije" FontFamily="{StaticResource CustomFont2}" Grid.Row="6" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Alergeni -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni pića: " Grid.Row="7"/>
+                    <TextBox x:Name="tbAlergeni" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Inventar -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Inventar ID: " Grid.Row="9"/>
+                    <TextBox x:Name="tbInventar" FontFamily="{StaticResource CustomFont2}" Grid.Row="10" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Slika -->
+                    <StackPanel Grid.Row="11" Orientation="Vertical" Margin="5">
+                        <Image x:Name="imgSlika" Stretch="Uniform" Width="200" Height="200" Margin="10"/>
+                        <Button Content="Odaberi sliku" Style="{StaticResource btnDoKomentara}" Click="btnOdaberiSliku_Click"/>
+                    </StackPanel>
+
+                    <!-- Tipke Spremi i Zatvori -->
+                    <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button Style="{StaticResource btnDoKomentara}" Content="Spremi" Click="btnSpremi_Click" Margin="5"/>
+                        <Button Style="{StaticResource btnDoKomentara}" Content="Zatvori" Click="btnZatvori_Click" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Popup>
+
+        <Popup x:Name="popupUrediPice" Placement="Center" AllowsTransparency="True" StaysOpen="True">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Naziv pića -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Unesite informacije za piće:" Grid.Row="0"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Naziv pića: " Grid.Row="1"/>
+                    <TextBox x:Name="tbNazivPicaUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="2" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Cijena -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Cijena pića: " Grid.Row="3"/>
+                    <TextBox x:Name="tbCijenaUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="4" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Nutritivne informacije -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije pića: " Grid.Row="5"/>
+                    <TextBox x:Name="tbNutrivneInformacijeUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="6" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Alergeni -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni pića: " Grid.Row="7"/>
+                    <TextBox x:Name="tbAlergeniUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Inventar -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Inventar ID: " Grid.Row="9"/>
+                    <TextBox x:Name="tbInventarUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="10" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    <!-- Slika -->
+                    <StackPanel Grid.Row="11" Orientation="Vertical" Margin="5">
+                        <Image x:Name="imgSlikaUredi" Stretch="Uniform" Width="200" Height="200" Margin="10"/>
+                        <Button Content="Odaberi sliku" Style="{StaticResource btnDoKomentara}" Click="btnOdaberiSlikuUredi_Click"/>
+                    </StackPanel>
+
+                    <!-- Tipke Spremi i Zatvori -->
+                    <StackPanel Grid.Row="12" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button Style="{StaticResource btnDoKomentara}" Content="Spremi" Click="btnSpremiUredi_Click" Margin="5"/>
+                        <Button Style="{StaticResource btnDoKomentara}" Content="Zatvori" Click="btnZatvoriUredi_Click" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

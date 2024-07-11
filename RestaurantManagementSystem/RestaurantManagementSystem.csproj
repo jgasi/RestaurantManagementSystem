@@ -176,6 +176,9 @@
     <Compile Include="UserControls\UcUpravljanjeKorisnicima.xaml.cs">
       <DependentUpon>UcUpravljanjeKorisnicima.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcUpravljanjePica.xaml.cs">
+      <DependentUpon>UcUpravljanjePica.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcUpravljanjeZalihama.xaml.cs">
       <DependentUpon>UcUpravljanjeZalihama.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UcUpravljanjeKorisnicima.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UcUpravljanjePica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
