@@ -11,6 +11,7 @@ namespace RestaurantManagementSystem
     {
         public static MainWindow mainWindow { get; set; }
         public static AdminWindow adminWindow { get; set; }
+        public static OsobljeWindow osobljeWindow { get; set; }
 
         private static UserControl currentContent;
         private static UserControl previousContent;
@@ -23,6 +24,11 @@ namespace RestaurantManagementSystem
         public static void SetAdminWindow(AdminWindow window)
         {
             adminWindow = window;
+        }
+
+        public static void SetOsobljeWindow(OsobljeWindow window)
+        {
+            osobljeWindow = window;
         }
 
         public static void OpenContent(UserControl userControl)
@@ -39,6 +45,12 @@ namespace RestaurantManagementSystem
                 adminWindow.contentPanel.Content = userControl;
                 currentContent = adminWindow.contentPanel.Content as UserControl;
             }
+            else if (osobljeWindow != null)
+            {
+                previousContent = osobljeWindow.contentPanel.Content as UserControl;
+                osobljeWindow.contentPanel.Content = userControl;
+                currentContent = osobljeWindow.contentPanel.Content as UserControl;
+            }
         }
 
         public static void CloseContent()
@@ -51,12 +63,17 @@ namespace RestaurantManagementSystem
             {
                 OpenContent(previousContent);
             }
+            else if (osobljeWindow != null)
+            {
+                OpenContent(previousContent);
+            }
         }
 
         public static void Logout()
         {
             mainWindow = null;
             adminWindow = null;
+            osobljeWindow = null;
         }
     }
 }

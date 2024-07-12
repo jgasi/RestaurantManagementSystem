@@ -187,6 +187,9 @@
     </Compile>
     <Compile Include="Autentikacija\CurrentUser.cs" />
     <Compile Include="Helpers\ByteArrayToImageConverter.cs" />
+    <Compile Include="Windows\OsobljeWindow.xaml.cs">
+      <DependentUpon>OsobljeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\OsobljeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\RegisterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

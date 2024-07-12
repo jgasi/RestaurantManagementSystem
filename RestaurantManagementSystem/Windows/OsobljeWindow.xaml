@@ -1,4 +1,4 @@
-﻿<Window x:Class="RestaurantManagementSystem.MainWindow"
+﻿<Window x:Class="RestaurantManagementSystem.OsobljeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,17 +6,15 @@
         xmlns:local="clr-namespace:RestaurantManagementSystem"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1300"
+        Title="OsobljeWindow" Height="700" Width="1300"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="pnlControlBar_MouseLeftButtonDown"
         Background="Transparent"
         AllowsTransparency="True">
 
-    
     <Border CornerRadius="10"
-        BorderThickness="1">
-
+            BorderThickness="1">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
@@ -27,7 +25,7 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <!--Navigacija-->
+                <!--Navigation-->
                 <ColumnDefinition Width="250"></ColumnDefinition>
                 <!--Content-->
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -44,16 +42,14 @@
                 </Border.Background>
 
                 <StackPanel>
-                    
                     <!--Logo-->
                     <StackPanel Orientation="Horizontal"
                                 Height="200"
                                 Width="230"
                                 Margin="15,25,0,40">
                         <Image Source="/Slike/logo.png" Height="200" Width="200" Margin="10,0,0,0"></Image>
-
                     </StackPanel>
-                    
+
                     <!--Menu buttons-->
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
@@ -65,8 +61,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}"
-                                 Click="PregledJelovnikaButton_Click">
+             Tag="{StaticResource color11}"
+             Click="PregledJelovnikaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Utensils" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Pregled jelovnika" Style="{StaticResource menuButtonText}"></TextBlock>
@@ -84,47 +80,18 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
-                                 Click="MojeRezervacijeButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="CalendarDays" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                            <TextBlock Text="Moje rezervacije" Style="{StaticResource menuButtonText}"></TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}"
-                                 Click="PovijestNarudzbiButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="ClockRotateLeft" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                            <TextBlock Text="Povijest narudžbi" Style="{StaticResource menuButtonText}"></TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}"
-                                 Click="RezervacijaButton_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="CalendarDays" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                            <TextBlock Text="Rezervacija" Style="{StaticResource menuButtonText}"></TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}"
                                  Click="KontaktInfoButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Phone" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Kontakt informacije" Style="{StaticResource menuButtonText}"></TextBlock>
                         </StackPanel>
                     </RadioButton>
-
                 </StackPanel>
-                
             </Border>
-            
+
             <!--Main section-->
             <Border CornerRadius="0,10,10,0"
-        Grid.Column="1">
+                    Grid.Column="1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
                         <GradientStop Color="{StaticResource primaryBackColor3}" Offset="0"></GradientStop>
@@ -172,7 +139,6 @@
                                 Click="btnMinimize_Click">
                             <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"></fa:IconImage>
                         </Button>
-
                     </StackPanel>
 
                     <!--Header / Caption -->
@@ -238,21 +204,15 @@
                                     <ImageBrush x:Name="profileImageBrush"></ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
-
                         </StackPanel>
-
                     </Grid>
 
                     <!-- Content section / Child views-->
                     <ContentControl x:Name="contentPanel"
                                     Grid.Row="2"
                                     Margin="25"></ContentControl>
-                    
-
                 </Grid>
-
             </Border>
-
         </Grid>
     </Border>
 </Window>

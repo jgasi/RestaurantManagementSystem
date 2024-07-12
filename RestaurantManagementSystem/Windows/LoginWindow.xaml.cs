@@ -102,7 +102,14 @@ namespace RestaurantManagementSystem
                         adminWindow.Show();
                         GuiManager.SetAdminWindow(adminWindow);
                         this.Close();
-                    } 
+                    }
+                    else if (korisnik.uloga == "Osoblje")
+                    {
+                        OsobljeWindow osobljeWindow = new OsobljeWindow(korisnik);
+                        osobljeWindow.Show();
+                        GuiManager.SetOsobljeWindow(osobljeWindow);
+                        this.Close();
+                    }
                 }
                 else
                 {
