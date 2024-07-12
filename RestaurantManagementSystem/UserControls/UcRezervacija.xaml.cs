@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 using Microsoft.Extensions.Caching.Memory;
@@ -269,10 +270,12 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var jelo in _selectedFoodItems)
             {
+                TextBox prilagodbeTextBox = FindTextBoxForSelectedFood(jelo);
+
                 Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
                 {
                     kolicina = "1",
-                    prilagodbe = null,
+                    prilagodbe = prilagodbeTextBox.Text,
                     Narudzba_id_narudzba = narudzbaNova.id_narudzba,
                     Jelo_id_jelo = jelo.id_jelo,
                     Pice_id_pice = null
@@ -282,10 +285,12 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var pice in _selectedDrinkItems)
             {
+                TextBox prilagodbeTextBox = FindTextBoxForSelectedDrink(pice);
+
                 Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
                 {
                     kolicina = "1",
-                    prilagodbe = null,
+                    prilagodbe = prilagodbeTextBox.Text,
                     Narudzba_id_narudzba = narudzbaNova.id_narudzba,
                     Jelo_id_jelo = null,
                     Pice_id_pice = pice.id_pice
@@ -303,9 +308,49 @@ namespace RestaurantManagementSystem.UserControls
             _selectedDrinkItems.Clear();
             SelectedFoodItemsControl.ItemsSource = null;
             SelectedDrinkItemsControl.ItemsSource = null;
-
-            // Optionally, you can perform any post-reservation logic here
         }
+
+        private TextBox FindTextBoxForSelectedFood(Jelo selectedFood)
+        {
+            var itemContainer = SelectedFoodItemsControl.ItemContainerGenerator.ContainerFromItem(selectedFood) as FrameworkElement;
+            if (itemContainer != null)
+            {
+                var textBox = FindVisualChild<TextBox>(itemContainer);
+                return textBox;
+            }
+            return null;
+        }
+
+        private TextBox FindTextBoxForSelectedDrink(Pice selectedDrink)
+        {
+            var itemContainer = SelectedDrinkItemsControl.ItemContainerGenerator.ContainerFromItem(selectedDrink) as FrameworkElement;
+            if (itemContainer != null)
+            {
+                var textBox = FindVisualChild<TextBox>(itemContainer);
+                return textBox;
+            }
+            return null;
+        }
+
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child != null && child is T typedChild)
+                {
+                    return typedChild;
+                }
+                else
+                {
+                    var result = FindVisualChild<T>(child);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
+
 
         private string GenerateRacun()
         {

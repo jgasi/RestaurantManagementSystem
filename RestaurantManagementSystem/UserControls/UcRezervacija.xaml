@@ -21,107 +21,115 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left part for food and drinks selection -->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <!-- Top part for food selection -->
-            <StackPanel Grid.Row="0" Margin="10">
-                <TextBlock Text="Izaberi jela" FontFamily="{StaticResource CustomFont4}" Foreground="White" FontWeight="Bold" FontSize="30" Margin="0,0,0,10"/>
-                <Label Content="Hrana:" FontFamily="{StaticResource CustomFont2}" Foreground="White" FontWeight="Bold"/>
-                <TextBox FontFamily="{StaticResource CustomFont2}" Name="FoodFilterTextBox" Margin="0,0,0,10"/>
-                <ListView Name="FoodListView" SelectionChanged="FoodListView_SelectionChanged">
-                    <!-- Example item template -->
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                <Image Source="{Binding slika}" Width="50" Height="50" Margin="0,0,10,0"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" VerticalAlignment="Center"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding cijena}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <!-- Pagination controls can be added here -->
-            </StackPanel>
+                <!-- Top part for food selection -->
+                <StackPanel Grid.Row="0" Margin="10">
+                    <TextBlock Text="Izaberi jela" FontFamily="{StaticResource CustomFont4}" Foreground="White" FontWeight="Bold" FontSize="30" Margin="0,0,0,10"/>
+                    <Label Content="Hrana:" FontFamily="{StaticResource CustomFont2}" Foreground="White" FontWeight="Bold"/>
+                    <TextBox FontFamily="{StaticResource CustomFont2}" Name="FoodFilterTextBox" Margin="0,0,0,10"/>
+                    <ListView Name="FoodListView" SelectionChanged="FoodListView_SelectionChanged">
+                        <!-- Example item template -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Image Source="{Binding slika}" Width="50" Height="50" Margin="0,0,10,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" VerticalAlignment="Center"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding cijena}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!-- Pagination controls can be added here -->
+                </StackPanel>
 
-            <!-- Bottom part for drinks selection -->
-            <StackPanel Grid.Row="1" Margin="10">
-                <TextBlock Text="Izaberi pića" FontFamily="{StaticResource CustomFont4}" Foreground="White" FontWeight="Bold" FontSize="30" Margin="0,0,0,10"/>
-                <Label Content="Pića:" FontFamily="{StaticResource CustomFont2}" Foreground="White" FontWeight="Bold"/>
-                <TextBox FontFamily="{StaticResource CustomFont2}" Name="DrinkFilterTextBox" Margin="0,0,0,10"/>
-                <ListView Name="DrinkListView" SelectionChanged="DrinkListView_SelectionChanged">
-                    <!-- Example item template -->
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                <Image Source="{Binding slika}" Width="50" Height="50" Margin="0,0,10,0"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" VerticalAlignment="Center"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding cijena}" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <!-- Pagination controls can be added here -->
-            </StackPanel>
-        </Grid>
+                <!-- Bottom part for drinks selection -->
+                <StackPanel Grid.Row="1" Margin="10">
+                    <TextBlock Text="Izaberi pića" FontFamily="{StaticResource CustomFont4}" Foreground="White" FontWeight="Bold" FontSize="30" Margin="0,0,0,10"/>
+                    <Label Content="Pića:" FontFamily="{StaticResource CustomFont2}" Foreground="White" FontWeight="Bold"/>
+                    <TextBox FontFamily="{StaticResource CustomFont2}" Name="DrinkFilterTextBox" Margin="0,0,0,10"/>
+                    <ListView Name="DrinkListView" SelectionChanged="DrinkListView_SelectionChanged">
+                        <!-- Example item template -->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Image Source="{Binding slika}" Width="50" Height="50" Margin="0,0,10,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" VerticalAlignment="Center"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding cijena}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <!-- Pagination controls can be added here -->
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
 
         <!-- Right part for date selection, total price, and reservation button -->
         <Grid Grid.Column="1">
-            <StackPanel Margin="10">
-                <TextBlock FontFamily="{StaticResource CustomFont4}" Text="Datum i vrijeme rezervacije" Foreground="White" FontWeight="Bold" FontSize="24" Margin="0,0,0,10"/>
-                <xctk:DateTimePicker FontFamily="{StaticResource CustomFont2}" x:Name="ReservationDateTimePicker"
-                                     Format="Custom"
-                                     FormatString="dd.MM.yyyy HH:mm"
-                                     Margin="0,0,10,10"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10">
+                    <TextBlock FontFamily="{StaticResource CustomFont4}" Text="Datum i vrijeme rezervacije" Foreground="White" FontWeight="Bold" FontSize="24" Margin="0,0,0,10"/>
+                    <xctk:DateTimePicker FontFamily="{StaticResource CustomFont2}" x:Name="ReservationDateTimePicker"
+                                         Format="Custom"
+                                         FormatString="dd.MM.yyyy HH:mm"
+                                         Margin="0,0,10,10"/>
 
-                <TextBlock  FontFamily="{StaticResource CustomFont2}"  FontSize="14" Text="Odabrana Jela:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
-                <ItemsControl Name="SelectedFoodItemsControl">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,5">
-                                <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
-                                <Button Width="30" Height="30" Tag="{Binding}" Click="RemoveJeloButton_Click"
-                                        Background="Transparent" BorderThickness="0">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                    <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30" />
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                    <TextBlock  FontFamily="{StaticResource CustomFont2}"  FontSize="14" Text="Odabrana Jela:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    <ItemsControl Name="SelectedFoodItemsControl">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FoodCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
+                                    <Button Width="30" Height="30" Tag="{Binding}" Click="RemoveJeloButton_Click"
+                                            Background="Transparent" BorderThickness="0">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-                <TextBlock  FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Odabrana Pića:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
-                <ItemsControl Name="SelectedDrinkItemsControl">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,5">
-                                <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
-                                <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
-                                <Button Width="30" Height="30" Tag="{Binding}" Click="RemovePiceButton_Click"
-                                        Background="Transparent" BorderThickness="0">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                    <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30" />
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <!-- Total price section -->
-                <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Ukupna cijena:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
-                <TextBlock x:Name="TotalPriceTextBlock" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
-            </StackPanel>
+
+                    <TextBlock  FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Odabrana Pića:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    <ItemsControl Name="SelectedDrinkItemsControl">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="DrinkCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
+                                    <Button Width="30" Height="30" Tag="{Binding}" Click="RemovePiceButton_Click"
+                        Background="Transparent" BorderThickness="0">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Total price section -->
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Ukupna cijena:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    <TextBlock x:Name="TotalPriceTextBlock" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                </StackPanel>
+            </ScrollViewer>
             <!-- Reservation button stays at bottom right corner -->
             <Button Style="{StaticResource btnDoKomentara}" Content="Rezerviraj" FontWeight="Bold" FontSize="16" Width="150" Height="50" Click="Rezerviraj_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,50"/>
         </Grid>
