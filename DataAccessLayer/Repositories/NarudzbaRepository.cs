@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -23,6 +24,20 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Narudzba> GetByIdNarudzbu(int id)
+        {
+            var query = from n in Entities
+                        where n.id_narudzba == id
+                        select n;
+
+            return query;
+        }
+
+        public Task<List<Narudzba>> GetAllWithStavkaNarudzbeAsync()
+        {
+            return Entities.Include(n => n.Stavka_narudzbe).ToListAsync();
+        }
+
         public IQueryable<Narudzba> GetAllById(int korisnikId)
         {
             var query = from n in Entities
@@ -40,6 +55,16 @@ namespace DataAccessLayer.Repositories
 
             return query;
         }
+
+        public Task<List<Narudzba>> GetByDateNow(DateTime? now)
+        {
+            return Entities.Include(n => n.Stavka_narudzbe)
+                           .Where(n => n.datum_vrijeme.HasValue &&
+                                       n.datum_vrijeme.Value >= now)
+                           .ToListAsync();
+        }
+
+
 
         public Narudzba GetLastNarudzbaByKorisnik(int korisnikId)
         {
@@ -90,13 +115,12 @@ namespace DataAccessLayer.Repositories
 
         public override int Update(Narudzba entity, bool saveChanges = true)
         {
-            var korisnik = Context.Korisnik.SingleOrDefault(k => k.id_korisnik == entity.Korisnik.id_korisnik);
             var narudzba = Entities.SingleOrDefault(n => n.id_narudzba == entity.id_narudzba);
 
             narudzba.datum_vrijeme = entity.datum_vrijeme;
             narudzba.racun = entity.racun;
             narudzba.status = entity.status;
-            narudzba.Korisnik = entity.Korisnik;
+            narudzba.Korisnik_id_korisnik = entity.Korisnik_id_korisnik;
 
             if (saveChanges)
             {

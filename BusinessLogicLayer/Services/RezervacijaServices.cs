@@ -30,6 +30,28 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Rezervacija>> GetAllRezervacijeByKorisnikId(int id)
+        {
+            using (var repo = new RezervacijaRepository())
+            {
+                List<Rezervacija> rezervacije = await repo.GetAllByKorId(id).ToListAsync();
+                return rezervacije;
+            }
+        }
+
+        public async Task<List<Rezervacija>> GetAllRezervacijeByKorisnikIdAndDatum(int id, DateTime? vrijeme)
+        {
+            using (var repo = new RezervacijaRepository())
+            {
+                var rezervacije = await repo.GetAllByKorIdAndVrijeme(id, vrijeme)
+                                            .Include(r => r.Stol)
+                                            .ToListAsync();
+
+                return rezervacije;
+            }
+        }
+
+
         public bool AddRezervaciju(Rezervacija rezervacija)
         {
             bool isSuccessful = false;

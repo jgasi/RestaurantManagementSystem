@@ -24,6 +24,24 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Rezervacija> GetAllByKorId(int id)
+        {
+            var query = from r in Entities
+                        where r.Korisnik_id_korisnik == id
+                        select r;
+
+            return query;
+        }
+
+        public IQueryable<Rezervacija> GetAllByKorIdAndVrijeme(int id, DateTime? vrijeme)
+        {
+            var query = from r in Entities
+                        where r.Korisnik_id_korisnik == id && r.datum_vrijeme == vrijeme
+                        select r;
+
+            return query;
+        }
+
         public override int Add(Rezervacija entity, bool saveChanges = true)
         {
             var korisnik = entity.Korisnik_id_korisnik;

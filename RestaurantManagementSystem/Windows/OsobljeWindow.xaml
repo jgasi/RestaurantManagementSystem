@@ -80,6 +80,15 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
+                                 Click="UpravljanjeNarudzbamaButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="ListCheck" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock Text="Upravljanje narudžbama" Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color11}"
                                  Click="KontaktInfoButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Phone" Style="{StaticResource menuButtonIcon}"></fa:IconImage>

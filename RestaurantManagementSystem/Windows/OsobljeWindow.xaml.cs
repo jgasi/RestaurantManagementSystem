@@ -147,6 +147,14 @@ namespace RestaurantManagementSystem
             UcitajSlikuProfila();
         }
 
+        private void UpravljanjeNarudzbamaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.ListCheck;
+            pageTitle.Text = "Upravljanje narudžbama";
+            var ucUpravljanjeNarudzbama = new UcUpravljanjeNarudzbama();
+            GuiManager.OpenContent(ucUpravljanjeNarudzbama);
+        }
+
         private void KontaktInfoButton_Click(object sender, RoutedEventArgs e)
         {
             pageIcon.Icon = IconChar.Phone;

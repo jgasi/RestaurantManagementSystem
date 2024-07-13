@@ -11,6 +11,7 @@ namespace BusinessLogicLayer.Services
 {
     public class NarudzbaServices
     {
+        private NarudzbaRepository narudzbaRepository = new NarudzbaRepository();
         public List<Narudzba> GetAllNarudzbe()
         {
             using (var repo = new NarudzbaRepository())
@@ -18,6 +19,11 @@ namespace BusinessLogicLayer.Services
                 List<Narudzba> narudzbe = repo.GetAll().ToList();
                 return narudzbe;
             }
+        }
+
+        public async Task<List<Narudzba>> GetAllNarudzbeAsync()
+        {
+            return await narudzbaRepository.GetAllWithStavkaNarudzbeAsync();
         }
 
         public async Task<List<Narudzba>> GetNarudzbeByDateAsync(DateTime? startDate, DateTime? endDate)
@@ -29,12 +35,26 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Narudzba>> GetNarudzbeByDateNowAsync(DateTime? now)
+        {
+            return await narudzbaRepository.GetByDateNow(now);
+        }
+
         public async Task<List<Narudzba>> GetAllNarudzbeByKorisnikAsync(int korisnikId)
         {
             using (var repo = new NarudzbaRepository())
             {
                 List<Narudzba> narudzbe = await repo.GetAllById(korisnikId).ToListAsync();
                 return narudzbe;
+            }
+        }
+
+        public async Task<Narudzba> GetNarudzbuByIdAsync(int idNarudzbe)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                List<Narudzba> narudzbe = await repo.GetByIdNarudzbu(idNarudzbe).ToListAsync();
+                return narudzbe.FirstOrDefault();
             }
         }
 
