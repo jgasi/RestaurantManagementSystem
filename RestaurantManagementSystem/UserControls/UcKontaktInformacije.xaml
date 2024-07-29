@@ -11,51 +11,53 @@
             <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Opacity="0.3" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top"/>
         </Grid.Background>
 
-        <StackPanel Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <!-- Logo at the top-middle part -->
-            <Image Source="/Slike/logo.png" Width="450" Height="450" HorizontalAlignment="Center" Margin="0 -200 0 30"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <!-- Logo at the top-middle part -->
+                <Image Source="/Slike/logo.png" Width="450" Height="450" HorizontalAlignment="Center" Margin="0 0 0 30"/>
 
-            <!-- Contact Information -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                <!-- Contact Information -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                    <!-- Address -->
+                    <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                        <fa:IconImage Icon="House" Foreground="White" Width="40" Height="40"></fa:IconImage>
+                        <TextBlock Margin="0,20,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Adresa" TextAlignment="Center"/>
+                        <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="123 Main St, City, Country" TextAlignment="Center"/>
+                    </StackPanel>
 
-                <!-- Address -->
-                <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                    <fa:IconImage Icon="House" Foreground="White"></fa:IconImage>
-                    <TextBlock Margin="0,20,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Adresa" TextAlignment="Center"/>
-                    <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="123 Main St, City, Country" TextAlignment="Center"/>
+                    <!-- Contact Number -->
+                    <StackPanel Orientation="Vertical" Margin="100,20,0,0">
+                        <fa:IconImage Icon="Phone" Foreground="White" Width="40" Height="40"></fa:IconImage>
+                        <TextBlock Margin="0,20,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Kontakt Broj" TextAlignment="Center"/>
+                        <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="+123 456 7890" TextAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Email Address -->
+                    <StackPanel Orientation="Vertical" Margin="100,24,0,0">
+                        <fa:IconImage Icon="EnvelopeCircleCheck" Foreground="White" Width="40" Height="40"></fa:IconImage>
+                        <TextBlock Margin="0,24,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Email Adresa" TextAlignment="Center"/>
+                        <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="info@example.com" TextAlignment="Center"/>
+                    </StackPanel>
                 </StackPanel>
-
-                <!-- Contact Number -->
-                <StackPanel Orientation="Vertical" Margin="100,20,0,0">
-                    <fa:IconImage Icon="Phone" Foreground="White"></fa:IconImage>
-                    <TextBlock Margin="0,20,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Kontakt Broj" TextAlignment="Center"/>
-                    <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="+123 456 7890" TextAlignment="Center"/>
-                </StackPanel>
-
-                <!-- Email Address -->
-                <StackPanel Orientation="Vertical" Margin="100,24,0,0">
-                    <fa:IconImage Icon="EnvelopeCircleCheck" Foreground="White"></fa:IconImage>
-                    <TextBlock Margin="0,24,0,0" FontFamily="{StaticResource CustomFont4}" FontSize="26" Foreground="White" Text="Email Adresa" TextAlignment="Center"/>
-                    <TextBlock Margin="10" FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" Text="info@example.com" TextAlignment="Center"/>
-                </StackPanel>
-
-            </StackPanel>
 
                 <!-- About Us Section -->
-            <StackPanel Orientation="Vertical" Margin="20,40,20,0" HorizontalAlignment="Center">
-                <TextBlock Margin="0,0,0,15" FontFamily="{StaticResource CustomFont4}" FontSize="42" Foreground="White" Text="O nama" TextAlignment="Center"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Center">
-                    Kuhinja našega restorana temelji se na ljubavi prema hrani i tradiciji obiteljskih recepata. Svaki obrok pripremamo s pažnjom, koristeći samo najkvalitetnije sastojke. Naša strast prema ugostiteljstvu očituje se u svakom jelu koje poslužujemo. Cilj nam je pružiti nezaboravno gastronomsko iskustvo u ugodnoj atmosferi. Ponosimo se našim prijateljskim osobljem koje je uvijek spremno pomoći i osigurati da se osjećate kao kod kuće. Bilo da dolazite na brzi ručak, večernji izlazak ili obiteljsku proslavu, kod nas ćete pronaći nešto za svakoga.
-                </TextBlock>
-            </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20,40,20,0" HorizontalAlignment="Center">
+                    <TextBlock Margin="0,0,0,15" FontFamily="{StaticResource CustomFont4}" FontSize="42" Foreground="White" Text="O nama" TextAlignment="Center"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Center">
+                        Kuhinja našega restorana temelji se na ljubavi prema hrani i tradiciji obiteljskih recepata. Svaki obrok pripremamo s pažnjom, koristeći samo najkvalitetnije sastojke. Naša strast prema ugostiteljstvu očituje se u svakom jelu koje poslužujemo. Cilj nam je pružiti nezaboravno gastronomsko iskustvo u ugodnoj atmosferi. Ponosimo se našim prijateljskim osobljem koje je uvijek spremno pomoći i osigurati da se osjećate kao kod kuće. Bilo da dolazite na brzi ručak, večernji izlazak ili obiteljsku proslavu, kod nas ćete pronaći nešto za svakoga.
+                    </TextBlock>
+                </StackPanel>
 
-            <!-- Our Mission Section -->
-            <StackPanel Orientation="Vertical" Margin="20,50,20,0" HorizontalAlignment="Center">
-                <TextBlock Margin="0,0,0,15" FontFamily="{StaticResource CustomFont4}" FontSize="42" Foreground="White" Text="Naša misija" TextAlignment="Center"/>
-                <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Center">
-                    Naša misija je donijeti okus sreće kroz našu kuhinju. Vjerujemo da hrana ima moć povezivanja ljudi i stvaranja trajnih uspomena. Stoga, svaki dan težimo prema izvrsnosti, inovacijama u kuhinji i održivom poslovanju. Posvećeni smo podržavanju lokalnih proizvođača i očuvanju okoliša. Kroz naš rad želimo inspirirati druge i pokazati da je moguće spojiti strast prema hrani s brigom za zajednicu. Naša vizija je postati prepoznatljivo mjesto gdje se tradicija i suvremenost susreću na tanjuru.
-                </TextBlock>
+                <!-- Our Mission Section -->
+                <StackPanel Orientation="Vertical" Margin="20,50,20,0" HorizontalAlignment="Center">
+                    <TextBlock Margin="0,0,0,15" FontFamily="{StaticResource CustomFont4}" FontSize="42" Foreground="White" Text="Naša misija" TextAlignment="Center"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="16" Foreground="White" TextWrapping="Wrap" TextAlignment="Center">
+                        Naša misija je donijeti okus sreće kroz našu kuhinju. Vjerujemo da hrana ima moć povezivanja ljudi i stvaranja trajnih uspomena. Stoga, svaki dan težimo prema izvrsnosti, inovacijama u kuhinji i održivom poslovanju. Posvećeni smo podržavanju lokalnih proizvođača i očuvanju okoliša. Kroz naš rad želimo inspirirati druge i pokazati da je moguće spojiti strast prema hrani s brigom za zajednicu. Naša vizija je postati prepoznatljivo mjesto gdje se tradicija i suvremenost susreću na tanjuru.
+                    </TextBlock>
+                    <TextBlock></TextBlock>
+                    <TextBlock></TextBlock>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

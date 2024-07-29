@@ -62,14 +62,15 @@
 
                 <TextBlock Grid.Row="5" Margin="10,50,10,10" FontSize="50" Text="Generalni podaci" HorizontalAlignment="Center" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
 
-                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock FontSize="22" Text="Najprodavanije jelo: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
-                    <Image x:Name="imgNajprodavanijeJelo" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="6" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock FontSize="40" Text="Najprodavanije jelo: " FontFamily="{StaticResource CustomFont4}" Foreground="White" VerticalAlignment="Center"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
                         <TextBlock FontSize="22" x:Name="tbNajprodavanijeJeloNaziv" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
                         <TextBlock FontSize="22" x:Name="tbNajprodavanijeJeloCijena" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <Image x:Name="imgNajprodavanijeJelo" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
+
 
                 <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
                     <TextBlock FontSize="22" Text="Prosječna ocjena najprodavanijeg jela: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
@@ -86,14 +87,15 @@
                     <fa:IconImage Icon="Star" Width="16" Height="16" Foreground="Gold" Margin="0,0,5,0"/>
                     <TextBlock FontSize="22" x:Name="tbNajprodavanijeJeloNajgoraOcjena" FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
                 </StackPanel>
-                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock FontSize="22" Text="Najprodavanije piće: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
-                    <Image x:Name="imgNajprodavanijePice" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="6" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock FontSize="40" Text="Najprodavanije piće: " FontFamily="{StaticResource CustomFont4}" Foreground="White" VerticalAlignment="Center"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
-                        <TextBlock FontSize="22" x:Name="tbNajprodavanijePiceNaziv" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
-                        <TextBlock FontSize="22" x:Name="tbNajprodavanijePiceCijena" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <TextBlock FontSize="22" x:Name="tbNajprodavanijePiceNaziv" HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <TextBlock FontSize="22" x:Name="tbNajprodavanijePiceCijena" HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <Image x:Name="imgNajprodavanijePice" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
+
                 <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
                     <TextBlock FontSize="22" Text="Prosječna ocjena najprodavanijeg pića: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
                     <fa:IconImage Icon="Star" Width="16" Height="16" Foreground="Gold" Margin="0,0,5,0"/>
@@ -113,14 +115,15 @@
 
 
                 <!-- Najgore jelo -->
-                <StackPanel Grid.Row="10" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <TextBlock FontSize="22" Text="Najgore jelo: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
-                    <Image x:Name="imgNajgoreJelo" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="10" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock FontSize="40" Text="Najgore jelo: " FontFamily="{StaticResource CustomFont4}" Foreground="White" VerticalAlignment="Center"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
                         <TextBlock FontSize="22" x:Name="tbNajgoreJeloNaziv" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
                         <TextBlock FontSize="22" x:Name="tbNajgoreJeloCijena" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <Image x:Name="imgNajgoreJelo" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
+
                 <StackPanel Grid.Row="11" Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
                     <TextBlock FontSize="22" Text="Prosječna ocjena najgoreg jela: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
                     <fa:IconImage Icon="Star" Width="16" Height="16" Foreground="Gold" Margin="0,0,5,0"/>
@@ -140,14 +143,15 @@
                 </StackPanel>
 
                 <!-- Najgore piće -->
-                <StackPanel Grid.Row="10" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <TextBlock FontSize="22" Text="Najgore piće: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
-                    <Image x:Name="imgNajgorePice" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="10" Margin="0,50,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock FontSize="40" Text="Najgore piće: " FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Right" Foreground="White" VerticalAlignment="Center"/>
                     <StackPanel VerticalAlignment="Center" Margin="10">
-                        <TextBlock FontSize="22" x:Name="tbNajgorePiceNaziv" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
-                        <TextBlock FontSize="22" x:Name="tbNajgorePiceCijena" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <TextBlock FontSize="22" x:Name="tbNajgorePiceNaziv" HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <TextBlock FontSize="22" x:Name="tbNajgorePiceCijena" HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+                        <Image x:Name="imgNajgorePice" Width="300" Height="300" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
+
                 <StackPanel Grid.Row="11" Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
                     <TextBlock FontSize="22" Text="Prosječna ocjena najgoreg pića: " FontFamily="{StaticResource CustomFont2}" Foreground="White" VerticalAlignment="Center"/>
                     <fa:IconImage Icon="Star" Width="16" Height="16" Foreground="Gold" Margin="0,0,5,0"/>
