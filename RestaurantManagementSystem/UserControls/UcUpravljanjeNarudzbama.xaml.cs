@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,7 +49,14 @@ namespace RestaurantManagementSystem.UserControls
                 }
 
                 // Pravimo string s prilagodbama za prikaz
-                var prilagodbe = string.Join(", ", narudzba.Stavka_narudzbe.Select(s => s.prilagodbe));
+                var prilagodbe = narudzba.Stavka_narudzbe
+                    .Select(s => s.prilagodbe)
+                    .Where(p => !string.IsNullOrEmpty(p)) // Filtriramo prazne prilagodbe
+                    .SelectMany(p => SplitPrilagodbe(p, 35)) // Splitamo prilagodbe na osnovu 35 znakova
+                    .ToList();
+
+                // Pripremamo prilagodbe u novom redu
+                var finalPrilagodbe = string.Join(Environment.NewLine, prilagodbe);
 
                 // Pravimo ViewModel za narudžbu, dodajući sve stolove koji su rezervirani za ovu narudžbu
                 foreach (var stolId in stolovi)
@@ -59,13 +67,24 @@ namespace RestaurantManagementSystem.UserControls
                         datum_vrijeme = narudzba.datum_vrijeme,
                         racun = narudzba.racun,
                         status = narudzba.status,
-                        prilagodbe = prilagodbe,
+                        prilagodbe = finalPrilagodbe,
                         stol_id = stolId
                     });
                 }
             }
 
             dgNarudzbe.ItemsSource = narudzbaViewModels;
+        }
+
+        // Metoda za razdvajanje prilagodbi
+        private IEnumerable<string> SplitPrilagodbe(string prilagodba, int maxLength)
+        {
+            // Razdvajamo prilagodbe u podnizove
+            for (int i = 0; i < prilagodba.Length; i += maxLength)
+            {
+                // Uzmi maksimalno maxLength znakova
+                yield return prilagodba.Substring(i, Math.Min(maxLength, prilagodba.Length - i));
+            }
         }
 
         private async void RadioButton_Status_Click(object sender, RoutedEventArgs e)
