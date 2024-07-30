@@ -80,14 +80,14 @@
                                          FormatString="dd.MM.yyyy HH:mm"
                                          Margin="0,0,10,10"/>
 
-                    <TextBlock  FontFamily="{StaticResource CustomFont2}"  FontSize="14" Text="Odabrana Jela:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource CustomFont2}"  FontSize="14" Text="Odabrana Jela:" Foreground="White" FontWeight="Bold" Margin="0,20,100,10"/>
+                        <TextBlock HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}"  FontSize="14" Text="Prilagodbe:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    </StackPanel>
                     <ItemsControl Name="SelectedFoodItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="0,5">
-                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
-                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
-                                    <TextBox x:Name="FoodCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
                                     <Button Width="30" Height="30" Tag="{Binding}" Click="RemoveJeloButton_Click"
                                             Background="Transparent" BorderThickness="0">
                                         <Button.Template>
@@ -95,31 +95,38 @@
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </ControlTemplate>
                                         </Button.Template>
-                                        <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30"/>
+                                        <TextBlock Text="X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30" Margin="0,0,10,0"/>
                                     </Button>
+                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FoodCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Odabrana Pića:" Foreground="White" FontWeight="Bold" Margin="0,20,100,10"/>
+                        <TextBlock HorizontalAlignment="Right" FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Prilagodbe:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    </StackPanel>
 
-                    <TextBlock  FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Odabrana Pića:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    
                     <ItemsControl Name="SelectedDrinkItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="0,5">
-                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
-                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
-                                    <TextBox x:Name="DrinkCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
                                     <Button Width="30" Height="30" Tag="{Binding}" Click="RemovePiceButton_Click"
-                        Background="Transparent" BorderThickness="0">
+                                            Background="Transparent" BorderThickness="0">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                             </ControlTemplate>
                                         </Button.Template>
-                                        <TextBlock Text="  X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30"/>
+                                        <TextBlock Text="X" Foreground="Red" FontFamily="{StaticResource CustomFont5}" FontSize="30" Margin="0,0,10,0"/>
                                     </Button>
+                                    <Image Source="{Binding slika}" Width="30" Height="30" Margin="0,0,5,0"/>
+                                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="{Binding naziv}" Foreground="White" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="DrinkCustomizationTextBox" FontFamily="{StaticResource CustomFont2}" Width="200" Height="25" Margin="10,0,0,0" Text="{Binding Prilagodbe, Mode=TwoWay}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
