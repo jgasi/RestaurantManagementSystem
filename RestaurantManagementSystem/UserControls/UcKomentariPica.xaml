@@ -76,6 +76,6 @@
         <TextBlock x:Name="loadingText" Grid.Row="1" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Collapsed"/>
 
         <!-- Spacer (empty row) -->
-        <Rectangle Grid.Row="2" Fill="Transparent"/>
+        <Rectangle Grid.Row="2" Fill="Transparent" Height="150"/>
     </Grid>
 </UserControl>
