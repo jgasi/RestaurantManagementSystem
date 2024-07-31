@@ -76,7 +76,7 @@ namespace RestaurantManagementSystem.UserControls
             dgNarudzbe.ItemsSource = narudzbaViewModels;
         }
 
-        // Metoda za razdvajanje prilagodbi
+
         private IEnumerable<string> SplitPrilagodbe(string prilagodba, int maxLength)
         {
             // Razdvajamo prilagodbe u podnizove

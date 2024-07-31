@@ -55,7 +55,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="12" Height="250" Width="400" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="20" MouseDown="Jelo_Click">
+                    <Border CornerRadius="12" Height="220" Width="375" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="20" MouseDown="Jelo_Click">
                         <Border.Background>
                             <ImageBrush ImageSource="/Slike/tempbackground-jelo.jpg" Opacity="0.22"/>
                         </Border.Background>
