@@ -7,61 +7,75 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
     <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <!-- Blurred Background Layer -->
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
+            </Grid.Background>
+            <Grid.Effect>
+                <BlurEffect Radius="10"/>
+            </Grid.Effect>
+        </Grid>
 
-        <!-- Slika korisnika -->
-        <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10">
-            <Border Background="White" CornerRadius="10" Margin="10">
-                <Image x:Name="imgSlika" Height="200" Width="200" Stretch="Uniform"/>
-            </Border>
-            <Button Content="Promijeni sliku" Style="{StaticResource btnSpremi}" Click="BtnPromijeniSliku_Click" Margin="10"/>
-        </StackPanel>
+        <!-- Content Layer -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <!-- Slika korisnika -->
+            <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10">
+                <Image x:Name="imgSlika" Width="280" Height="255" Stretch="Fill"  Margin="10">
+                    <Image.Clip>
+                        <RectangleGeometry Rect="0,0,280,255" RadiusX="20" RadiusY="20"/>
+                    </Image.Clip>
+                    <Image.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.5" ShadowDepth="5" BlurRadius="10"/>
+                    </Image.Effect>
+                </Image>
+                <Button Content="Promijeni sliku" Style="{StaticResource btnSpremi}" Click="BtnPromijeniSliku_Click" Margin="10"/>
+            </StackPanel>
 
-        <!-- Podaci korisnika -->
-        <StackPanel Grid.Column="1" Margin="20">
-            <StackPanel.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
-                    <Setter Property="FontSize" Value="24"/>
-                    <!-- Povećajte veličinu fonta -->
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
-                    <Setter Property="FontSize" Value="20"/>
-                    <!-- Povećajte veličinu fonta -->
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-                <Style TargetType="PasswordBox">
-                    <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
-                    <Setter Property="FontSize" Value="16"/>
-                    <!-- Povećajte veličinu fonta -->
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-            </StackPanel.Resources>
+            <!-- Podaci korisnika -->
+            <StackPanel Grid.Column="1" Margin="20">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="{StaticResource CustomFont4}"/>
+                        <Setter Property="FontSize" Value="30"/>
+                        <Setter Property="Margin" Value="5,35,5,5"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                    <Style TargetType="PasswordBox">
+                        <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </StackPanel.Resources>
 
-            <TextBlock Text="Korisničko ime:"/>
-            <TextBox x:Name="txtKorime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
+                <TextBlock Text="Korisničko ime:"/>
+                <TextBox x:Name="txtKorime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock Text="Lozinka:"/>
-            <TextBox x:Name="txtLozinka" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
+                <TextBlock Text="Lozinka:"/>
+                <TextBox x:Name="txtLozinka" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock Text="Ime:"/>
-            <TextBox x:Name="txtIme" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
+                <TextBlock Text="Ime:"/>
+                <TextBox x:Name="txtIme" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock Text="Prezime:"/>
-            <TextBox x:Name="txtPrezime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
+                <TextBlock Text="Prezime:"/>
+                <TextBox x:Name="txtPrezime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-            <TextBlock Text="Email:"/>
-            <TextBox x:Name="txtEmail" Style="{StaticResource tbPodaci}" Height="30" Margin="0,0,0,10" FontSize="18"/>
+                <TextBlock Text="Email:"/>
+                <TextBox x:Name="txtEmail" Style="{StaticResource tbPodaci}" Height="30" Margin="0,0,0,10" FontSize="18"/>
 
-            <!-- Button za spremanje promjena -->
-            <Button Content="Spremi" Style="{StaticResource btnSpremi}" Width="75" HorizontalAlignment="Right" Margin="5" Click="BtnSpremi_Click"/>
-        </StackPanel>
+                <!-- Button za spremanje promjena -->
+                <Button Content="Spremi" Style="{StaticResource btnSpremi}" Width="150" HorizontalAlignment="Right" Margin="5,30,5,5" Click="BtnSpremi_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

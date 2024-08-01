@@ -162,13 +162,15 @@
 
     <Style x:Key="tbPodaci" TargetType="TextBox">
         <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="10,2,0,0"/>
+        <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
                     <Border Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="10">
+                        CornerRadius="6">
                         <ScrollViewer x:Name="PART_ContentHost"/>
                     </Border>
                 </ControlTemplate>
