@@ -20,8 +20,8 @@
         </Border.Background>
 
         <Border CornerRadius="10"
-         BorderThickness="1"
-         Opacity="0.65">
+                BorderThickness="1"
+                Opacity="0.65">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -35,14 +35,12 @@
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                     <GradientStop Color="{StaticResource secondaryBackColor3}" Offset="0"/>
                     <GradientStop Color="{StaticResource secondaryBackColor5}" Offset="0.75"/>
-
                 </LinearGradientBrush>
             </Border.Background>
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30">
-                    </RowDefinition>
+                    <RowDefinition Height="30"/>
                     <RowDefinition>
                     </RowDefinition>
                 </Grid.RowDefinitions>
@@ -56,104 +54,90 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="REGISTER"
-                        Foreground="White"
-                        FontSize="10"
-                        FontFamily="{StaticResource CustomFont2}"
-                        Grid.Column="0"
-                        VerticalAlignment="Center"
-                        Margin="10,0,0,0"
-                        ></TextBlock>
+                               Foreground="White"
+                               FontSize="10"
+                               FontFamily="{StaticResource CustomFont2}"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="10,0,0,0"/>
 
                     <Button x:Name="btnMinimize"
-                     BorderThickness="0"
-                     Content="-"
-                     Foreground="White"
-                     FontSize="16"
-                     FontFamily="{StaticResource CustomFont2}"
-                     Cursor="Hand"
-                     Grid.Column="1"
-                     Click="btnMinimize_Click">
-
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="{StaticResource CustomFont2}"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimize_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="Black"></Setter>
+                                <Setter Property="Background" Value="Black"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"/>
                                     </Trigger>
                                 </Style.Triggers>
-
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                 CornerRadius="9"
-                                 Background="{TemplateBinding Background}">
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"></ContentPresenter>
-
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
 
                     <Button x:Name="btnClose"
-                     BorderThickness="0"
-                     Content="X"
-                     Foreground="White"
-                     FontSize="12"
-                     FontFamily="{StaticResource CustomFont2}"
-                     Cursor="Hand"
-                     Grid.Column="2"
-                     Click="btnClose_Click">
-
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="{StaticResource CustomFont2}"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnClose_Click">
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="Black"></Setter>
+                                <Setter Property="Background" Value="Black"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"/>
                                     </Trigger>
                                 </Style.Triggers>
-
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" Height="18"
-                                 CornerRadius="9"
-                                 Background="{TemplateBinding Background}">
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"></ContentPresenter>
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
                 </Grid>
 
-
-
-
                 <StackPanel Width="250"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Orientation="Vertical"
                             Margin="0,1,0,0">
 
                     <Image Source="/Slike/logo.png"
-                           Width="200" Height="200"></Image>
+                           Width="200" Height="200"/>
 
                     <TextBlock Text="Restaurant"
                                Foreground="White"
                                FontSize="25"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               HorizontalAlignment="Center">
-                    </TextBlock>
+                               HorizontalAlignment="Center"/>
 
                     <TextBlock Text="Nekakav dodatan tekst ispod imena restorana da lijepo izgleda napisi to kasnije lijepi pozdrav."
                                Foreground="White"
@@ -162,18 +146,14 @@
                                FontFamily="{StaticResource CustomFont2}"
                                TextWrapping="Wrap"
                                TextAlignment="Center"
-                               Margin="5,5,0,0">
-
-                    </TextBlock>
+                               Margin="5,5,0,0"/>
 
                     <TextBlock Text="Korisničko ime"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               Margin="0,35,0,0">
-                    </TextBlock>
-
+                               Margin="0,35,0,0"/>
                     <TextBox x:Name="txtKorime"
                              FontSize="13"
                              FontWeight="Medium"
@@ -186,54 +166,46 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="30,0,0,0">
-
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Slike/user-regular.png"
                                         Stretch="Uniform"
-                                        AlignmentX="Left">
-                            </ImageBrush>
+                                        AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-
-
+                    <TextBlock x:Name="txtKorimeError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
                     <TextBlock Text="Lozinka"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               Margin="0,15,0,0">
-                    </TextBlock>
-
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtLozinka"
-                                 FontSize="13"
-                                 FontWeight="Medium"
-                                 FontFamily="{StaticResource CustomFont2}"
-                                 Foreground="White"
-                                 CaretBrush="LightGray"
-                                 BorderBrush="Black"
-                                 BorderThickness="0,0,0,1"
-                                 Height="28"
-                                 VerticalContentAlignment="Center"
-                                 Margin="0,5,0,0"
-                                 Padding="30,0,0,0">
-
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="{StaticResource CustomFont2}"
+                             Foreground="White"
+                             CaretBrush="LightGray"
+                             BorderBrush="Black"
+                             BorderThickness="0,0,0,1"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="30,0,0,0">
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Slike/lozinka-ikona1.png"
                                         Stretch="Uniform"
-                                        AlignmentX="Left">
-                            </ImageBrush>
+                                        AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
+                    <TextBlock x:Name="txtLozinkaError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
                     <TextBlock Text="Ime"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               Margin="0,15,0,0">
-                    </TextBlock>
-
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtIme"
                              FontSize="13"
                              FontWeight="Medium"
@@ -246,23 +218,20 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="30,0,0,0">
-
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Slike/ime-prezime-ikona1.png"
                                         Stretch="Uniform"
-                                        AlignmentX="Left">
-                            </ImageBrush>
+                                        AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
+                    <TextBlock x:Name="txtImeError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
                     <TextBlock Text="Prezime"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               Margin="0,15,0,0">
-                    </TextBlock>
-
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtPrezime"
                              FontSize="13"
                              FontWeight="Medium"
@@ -275,23 +244,20 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="30,0,0,0">
-
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Slike/ime-prezime-ikona1.png"
                                         Stretch="Uniform"
-                                        AlignmentX="Left">
-                            </ImageBrush>
+                                        AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
+                    <TextBlock x:Name="txtPrezimeError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
                     <TextBlock Text="Email"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="{StaticResource CustomFont2}"
-                               Margin="0,15,0,0">
-                    </TextBlock>
-
+                               Margin="0,15,0,0"/>
                     <TextBox x:Name="txtEmail"
                              FontSize="13"
                              FontWeight="Medium"
@@ -304,17 +270,13 @@
                              VerticalContentAlignment="Center"
                              Margin="0,5,0,0"
                              Padding="30,0,0,0">
-
                         <TextBox.Background>
                             <ImageBrush ImageSource="/Slike/email-ikona1.png"
                                         Stretch="Uniform"
-                                        AlignmentX="Left">
-                            </ImageBrush>
+                                        AlignmentX="Left"/>
                         </TextBox.Background>
                     </TextBox>
-
-
-
+                    <TextBlock x:Name="txtEmailError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
                     <Button x:Name="btnRegister"
                             BorderThickness="0"
@@ -323,39 +285,33 @@
                             FontSize="12"
                             FontFamily="{StaticResource CustomFont2}"
                             Cursor="Hand"
-                            Grid.Column="2"
                             Margin="0,50,0,0"
                             Click="btnRegister_Click">
-
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="Black"></Setter>
+                                <Setter Property="Background" Value="Black"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource color13}"></Setter>
+                                        <Setter Property="Background" Value="{StaticResource color13}"/>
                                     </Trigger>
                                 </Style.Triggers>
-
                             </Style>
                         </Button.Style>
-
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="150" Height="40"
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
-                                      HorizontalAlignment="Center"></ContentPresenter>
+                                                      HorizontalAlignment="Center"/>
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
-
                     </Button>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
                                 Margin="0,1,0,0">
-
                         <TextBlock Text="Login"
                                    Foreground="White"
                                    FontSize="12"
@@ -366,7 +322,6 @@
                                    MouseLeave="TextBlock_MouseLeave"
                                    MouseLeftButtonDown="TextBlockLogin_MouseLeftButtonDown"
                                    TextDecorations="None"/>
-
                         <TextBlock Text="Informacije"
                                    Foreground="White"
                                    FontSize="12"
@@ -380,7 +335,7 @@
                     </StackPanel>
                 </StackPanel>
 
-                <ContentControl x:Name="contentPanel"></ContentControl>
+                <ContentControl x:Name="contentPanel"/>
             </Grid>
         </Border>
     </Border>

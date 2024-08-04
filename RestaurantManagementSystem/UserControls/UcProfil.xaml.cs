@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -49,6 +51,13 @@ namespace RestaurantManagementSystem.UserControls
 
         private void BtnSpremi_Click(object sender, RoutedEventArgs e)
         {
+            string errors = provjeriUnose();
+            if (!string.IsNullOrEmpty(errors))
+            {
+                MessageBox.Show(errors, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             if (TrenutniKorisnik != null)
             {
                 TrenutniKorisnik.korime = txtKorime.Text;
@@ -71,6 +80,47 @@ namespace RestaurantManagementSystem.UserControls
                 isImageChanged = false;
             }
         }
+
+
+        private string provjeriUnose()
+        {
+            StringBuilder errorMessage = new StringBuilder();
+            string korisnickoIme = txtKorime.Text;
+            string lozinka = txtLozinka.Text;
+            string ime = txtIme.Text;
+            string prezime = txtPrezime.Text;
+            string email = txtEmail.Text;
+
+            bool isKorisnickoImeValid = Regex.IsMatch(korisnickoIme, @"^[a-zA-Z0-9_]{3,20}$");
+            bool isLozinkaValid = Regex.IsMatch(lozinka, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{5,}$");
+            bool isImeValid = Regex.IsMatch(ime, @"^[a-zA-Z\s-]{1,}$");
+            bool isPrezimeValid = Regex.IsMatch(prezime, @"^[a-zA-Z\s-]{1,}$");
+            bool isEmailValid = Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+
+            if (!isKorisnickoImeValid)
+            {
+                errorMessage.AppendLine("Korisničko ime mora imati između 3 i 20 znakova, i može sadržavati slova, brojeve i donje crte.");
+            }
+            if (!isLozinkaValid)
+            {
+                errorMessage.AppendLine("Lozinka mora imati najmanje 5 znakova, jedan broj i jedno slovo. Može imati i znakove '@$!%*?&'.");
+            }
+            if (!isImeValid)
+            {
+                errorMessage.AppendLine("Ime može sadržavati samo slova, znak '-' i razmake.");
+            }
+            if (!isPrezimeValid)
+            {
+                errorMessage.AppendLine("Prezime može sadržavati samo slova, znak '-' i razmake.");
+            }
+            if (!isEmailValid)
+            {
+                errorMessage.AppendLine("Email adresa nije u ispravnom formatu.\n     - Primjer maila: ime.prezime5@gmail.com");
+            }
+
+            return errorMessage.ToString();
+        }
+
 
         private void BtnPromijeniSliku_Click(object sender, RoutedEventArgs e)
         {

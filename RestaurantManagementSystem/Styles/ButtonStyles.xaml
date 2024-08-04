@@ -249,6 +249,20 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-    
+
+    <!-- Stil za TextBox koji prikazuje grešku -->
+    <Style x:Key="TextBoxValidationErrorStyle" TargetType="TextBox">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="5"/>
+
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="True">
+                <Setter Property="BorderBrush" Value="Red"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

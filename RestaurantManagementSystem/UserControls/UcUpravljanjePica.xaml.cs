@@ -6,6 +6,8 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace RestaurantManagementSystem.UserControls
 {
@@ -54,9 +56,62 @@ namespace RestaurantManagementSystem.UserControls
 
         private void btnSpremi_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbNazivPica.Text) || string.IsNullOrEmpty(tbCijena.Text) || string.IsNullOrEmpty(tbNutrivneInformacije.Text) || string.IsNullOrEmpty(tbAlergeni.Text))
+            // Provjera da li su sva polja popunjena
+            if (string.IsNullOrEmpty(tbNazivPica.Text) || string.IsNullOrEmpty(tbCijena.Text) ||
+                string.IsNullOrEmpty(tbNutrivneInformacije.Text) || string.IsNullOrEmpty(tbAlergeni.Text) ||
+                string.IsNullOrEmpty(tbInventar.Text))
             {
-                MessageBox.Show("Molimo vas da popunite sva polja!");
+                MessageWindow messageWindow = new MessageWindow("Molimo vas da popunite sva polja!");
+                messageWindow.Top = 0;
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2;
+                messageWindow.Show();
+                return;
+            }
+
+            // Deklaracija varijabli i regex provjere
+            StringBuilder errorMessage = new StringBuilder();
+            string nazivPica = tbNazivPica.Text.Trim();
+            string cijenaPica = tbCijena.Text.Trim();
+            string nutritivneInformacije = tbNutrivneInformacije.Text.Trim();
+            string alergeni = tbAlergeni.Text.Trim();
+            string idInventara = tbInventar.Text.Trim();
+
+            // Validacija pomoću regex-a
+            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-zA-Z\s-]+$");
+            bool isCijenaPicaValid = Regex.IsMatch(cijenaPica, @"^\d+(\.\d{1,2})?$");
+            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+
+            // Provjera grešaka
+            if (!isNazivPicaValid)
+            {
+                errorMessage.AppendLine("Naziv pića može sadržavati samo slova i znak '-'.");
+            }
+            if (!isCijenaPicaValid)
+            {
+                errorMessage.AppendLine("Cijena pića mora biti u obliku kao npr:\n     12000.5 ili 12.99.");
+            }
+            if (!isNutritivneInformacijeValid)
+            {
+                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+            }
+            if (!isAlergeniValid)
+            {
+                errorMessage.AppendLine("Alergeni moraju biti odvojeni zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+            }
+            if (!isIDInventaraValid)
+            {
+                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+
+            // Ako postoje greške, prikaži poruku
+            if (errorMessage.Length > 0)
+            {
+                MessageWindow messageWindow = new MessageWindow(errorMessage.ToString());
+                messageWindow.Top = 0;
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2;
+                messageWindow.Show();
                 return;
             }
 
@@ -221,9 +276,62 @@ namespace RestaurantManagementSystem.UserControls
 
         private void btnSpremiUredi_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbNazivPicaUredi.Text) || string.IsNullOrEmpty(tbCijenaUredi.Text) || string.IsNullOrEmpty(tbNutrivneInformacijeUredi.Text) || string.IsNullOrEmpty(tbAlergeniUredi.Text))
+            // Provjera da li su sva polja popunjena
+            if (string.IsNullOrEmpty(tbNazivPicaUredi.Text) || string.IsNullOrEmpty(tbCijenaUredi.Text) ||
+                string.IsNullOrEmpty(tbNutrivneInformacijeUredi.Text) || string.IsNullOrEmpty(tbAlergeniUredi.Text) ||
+                string.IsNullOrEmpty(tbInventarUredi.Text))
             {
-                MessageBox.Show("Molimo vas da popunite sva polja!");
+                MessageWindow messageWindow = new MessageWindow("Molimo vas da popunite sva polja!");
+                messageWindow.Top = 0;
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2;
+                messageWindow.Show();
+                return;
+            }
+
+            // Deklaracija varijabli i regex provjere
+            StringBuilder errorMessage = new StringBuilder();
+            string nazivPica = tbNazivPicaUredi.Text.Trim();
+            string cijenaPica = tbCijenaUredi.Text.Trim();
+            string nutritivneInformacije = tbNutrivneInformacijeUredi.Text.Trim();
+            string alergeni = tbAlergeniUredi.Text.Trim();
+            string idInventara = tbInventarUredi.Text.Trim();
+
+            // Validacija pomoću regex-a
+            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-zA-Z\s-]+$");
+            bool isCijenaPicaValid = Regex.IsMatch(cijenaPica, @"^\d+(\.\d{1,2})?$");
+            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+
+            // Provjera grešaka
+            if (!isNazivPicaValid)
+            {
+                errorMessage.AppendLine("Naziv pića može sadržavati samo slova i znak '-'.");
+            }
+            if (!isCijenaPicaValid)
+            {
+                errorMessage.AppendLine("Cijena pića mora biti u obliku kao npr:\n     12000.5 ili 12.99.");
+            }
+            if (!isNutritivneInformacijeValid)
+            {
+                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+            }
+            if (!isAlergeniValid)
+            {
+                errorMessage.AppendLine("Alergeni moraju biti odvojeni zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+            }
+            if (!isIDInventaraValid)
+            {
+                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+
+            // Ako postoje greške, prikaži poruku
+            if (errorMessage.Length > 0)
+            {
+                MessageWindow messageWindow = new MessageWindow(errorMessage.ToString());
+                messageWindow.Top = 0;
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2;
+                messageWindow.Show();
                 return;
             }
 

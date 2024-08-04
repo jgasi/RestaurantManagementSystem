@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +65,53 @@ namespace RestaurantManagementSystem.UserControls
 
         private void BtnSpremi_Click(object sender, RoutedEventArgs e)
         {
+            // Deklaracija varijabli
+            string kolicinaNaZalihi = tbKolicinaNaZalihi.Text.Trim();
+            string minimalnaKolicinaNarudzbe = tbMinimalnaKolicinaNarudzbe.Text.Trim();
+            string dostavljac = tbDostavljac.Text.Trim();
+            string cijena = tbCijena.Text.Trim();
+            DateTime? datumNabave = dpDatumNabave.SelectedDate;
+
+            // Validacija pomoću regex-a
+            bool isKolicinaNaZalihiValid = Regex.IsMatch(kolicinaNaZalihi, @"^\d+$");
+            bool isMinimalnaKolicinaNarudzbeValid = Regex.IsMatch(minimalnaKolicinaNarudzbe, @"^\d+$");
+            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-zA-Z0-9\-\.\s]+$");
+            bool isCijenaValid = Regex.IsMatch(cijena, @"^\d+(\.\d{1,2})?$");
+
+            // Provjera grešaka
+            StringBuilder errorMessage = new StringBuilder();
+
+            if (!isKolicinaNaZalihiValid)
+            {
+                errorMessage.AppendLine("Količina na zalihi mora biti cijeli broj.");
+            }
+            if (!isMinimalnaKolicinaNarudzbeValid)
+            {
+                errorMessage.AppendLine("Minimalna količina narudžbe mora biti cijeli broj.");
+            }
+            if (!isDostavljacValid)
+            {
+                errorMessage.AppendLine("Dostavljač može sadržavati slova, brojeve, znak '-' i '.'");
+            }
+            if (!isCijenaValid)
+            {
+                errorMessage.AppendLine("Cijena mora biti u obliku kao npr:\n     12000.99 ili 12.99.");
+            }
+            if (!datumNabave.HasValue) // Provjera da li je datum odabran
+            {
+                errorMessage.AppendLine("Morate odabrati datum nabave.");
+            }
+
+            // Ako postoje greške, prikaži poruku
+            if (errorMessage.Length > 0)
+            {
+                MessageWindow messageWindow = new MessageWindow(errorMessage.ToString());
+                messageWindow.Top = 0; // Postavi Y koordinatu na vrh ekrana
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2; // Centriraj X koordinatu
+                messageWindow.Show();
+                return; // Prekini daljnje izvršavanje
+            }
+
             try
             {
                 trenutniInventar.kolicina_na_zalihi = tbKolicinaNaZalihi.Text;
@@ -83,8 +132,56 @@ namespace RestaurantManagementSystem.UserControls
             }
         }
 
+
         private void BtnSpremiNovi_Click(object sender, RoutedEventArgs e)
         {
+            // Deklaracija varijabli
+            string kolicinaNaZalihi = tbNovaKolicinaNaZalihi.Text.Trim();
+            string minimalnaKolicinaNarudzbe = tbNovaMinimalnaKolicinaNarudzbe.Text.Trim();
+            string dostavljac = tbNoviDostavljac.Text.Trim();
+            string cijena = tbNovaCijena.Text.Trim();
+            DateTime? datumNabave = dpNoviDatumNabave.SelectedDate;
+
+            // Validacija pomoću regex-a
+            bool isKolicinaNaZalihiValid = Regex.IsMatch(kolicinaNaZalihi, @"^\d+$");
+            bool isMinimalnaKolicinaNarudzbeValid = Regex.IsMatch(minimalnaKolicinaNarudzbe, @"^\d+$");
+            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-zA-Z0-9\-\.\s]+$");
+            bool isCijenaValid = Regex.IsMatch(cijena, @"^\d+(\.\d{1,2})?$");
+
+            // Provjera grešaka
+            StringBuilder errorMessage = new StringBuilder();
+
+            if (!isKolicinaNaZalihiValid)
+            {
+                errorMessage.AppendLine("Količina na zalihi mora biti cijeli broj.");
+            }
+            if (!isMinimalnaKolicinaNarudzbeValid)
+            {
+                errorMessage.AppendLine("Minimalna količina narudžbe mora biti cijeli broj.");
+            }
+            if (!isDostavljacValid)
+            {
+                errorMessage.AppendLine("Dostavljač može sadržavati slova, brojeve, znak '-' i '.'");
+            }
+            if (!isCijenaValid)
+            {
+                errorMessage.AppendLine("Cijena mora biti u obliku kao npr:\n     12000.99 ili 12.99.");
+            }
+            if (!datumNabave.HasValue) // Provjera da li je datum odabran
+            {
+                errorMessage.AppendLine("Morate odabrati datum nabave.");
+            }
+
+            // Ako postoje greške, prikaži poruku
+            if (errorMessage.Length > 0)
+            {
+                MessageWindow messageWindow = new MessageWindow(errorMessage.ToString());
+                messageWindow.Top = 0; // Postavi Y koordinatu na vrh ekrana
+                messageWindow.Left = (SystemParameters.PrimaryScreenWidth - messageWindow.Width) / 2; // Centriraj X koordinatu
+                messageWindow.Show();
+                return; // Prekini daljnje izvršavanje
+            }
+
             try
             {
                 var noviInventar = new Inventar
@@ -107,6 +204,7 @@ namespace RestaurantManagementSystem.UserControls
                 MessageBox.Show($"Greška pri dodavanju novog inventara: {ex.Message}");
             }
         }
+
 
         private void BtnOdustani_Click(object sender, RoutedEventArgs e)
         {
