@@ -61,8 +61,8 @@
                 <TextBlock Text="Korisničko ime:"/>
                 <TextBox x:Name="txtKorime" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
 
-                <TextBlock Text="Lozinka:"/>
-                <TextBox x:Name="txtLozinka" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>
+                <TextBlock Text="Lozinka (ostaviti prazno ako ne želite promijeniti lozinku):"/>
+                <PasswordBox x:Name="txtLozinka" Style="{StaticResource tbPodaciPasswordBox}" Height="30" FontSize="18"/>
 
                 <TextBlock Text="Ime:"/>
                 <TextBox x:Name="txtIme" Style="{StaticResource tbPodaci}" Height="30" FontSize="18"/>

@@ -178,6 +178,24 @@
         </Setter>
     </Style>
 
+    <Style x:Key="tbPodaciPasswordBox" TargetType="PasswordBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="10,2,0,0"/>
+        <Setter Property="FontFamily" Value="{StaticResource CustomFont2}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 
 

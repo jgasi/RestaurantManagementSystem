@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
@@ -12,6 +13,24 @@ namespace BusinessLogicLayer.Services
 {
     public class KorisnikServices
     {
+        private const string fiksnaSol = "moja_fiksna_vrijednost_soli";
+
+        public string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] saltedPassword = Encoding.UTF8.GetBytes(fiksnaSol + password);
+                byte[] hash = sha256.ComputeHash(saltedPassword);
+                return Convert.ToBase64String(hash);
+            }
+        }
+
+        public bool ValidatePassword(string inputPassword, string storedHashPassword)
+        {
+            string hashInputPassword = HashPassword(inputPassword);
+            return hashInputPassword == storedHashPassword;
+        }
+
         public List<Korisnik> GetAllKorisnike()
         {
             using(var repo = new KorisnikRepository()) 
@@ -63,6 +82,7 @@ namespace BusinessLogicLayer.Services
         public bool AddKorisnik(Korisnik korisnik)
         {
             bool isSuccesful = false;
+            korisnik.lozinka = HashPassword(korisnik.lozinka);
 
             using (var repo = new KorisnikRepository())
             {

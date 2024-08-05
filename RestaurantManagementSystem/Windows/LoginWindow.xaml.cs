@@ -85,7 +85,7 @@ namespace RestaurantManagementSystem
             if (pronaden.Any())
             {
                 var korisnik = pronaden.FirstOrDefault();
-                if (korisnik != null && korisnik.lozinka == lozinka)
+                if (korisnik != null && korisnikServices.ValidatePassword(lozinka, korisnik.lozinka))
                 {
                     //CurrentUser.LoggedInUser = korisnik;
 

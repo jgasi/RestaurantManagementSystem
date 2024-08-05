@@ -93,6 +93,9 @@ namespace RestaurantManagementSystem
 
                 korisnikServices.AddKorisnik(korisnik);
                 MessageBox.Show("Registracija uspješna!", "Obavijest", MessageBoxButton.OK, MessageBoxImage.Information);
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                this.Close();
             }
             else
             {

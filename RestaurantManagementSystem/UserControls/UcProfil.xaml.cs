@@ -19,6 +19,8 @@ namespace RestaurantManagementSystem.UserControls
         private KorisnikServices korisnikServices = new KorisnikServices();
         private bool isImageChanged = false;
 
+        private string globalnaLozinka = "";
+
         //samo za dodavanje slika za pića
         //private PiceServices piceServices = new PiceServices();
 
@@ -37,7 +39,6 @@ namespace RestaurantManagementSystem.UserControls
             if (TrenutniKorisnik != null)
             {
                 txtKorime.Text = TrenutniKorisnik.korime;
-                txtLozinka.Text = TrenutniKorisnik.lozinka;
                 txtIme.Text = TrenutniKorisnik.ime;
                 txtPrezime.Text = TrenutniKorisnik.prezime;
                 txtEmail.Text = TrenutniKorisnik.email;
@@ -61,7 +62,7 @@ namespace RestaurantManagementSystem.UserControls
             if (TrenutniKorisnik != null)
             {
                 TrenutniKorisnik.korime = txtKorime.Text;
-                TrenutniKorisnik.lozinka = txtLozinka.Text;
+                TrenutniKorisnik.lozinka = globalnaLozinka;
                 TrenutniKorisnik.ime = txtIme.Text;
                 TrenutniKorisnik.prezime = txtPrezime.Text;
                 TrenutniKorisnik.email = txtEmail.Text;
@@ -86,7 +87,7 @@ namespace RestaurantManagementSystem.UserControls
         {
             StringBuilder errorMessage = new StringBuilder();
             string korisnickoIme = txtKorime.Text;
-            string lozinka = txtLozinka.Text;
+            string lozinka = txtLozinka.Password;
             string ime = txtIme.Text;
             string prezime = txtPrezime.Text;
             string email = txtEmail.Text;
@@ -101,10 +102,22 @@ namespace RestaurantManagementSystem.UserControls
             {
                 errorMessage.AppendLine("Korisničko ime mora imati između 3 i 20 znakova, i može sadržavati slova, brojeve i donje crte.");
             }
-            if (!isLozinkaValid)
+            if (txtLozinka.Password != "")
             {
-                errorMessage.AppendLine("Lozinka mora imati najmanje 5 znakova, jedan broj i jedno slovo. Može imati i znakove '@$!%*?&'.");
+                if (!isLozinkaValid)
+                {
+                    errorMessage.AppendLine("Lozinka mora imati najmanje 5 znakova, jedan broj i jedno slovo. Može imati i znakove '@$!%*?&'.");
+                }
+                else
+                {
+                    globalnaLozinka = korisnikServices.HashPassword(txtLozinka.Password);
+                }
             }
+            else
+            {
+                globalnaLozinka = TrenutniKorisnik.lozinka;
+            }
+            
             if (!isImeValid)
             {
                 errorMessage.AppendLine("Ime može sadržavati samo slova, znak '-' i razmake.");
