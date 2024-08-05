@@ -40,10 +40,20 @@ namespace RestaurantManagementSystem.UserControls
                 Korisnik korisnik = button.DataContext as Korisnik;
                 if (korisnik != null)
                 {
-                    if (korisnik.uloga != "Administrator")
+                    if(korisnik.uloga != "Administrator") 
                     {
-                        korisnikServices.RemoveKorisnik(korisnik);
-                        LoadUsers();
+                        MessageBoxResult result = MessageBox.Show(
+                        "Jeste li sigurni da želite obrisati korisnika " + korisnik.korime + "?",
+                        "Potvrda brisanja",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning
+                    );
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            korisnikServices.RemoveKorisnik(korisnik);
+                            LoadUsers();
+                        }
                     }
                     else
                     {
