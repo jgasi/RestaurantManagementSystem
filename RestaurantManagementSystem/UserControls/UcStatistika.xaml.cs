@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -61,35 +62,37 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var order in orders)
             {
-                string[] parts = order.racun.Split(new string[] { "EUR" }, StringSplitOptions.RemoveEmptyEntries);
+                string[] lines = order.racun.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (var part in parts)
+                foreach (var line in lines)
                 {
-                    if (part.Contains("Ukupna cijena:"))
+                    if (line.Contains("Ukupna cijena:"))
                     {
-                        decimal totalPrice;
-                        if (decimal.TryParse(part.Replace("Ukupna cijena:", "").Trim(), out totalPrice))
+                        string totalPriceStr = line.Replace("Ukupna cijena:", "").Replace("EUR", "").Trim();
+                        if (decimal.TryParse(totalPriceStr.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal totalPrice))
                         {
                             totalRevenue += totalPrice;
                         }
                     }
                     else
                     {
-                        // Brojimo naručene jedinice tako što brojimo znakove "-"
-                        int unitsInThisPart = part.Count(c => c == '-');
-                        totalSoldUnits += unitsInThisPart;
+                        // Pretpostavljamo da svaka stavka sadrži jednu crticu '-'
+                        if (line.Contains("-"))
+                        {
+                            totalSoldUnits++;
+                        }
                     }
                 }
             }
 
             var sveRecenzije = await recenzijaServices.GetAllRecenzijeAsync();
-            
+
             int zbrojOcjena = 0;
             int kolikoOcjena = 0;
-            
-            foreach(var recenzija in sveRecenzije)
+
+            foreach (var recenzija in sveRecenzije)
             {
-                if(int.TryParse(recenzija.ocjena, out int trenutnaOcjena))
+                if (int.TryParse(recenzija.ocjena, out int trenutnaOcjena))
                 {
                     kolikoOcjena++;
                     zbrojOcjena += trenutnaOcjena;
@@ -97,11 +100,12 @@ namespace RestaurantManagementSystem.UserControls
             }
             decimal prosjekOcjena = kolikoOcjena > 0 ? (decimal)zbrojOcjena / kolikoOcjena : 0;
 
-            totalSoldUnits -= 2;
+            // totalSoldUnits se računa ispravno, nema potrebe za oduzimanje 2
             tbUkupniPrihod.Text = $"{totalRevenue:C}";
             tbBrojProdanihJedinica.Text = totalSoldUnits.ToString();
             tbProsjecnaOcjena.Text = $"{prosjekOcjena:F2}";
         }
+
 
         private async void UcitajNajprodavanijeJelo()
         {
