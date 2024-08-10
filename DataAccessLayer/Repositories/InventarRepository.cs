@@ -22,6 +22,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public Inventar GetById(int id)
+        {
+            var query = from i in Entities
+                        where i.id_inventar == id
+                        select i;
+
+            return query.FirstOrDefault();
+        }
+
         public override int Add(Inventar entity, bool saveChanges = true)
         {
             var inventar = new Inventar

@@ -22,6 +22,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Recenzija> GetRecenzijeByKorisnikId(int proslijedenId)
+        {
+            var query = from r in Entities
+                        where r.Korisnik_id_korisnik == proslijedenId
+                        select r;
+
+            return query;
+        }
+
         public IQueryable<Recenzija> GetRecenzijeById(int proslijedenId)
         {
             var query = from r in Entities

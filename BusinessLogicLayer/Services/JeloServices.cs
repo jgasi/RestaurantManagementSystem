@@ -40,6 +40,15 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Jelo>> GetJeloByIdInventaraAsync(int id)
+        {
+            using (var repo = new JeloRepository())
+            {
+                List<Jelo> jelo = await repo.GetJeloByIdInventara(id).ToListAsync();
+                return jelo;
+            }
+        }
+
         public async Task<List<Jelo>> GetJelaByPageAsync(int pageNumber, int itemsPerPage)
         {
             using (var repo = new JeloRepository())

@@ -29,6 +29,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public Inventar GetInventarById(int id)
+        {
+            using (var repo = new InventarRepository())
+            {
+                Inventar inventar = repo.GetById(id);
+                return inventar;
+            }
+        }
+
+
         public bool AddInventar(Inventar inventar)
         {
             bool isSuccessful = false;

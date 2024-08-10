@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
+using System.Linq;
 
 namespace RestaurantManagementSystem.UserControls
 {
@@ -216,15 +217,34 @@ namespace RestaurantManagementSystem.UserControls
             popupDodajNovi.IsOpen = false;
         }
 
-        private void ObrisiButton_Click(object sender, RoutedEventArgs e)
+        private async void ObrisiButton_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.DataContext is Inventar inventar)
             {
                 trenutniInventar = inventar;
 
-                inventarServices.RemoveInventar(inventar);
-                UcitajInventar();
+                bool jelIventarPrazan = await ProvjeriJelInventarZauzet(inventar.id_inventar);
+                if (jelIventarPrazan)
+                {
+                    inventarServices.RemoveInventar(inventar);
+                    UcitajInventar();
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Inventar nije prazan!\nNajprije obriši jela ili pića iz inventara kako bi ga obrisao.");
+                }
+
             }
         }
+
+        private async Task<bool> ProvjeriJelInventarZauzet(int id)
+        {
+            var jelaUInventaru = await jeloServices.GetJeloByIdInventaraAsync(id);
+            var picaUInventaru = await piceServices.GetPiceByIdInventaraAsync(id);
+
+            return !(jelaUInventaru?.Any() == true || picaUInventaru?.Any() == true);
+        }
+
+
     }
 }

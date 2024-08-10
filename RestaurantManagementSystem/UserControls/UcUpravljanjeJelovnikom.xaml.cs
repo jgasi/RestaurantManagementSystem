@@ -1,19 +1,20 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
-using System.Text.RegularExpressions;
-using System.Text;
+using Microsoft.Win32;
 
 namespace RestaurantManagementSystem.UserControls
 {
     public partial class UcUpravljanjeJelovnikom : UserControl
     {
         private JeloServices jeloServices = new JeloServices();
+        private InventarServices inventarServices = new InventarServices();
         private bool isImageChanged = false;
         Jelo globalnoJeloEdit;
 
@@ -82,6 +83,7 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
 
             // Provjera grešaka
             if (!isNazivJelaValid)
@@ -104,6 +106,10 @@ namespace RestaurantManagementSystem.UserControls
             {
                 errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
             }
+            if (!doesIDInventaraExist)
+            {
+                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
+            }
 
             // Ako postoje greške, prikaži poruku
             if (errorMessage.Length > 0)
@@ -114,7 +120,6 @@ namespace RestaurantManagementSystem.UserControls
                 messageWindow.Show();
                 return; // Prekini daljnje izvršavanje
             }
-
             // Kreiranje novog jela
             Jelo novoJelo = new Jelo
             {
@@ -141,7 +146,6 @@ namespace RestaurantManagementSystem.UserControls
             loadingText.Visibility = Visibility.Visible;
             UcitajJela();
         }
-
 
 
         private void btnZatvori_Click(object sender, RoutedEventArgs e)
@@ -310,6 +314,7 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
 
             // Provjera grešaka
             if (!isNazivJelaValid)
@@ -331,6 +336,10 @@ namespace RestaurantManagementSystem.UserControls
             if (!isIDInventaraValid)
             {
                 errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+            if (!doesIDInventaraExist)
+            {
+                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
             }
 
             // Ako postoje greške, prikaži poruku

@@ -38,6 +38,15 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Recenzija>> GetRecenzijeByKorisnikIdAsync(int id)
+        {
+            using (var repo = new RecenzijaRepository())
+            {
+                List<Recenzija> recenzije = await repo.GetRecenzijeByKorisnikId(id).ToListAsync();
+                return recenzije;
+            }
+        }
+
         public async Task<List<Recenzija>> GetRecenzijePicaByIdAsync(int id)
         {
             using (var repo = new RecenzijaRepository())

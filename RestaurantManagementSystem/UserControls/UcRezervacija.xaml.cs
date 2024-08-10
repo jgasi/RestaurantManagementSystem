@@ -198,17 +198,26 @@ namespace RestaurantManagementSystem.UserControls
 
         private async void Rezerviraj_Click(object sender, RoutedEventArgs e)
         {
-            // Check if at least one food item or drink is selected
+            // Inicijaliziraj listu za poruke o greškama
+            List<string> errorMessages = new List<string>();
+
+            // Provjeri jesu li jela ili pića odabrani
             if (_selectedFoodItems.Count == 0 && _selectedDrinkItems.Count == 0)
             {
-                return;
+                errorMessages.Add("Odaberi barem jedno jelo ili piće!");
             }
 
-            // Get the selected reservation date and time
+            // Provjeri je li datum i vrijeme rezervacije odabrano
             DateTime? selectedDateTime = ReservationDateTimePicker.Value;
-
             if (selectedDateTime == null)
             {
+                errorMessages.Add("Odaberi datum i vrijeme rezervacije!");
+            }
+
+            // Ako postoje poruke o greškama, prikaži ih
+            if (errorMessages.Count > 0)
+            {
+                System.Windows.Forms.MessageBox.Show(string.Join("\n", errorMessages));
                 return;
             }
 

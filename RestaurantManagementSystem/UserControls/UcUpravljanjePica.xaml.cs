@@ -14,6 +14,7 @@ namespace RestaurantManagementSystem.UserControls
     public partial class UcUpravljanjePica : UserControl
     {
         private PiceServices piceServices = new PiceServices();
+        private InventarServices inventarServices = new InventarServices();
         private bool isImageChanged = false;
         Pice globalnoPiceEdit;
 
@@ -82,6 +83,7 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
 
             // Provjera grešaka
             if (!isNazivPicaValid)
@@ -103,6 +105,10 @@ namespace RestaurantManagementSystem.UserControls
             if (!isIDInventaraValid)
             {
                 errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+            if (!doesIDInventaraExist)
+            {
+                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
             }
 
             // Ako postoje greške, prikaži poruku
@@ -302,6 +308,8 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
+            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
+
 
             // Provjera grešaka
             if (!isNazivPicaValid)
@@ -323,6 +331,10 @@ namespace RestaurantManagementSystem.UserControls
             if (!isIDInventaraValid)
             {
                 errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+            if (!doesIDInventaraExist)
+            {
+                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
             }
 
             // Ako postoje greške, prikaži poruku

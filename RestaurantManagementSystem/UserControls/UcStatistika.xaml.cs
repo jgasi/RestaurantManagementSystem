@@ -100,7 +100,6 @@ namespace RestaurantManagementSystem.UserControls
             }
             decimal prosjekOcjena = kolikoOcjena > 0 ? (decimal)zbrojOcjena / kolikoOcjena : 0;
 
-            // totalSoldUnits se računa ispravno, nema potrebe za oduzimanje 2
             tbUkupniPrihod.Text = $"{totalRevenue:C}";
             tbBrojProdanihJedinica.Text = totalSoldUnits.ToString();
             tbProsjecnaOcjena.Text = $"{prosjekOcjena:F2}";

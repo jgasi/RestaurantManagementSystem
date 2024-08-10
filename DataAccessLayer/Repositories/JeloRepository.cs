@@ -41,6 +41,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Jelo> GetJeloByIdInventara(int givenId)
+        {
+            var query = from j in Entities
+                        where j.Inventar_id_inventar == givenId
+                        select j;
+
+            return query;
+        }
+
         public IQueryable<Jelo> GetJeloByName(string name)
         {
             var query = from j in Entities

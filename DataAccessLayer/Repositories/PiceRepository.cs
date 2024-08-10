@@ -40,6 +40,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Pice> GetPiceByIdInventara(int givenId)
+        {
+            var query = from p in Entities
+                        where p.Inventar_id_inventar == givenId
+                        select p;
+
+            return query;
+        }
+
         public IQueryable<Pice> GetFirstThreePica()
         {
             var query = Entities.OrderBy(p => p.id_pice)
