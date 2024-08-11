@@ -42,6 +42,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Rezervacija> GetAllByDatum(DateTime? vrijeme)
+        {
+            var query = from r in Entities
+                        where r.datum_vrijeme == vrijeme
+                        select r;
+
+            return query;
+        }
+
         public override int Add(Rezervacija entity, bool saveChanges = true)
         {
             var korisnik = entity.Korisnik_id_korisnik;

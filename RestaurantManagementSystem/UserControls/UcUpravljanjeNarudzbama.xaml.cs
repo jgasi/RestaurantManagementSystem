@@ -29,23 +29,48 @@ namespace RestaurantManagementSystem.UserControls
         {
             DateTime? now = DateTime.Now;
             var narudzbe = await narudzbaServices.GetNarudzbeByDateNowAsync(now);
+            System.Windows.Forms.MessageBox.Show("DOHVATIO NARUDZBI: " + narudzbe.Count());
             narudzbaViewModels = new List<NarudzbaViewModel>();
+
+            // Dictionary za praćenje zauzetih stolova po datumu
+            Dictionary<DateTime, HashSet<int>> zauzetiStoloviPoDatumu = new Dictionary<DateTime, HashSet<int>>();
 
             foreach (var narudzba in narudzbe)
             {
-                // Pronađi sve rezervacije za određenog korisnika i datum
-                var rezervacije = await rezervacijaServices.GetAllRezervacijeByKorisnikIdAndDatum(narudzba.Korisnik_id_korisnik, narudzba.datum_vrijeme);
+                // Pronađi sve rezervacije koje odgovaraju vremenu narudžbe
+                var rezervacije = await rezervacijaServices.GetAllRezervacijeByDatum(narudzba.datum_vrijeme);
 
-                // Inicijaliziramo listu stolova za ovu narudžbu
-                var stolovi = new List<int>();
+                // Uzimamo sve jedinstvene ID-ove stolova
+                var stolovi = rezervacije
+                    .Where(r => r.datum_vrijeme == narudzba.datum_vrijeme)
+                    .Select(r => r.Stol_id_stol)
+                    .Distinct() // Uzimamo samo jedinstvene stolove
+                    .ToList();
 
-                // Prolazimo kroz sve rezervacije i dodajemo ID stola u listu
-                foreach (var rezervacija in rezervacije)
+                int? stolId = null;
+
+                // Provjeravamo koji su stolovi zauzeti za trenutni datum
+                if (!zauzetiStoloviPoDatumu.ContainsKey(narudzba.datum_vrijeme.Value.Date))
                 {
-                    if (rezervacija.Stol_id_stol != 0 && !stolovi.Contains(rezervacija.Stol_id_stol))
+                    zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date] = new HashSet<int>();
+                }
+
+                foreach (var id in stolovi)
+                {
+                    if (!zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Contains(id))
                     {
-                        stolovi.Add(rezervacija.Stol_id_stol);
+                        stolId = id; // Ako stol nije zauzet, uzmi taj ID
+                        zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Add(stolId.Value); // Dodaj stol u zauzete
+                        break; // Izađi iz petlje jer smo našli stol
                     }
+                }
+
+                // Ako stol ID nije pronađen, postavi na 0
+                if (stolId == null)
+                {
+                    // Ako nema slobodnog stola, dodajte novu logiku za dodavanje ID-a
+                    stolId = zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Count + 1;
+                    zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Add(stolId.Value); // Dodaj novog stol u zauzete
                 }
 
                 // Pravimo string s prilagodbama za prikaz
@@ -58,23 +83,26 @@ namespace RestaurantManagementSystem.UserControls
                 // Pripremamo prilagodbe u novom redu
                 var finalPrilagodbe = string.Join(Environment.NewLine, prilagodbe);
 
-                // Pravimo ViewModel za narudžbu, dodajući sve stolove koji su rezervirani za ovu narudžbu
-                foreach (var stolId in stolovi)
+                // Pravimo ViewModel za narudžbu
+                narudzbaViewModels.Add(new NarudzbaViewModel
                 {
-                    narudzbaViewModels.Add(new NarudzbaViewModel
-                    {
-                        narudzba_Id = narudzba.id_narudzba,
-                        datum_vrijeme = narudzba.datum_vrijeme,
-                        racun = narudzba.racun,
-                        status = narudzba.status,
-                        prilagodbe = finalPrilagodbe,
-                        stol_id = stolId
-                    });
-                }
+                    narudzba_Id = narudzba.id_narudzba,
+                    datum_vrijeme = narudzba.datum_vrijeme,
+                    racun = narudzba.racun,
+                    status = narudzba.status,
+                    prilagodbe = finalPrilagodbe,
+                    stol_id = stolId.Value // Dodajemo izračunati stol ID
+                });
             }
 
             dgNarudzbe.ItemsSource = narudzbaViewModels;
         }
+
+
+
+
+
+
 
 
         private IEnumerable<string> SplitPrilagodbe(string prilagodba, int maxLength)
@@ -126,4 +154,5 @@ namespace RestaurantManagementSystem.UserControls
         public string prilagodbe { get; set; }
         public int stol_id { get; set; }
     }
+
 }

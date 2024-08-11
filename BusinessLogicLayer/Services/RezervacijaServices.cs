@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Repositories;
@@ -30,6 +31,7 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+
         public async Task<List<Rezervacija>> GetAllRezervacijeByKorisnikId(int id)
         {
             using (var repo = new RezervacijaRepository())
@@ -44,6 +46,18 @@ namespace BusinessLogicLayer.Services
             using (var repo = new RezervacijaRepository())
             {
                 var rezervacije = await repo.GetAllByKorIdAndVrijeme(id, vrijeme)
+                                            .Include(r => r.Stol)
+                                            .ToListAsync();
+
+                return rezervacije;
+            }
+        }
+
+        public async Task<List<Rezervacija>> GetAllRezervacijeByDatum(DateTime? vrijeme)
+        {
+            using (var repo = new RezervacijaRepository())
+            {
+                var rezervacije = await repo.GetAllByDatum(vrijeme)
                                             .Include(r => r.Stol)
                                             .ToListAsync();
 
