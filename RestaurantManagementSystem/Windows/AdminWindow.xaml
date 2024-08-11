@@ -107,15 +107,6 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
-                                 >
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="CalendarDays" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                            <TextBlock Text="Upravljanje rezervacijama" FontSize="12.5" Style="{StaticResource menuButtonText}"></TextBlock>
-                        </StackPanel>
-                    </RadioButton>
-
-                    <RadioButton Style="{StaticResource menuButton}"
-                                 Tag="{StaticResource color11}"
                                  Click="KontaktInfoButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Phone" Style="{StaticResource menuButtonIcon}"></fa:IconImage>

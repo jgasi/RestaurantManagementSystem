@@ -8,28 +8,17 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="500"
              Height="900">
-    <!-- Set a fixed height for the UserControl -->
-
     <Grid>
-        <!-- Grid with four rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Row 0: Title -->
             <RowDefinition Height="*"/>
-            <!-- Row 1: Comments ListView -->
             <RowDefinition Height="Auto"/>
-            <!-- Row 2: Spacer -->
             <RowDefinition Height="Auto"/>
-            <!-- Row 3: Pagination buttons -->
         </Grid.RowDefinitions>
 
-        <!-- Title -->
         <TextBlock Grid.Row="0" FontFamily="{StaticResource CustomFont4}" Text="Komentari" FontSize="30" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,20,0,10"/>
 
-        <!-- Comments ListView -->
-        <ListView x:Name="commentsListView" Grid.Row="1" Margin="0,10" BorderBrush="Transparent" BorderThickness="1"
-                  Background="Transparent">
-            <!-- Set ListView background to Transparent -->
+        <ListView x:Name="commentsListView" Grid.Row="1" Margin="0,10" BorderBrush="Transparent" BorderThickness="1" Background="Transparent">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="BorderBrush" Value="LightGray"/>
@@ -37,8 +26,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListViewItem">
-                                <Border Background="White" BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                <Border Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                     <ContentPresenter />
                                 </Border>
                             </ControlTemplate>
@@ -53,6 +41,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Dodan novi stupac za "X" -->
                             </Grid.ColumnDefinitions>
                             <Image x:Name="imgSlika" Height="100" Width="100" Stretch="Uniform" Source="{Binding Korisnik.slika}"/>
 
@@ -66,16 +56,18 @@
 
                                 <TextBlock Text="{Binding komentar}" Foreground="Black"/>
                             </StackPanel>
+
+                            <!-- Crveni "X" za brisanje -->
+                            <TextBlock Grid.Column="2" Text="X" FontSize="20" FontWeight="Bold" Foreground="Red" 
+                                       MouseDown="DeleteComment_MouseDown" Cursor="Hand" Margin="10,35,0,0"/>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Loading indicator -->
         <TextBlock x:Name="loadingText" Grid.Row="1" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Collapsed"/>
 
-        <!-- Spacer (empty row) -->
         <Rectangle Grid.Row="2" Fill="Transparent" Height="150"/>
     </Grid>
 </UserControl>

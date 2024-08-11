@@ -29,7 +29,6 @@ namespace RestaurantManagementSystem.UserControls
         {
             DateTime? now = DateTime.Now;
             var narudzbe = await narudzbaServices.GetNarudzbeByDateNowAsync(now);
-            System.Windows.Forms.MessageBox.Show("DOHVATIO NARUDZBI: " + narudzbe.Count());
             narudzbaViewModels = new List<NarudzbaViewModel>();
 
             // Dictionary za praćenje zauzetih stolova po datumu
@@ -97,13 +96,6 @@ namespace RestaurantManagementSystem.UserControls
 
             dgNarudzbe.ItemsSource = narudzbaViewModels;
         }
-
-
-
-
-
-
-
 
         private IEnumerable<string> SplitPrilagodbe(string prilagodba, int maxLength)
         {

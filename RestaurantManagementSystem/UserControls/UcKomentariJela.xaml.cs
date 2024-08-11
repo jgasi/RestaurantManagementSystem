@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 
@@ -45,6 +47,30 @@ namespace RestaurantManagementSystem.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading comments: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteComment_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBlock textBlock)
+            {
+                var comment = textBlock.DataContext as Recenzija;
+                if (comment != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Želite li stvarno obrisati ovaj komentar?", "Potvrda brisanja", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            recenzijaServices.RemoveRecenziju(comment);
+                            comments.Remove(comment);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Greška prilikom brisanja: {ex.Message}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
             }
         }
     }
