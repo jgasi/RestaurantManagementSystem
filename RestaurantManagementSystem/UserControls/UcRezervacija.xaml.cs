@@ -207,11 +207,15 @@ namespace RestaurantManagementSystem.UserControls
                 errorMessages.Add("Odaberi barem jedno jelo ili piće!");
             }
 
-            // Provjeri je li datum i vrijeme rezervacije odabrano
+            // Provjeri je li datum i vrijeme rezervacije odabrano i jel u budućnosti
             DateTime? selectedDateTime = ReservationDateTimePicker.Value;
             if (selectedDateTime == null)
             {
                 errorMessages.Add("Odaberi datum i vrijeme rezervacije!");
+            }
+            else if (selectedDateTime <= DateTime.Now)
+            {
+                errorMessages.Add("Datum i vrijeme rezervacije moraju biti u budućnosti!");
             }
 
             // Ako postoje poruke o greškama, prikaži ih
