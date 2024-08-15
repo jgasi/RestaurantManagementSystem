@@ -322,16 +322,6 @@
                                    MouseLeave="TextBlock_MouseLeave"
                                    MouseLeftButtonDown="TextBlockLogin_MouseLeftButtonDown"
                                    TextDecorations="None"/>
-                        <TextBlock Text="Informacije"
-                                   Foreground="White"
-                                   FontSize="12"
-                                   FontWeight="Medium"
-                                   FontFamily="{StaticResource CustomFont2}"
-                                   Margin="5,15,0,0"
-                                   MouseEnter="TextBlock_MouseEnter"
-                                   MouseLeave="TextBlock_MouseLeave"
-                                   MouseLeftButtonDown="TextBlockInformacije_MouseLeftButtonDown"
-                                   TextDecorations="None"/>
                     </StackPanel>
                 </StackPanel>
 
