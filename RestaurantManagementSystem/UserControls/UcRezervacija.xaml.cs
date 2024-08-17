@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,9 @@ namespace RestaurantManagementSystem.UserControls
         private Stavka_narudzbeServices _stavka_narudzbeServices = new Stavka_narudzbeServices();
         private List<Jelo> _filteredFoodItems;
         private List<Pice> _filteredDrinkItems;
-        private List<Jelo> _selectedFoodItems = new List<Jelo>();
-        private List<Pice> _selectedDrinkItems = new List<Pice>();
+        private ObservableCollection<Jelo> _selectedFoodItems = new ObservableCollection<Jelo>();
+        private ObservableCollection<Pice> _selectedDrinkItems = new ObservableCollection<Pice>();
+
 
         private Korisnik korisnik;
 
@@ -35,10 +37,8 @@ namespace RestaurantManagementSystem.UserControls
             InitializeComponent();
             InitializeFilters();
 
-            // Initialize MemoryCache
             _cache = new MemoryCache(new MemoryCacheOptions());
 
-            // Asynchronously load food and drink items into cache if not already loaded
             LoadJelaAndPicaIntoCache();
             korisnik = trenutniKorisnik;
 
@@ -253,7 +253,6 @@ namespace RestaurantManagementSystem.UserControls
                 return;
             }
 
-            // Save the reservation
             Rezervacija novaRezervacija = new Rezervacija
             {
                 datum_vrijeme = selectedDateTime.Value,
@@ -263,7 +262,6 @@ namespace RestaurantManagementSystem.UserControls
 
             _rezervacijaServices.AddRezervaciju(novaRezervacija);
 
-            //spremi narudzbu
             Narudzba narudzba = new Narudzba
             {
                 datum_vrijeme = selectedDateTime.Value,
@@ -274,17 +272,13 @@ namespace RestaurantManagementSystem.UserControls
 
             Narudzba narudzbaNova = await _narudzbaServices.AddNarudzbuAsync(narudzba);
 
-            //Narudzba narudbaNova = _narudzbaServices.GetLastNarudzbaByKorisnik(narudzba.Korisnik_id_korisnik);
-
 
             foreach (var jelo in _selectedFoodItems)
             {
-                TextBox prilagodbeTextBox = FindTextBoxForSelectedFood(jelo);
-
                 Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
                 {
                     kolicina = "1",
-                    prilagodbe = prilagodbeTextBox.Text,
+                    prilagodbe = txtPrilagodbe.Text,
                     Narudzba_id_narudzba = narudzbaNova.id_narudzba,
                     Jelo_id_jelo = jelo.id_jelo,
                     Pice_id_pice = null
@@ -294,12 +288,10 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var pice in _selectedDrinkItems)
             {
-                TextBox prilagodbeTextBox = FindTextBoxForSelectedDrink(pice);
-
                 Stavka_narudzbe stavka_Narudzbe = new Stavka_narudzbe
                 {
                     kolicina = "1",
-                    prilagodbe = prilagodbeTextBox.Text,
+                    prilagodbe = txtPrilagodbe.Text,
                     Narudzba_id_narudzba = narudzbaNova.id_narudzba,
                     Jelo_id_jelo = null,
                     Pice_id_pice = pice.id_pice
@@ -312,52 +304,11 @@ namespace RestaurantManagementSystem.UserControls
             _ukupnaCijena = 0;
             TotalPriceTextBlock.Text = _ukupnaCijena.ToString();
 
-            // Clear selected items after successful reservation
             _selectedFoodItems.Clear();
             _selectedDrinkItems.Clear();
             SelectedFoodItemsControl.ItemsSource = null;
             SelectedDrinkItemsControl.ItemsSource = null;
-        }
-
-        private TextBox FindTextBoxForSelectedFood(Jelo selectedFood)
-        {
-            var itemContainer = SelectedFoodItemsControl.ItemContainerGenerator.ContainerFromItem(selectedFood) as FrameworkElement;
-            if (itemContainer != null)
-            {
-                var textBox = FindVisualChild<TextBox>(itemContainer);
-                return textBox;
-            }
-            return null;
-        }
-
-        private TextBox FindTextBoxForSelectedDrink(Pice selectedDrink)
-        {
-            var itemContainer = SelectedDrinkItemsControl.ItemContainerGenerator.ContainerFromItem(selectedDrink) as FrameworkElement;
-            if (itemContainer != null)
-            {
-                var textBox = FindVisualChild<TextBox>(itemContainer);
-                return textBox;
-            }
-            return null;
-        }
-
-        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
-            {
-                var child = VisualTreeHelper.GetChild(parent, i);
-                if (child != null && child is T typedChild)
-                {
-                    return typedChild;
-                }
-                else
-                {
-                    var result = FindVisualChild<T>(child);
-                    if (result != null)
-                        return result;
-                }
-            }
-            return null;
+            txtPrilagodbe.Text = "";
         }
 
 
@@ -375,30 +326,6 @@ namespace RestaurantManagementSystem.UserControls
             }
             racunDetails.AppendLine($"Ukupna cijena: {_ukupnaCijena} EUR");
             return racunDetails.ToString();
-        }
-
-
-
-
-        // Additional functionality added
-        private void AddJeloButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is Jelo selectedJelo)
-            {
-                _selectedFoodItems.Add(selectedJelo);
-                SelectedFoodItemsControl.ItemsSource = null;
-                SelectedFoodItemsControl.ItemsSource = _selectedFoodItems;
-            }
-        }
-
-        private void AddPiceButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is Pice selectedPice)
-            {
-                _selectedDrinkItems.Add(selectedPice);
-                SelectedDrinkItemsControl.ItemsSource = null;
-                SelectedDrinkItemsControl.ItemsSource = _selectedDrinkItems;
-            }
         }
 
         private void RemoveJeloButton_Click(object sender, RoutedEventArgs e)

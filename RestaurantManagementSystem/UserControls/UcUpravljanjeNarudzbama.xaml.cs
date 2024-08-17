@@ -73,14 +73,12 @@ namespace RestaurantManagementSystem.UserControls
                 }
 
                 // Pravimo string s prilagodbama za prikaz
-                var prilagodbe = narudzba.Stavka_narudzbe
+                var prilagodba = narudzba.Stavka_narudzbe
                     .Select(s => s.prilagodbe)
-                    .Where(p => !string.IsNullOrEmpty(p)) // Filtriramo prazne prilagodbe
-                    .SelectMany(p => SplitPrilagodbe(p, 35)) // Splitamo prilagodbe na osnovu 35 znakova
-                    .ToList();
+                    .FirstOrDefault(p => !string.IsNullOrEmpty(p));
 
-                // Pripremamo prilagodbe u novom redu
-                var finalPrilagodbe = string.Join(Environment.NewLine, prilagodbe);
+                var prilagodbeZaPrikaz = prilagodba != null ? SplitPrilagodbe(prilagodba, 35) : string.Empty;
+
 
                 // Pravimo ViewModel za narudžbu
                 narudzbaViewModels.Add(new NarudzbaViewModel
@@ -89,7 +87,7 @@ namespace RestaurantManagementSystem.UserControls
                     datum_vrijeme = narudzba.datum_vrijeme,
                     racun = narudzba.racun,
                     status = narudzba.status,
-                    prilagodbe = finalPrilagodbe,
+                    prilagodbe = prilagodbeZaPrikaz,
                     stol_id = stolId.Value // Dodajemo izračunati stol ID
                 });
             }
@@ -97,15 +95,22 @@ namespace RestaurantManagementSystem.UserControls
             dgNarudzbe.ItemsSource = narudzbaViewModels;
         }
 
-        private IEnumerable<string> SplitPrilagodbe(string prilagodba, int maxLength)
+        public string SplitPrilagodbe(string prilagodba, int maxLineLength)
         {
-            // Razdvajamo prilagodbe u podnizove
-            for (int i = 0; i < prilagodba.Length; i += maxLength)
+            StringBuilder result = new StringBuilder();
+            int start = 0;
+
+            while (start < prilagodba.Length)
             {
-                // Uzmi maksimalno maxLength znakova
-                yield return prilagodba.Substring(i, Math.Min(maxLength, prilagodba.Length - i));
+                // Dohvati maksimalno 35 znakova ili ostatak stringa ako je kraći
+                int length = Math.Min(maxLineLength, prilagodba.Length - start);
+                result.AppendLine(prilagodba.Substring(start, length));
+                start += length;
             }
+
+            return result.ToString();
         }
+
 
         private async void RadioButton_Status_Click(object sender, RoutedEventArgs e)
         {
