@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -14,12 +15,18 @@
 
         <!-- Title TextBlock -->
         <TextBlock Foreground="White" FontFamily="{StaticResource CustomFont2}" Text="Moje Rezervacije" FontSize="24" Margin="0,0,0,10" />
+        
 
         <!-- Grid with Background Image -->
         <Grid Grid.Row="1" Margin="5">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
-            </Grid.Background>
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
+                </Grid.Background>
+                <Grid.Effect>
+                    <BlurEffect Radius="10"/>
+                </Grid.Effect>
+            </Grid>
 
             <!-- Border Around DataGrid -->
             <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">

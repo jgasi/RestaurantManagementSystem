@@ -17,9 +17,14 @@
 
         <!-- Grid with Background Image -->
         <Grid Grid.Row="1" Margin="5">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
-            </Grid.Background>
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Slike/mainpozadina.jpg" Stretch="UniformToFill" AlignmentX="Right" AlignmentY="Top" Opacity="0.3"/>
+                </Grid.Background>
+                <Grid.Effect>
+                    <BlurEffect Radius="10"/>
+                </Grid.Effect>
+            </Grid>
 
             <!-- Border Around DataGrid -->
             <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5">

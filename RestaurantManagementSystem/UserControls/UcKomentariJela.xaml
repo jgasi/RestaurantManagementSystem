@@ -8,10 +8,8 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="500"
              Height="900">
-    <!-- Set a fixed height for the UserControl -->
 
     <Grid>
-        <!-- Grid with four rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- Row 0: Title -->
