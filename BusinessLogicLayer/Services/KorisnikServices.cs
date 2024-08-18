@@ -69,6 +69,16 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<Korisnik> GetKorisnikByIdAsync(int id)
+        {
+            using (var repo = new KorisnikRepository())
+            {
+                Korisnik korisnik = await repo.GetKorisnikByIdAsync(id);
+
+                return korisnik;
+            }
+        }
+
         public async Task<int> GetKorisnikCountAsync() 
         {
             using (var repo = new KorisnikRepository())

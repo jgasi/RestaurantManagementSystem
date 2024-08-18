@@ -30,7 +30,7 @@
                 <DataGrid x:Name="dgKorisnici" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" 
                           GridLinesVisibility="None" HeadersVisibility="Column"
                           ColumnHeaderHeight="30" Background="Transparent" RowHeaderWidth="0"
-                          SelectionMode="Single" SelectionUnit="FullRow" RowHeight="50">
+                          SelectionMode="Single" SelectionUnit="FullRow">
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="BorderThickness" Value="0,0,0,1" />
@@ -73,6 +73,16 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
+                        
+                        <!-- Column for Image -->
+                        <DataGridTemplateColumn Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding slika}" Width="250" Height="250" Stretch="Fill"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                         <DataGridTextColumn Header="Korisničko Ime" Binding="{Binding korime}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
@@ -123,32 +133,13 @@
                         <DataGridTemplateColumn Header="Akcije" Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Content="Obriši" Click="DeleteUser_Click" BorderThickness="0" Margin="20,0,0,0" FontFamily="{StaticResource CustomFont2}">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background" Value="#1a2a5a"/>
-                                                <Setter Property="Foreground" Value="White"/>
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border Background="{TemplateBinding Background}">
-                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                            </Border>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#0d1630"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
+                                    <Button Content="Obriši" 
+                                            Click="DeleteUser_Click"
+                                            Style="{StaticResource DeleteButtonStyle}"
+                                            Margin="0,0,5,0"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>

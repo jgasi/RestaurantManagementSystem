@@ -74,7 +74,7 @@ namespace RestaurantManagementSystem.UserControls
 
         private void CommentsButton_Click(object sender, RoutedEventArgs e)
         {
-            UcKomentariJela ucKomentariJela = new UcKomentariJela(primljenoJelo);
+            UcKomentariJela ucKomentariJela = new UcKomentariJela(primljenoJelo, trenutniKorisnik);
             glavniGrid.Children.Clear();
             glavniGrid.Children.Add(ucKomentariJela);
         }

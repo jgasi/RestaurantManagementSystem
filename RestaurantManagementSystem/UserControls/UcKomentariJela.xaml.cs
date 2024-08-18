@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Runtime.Remoting.Contexts;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,13 +13,16 @@ namespace RestaurantManagementSystem.UserControls
         private readonly RecenzijaServices recenzijaServices = new RecenzijaServices();
         private readonly KorisnikServices korisnikServices = new KorisnikServices();
         private ObservableCollection<Recenzija> comments;
+        private Korisnik trenutniKorisnik;
 
-        public UcKomentariJela(Jelo selectedJelo)
+
+        public UcKomentariJela(Jelo selectedJelo, Korisnik korisnik)
         {
             InitializeComponent();
             comments = new ObservableCollection<Recenzija>();
             commentsListView.ItemsSource = comments;
             LoadComments(selectedJelo);
+            trenutniKorisnik = korisnik;
         }
 
         private async void LoadComments(Jelo selectedJelo)
@@ -37,7 +38,7 @@ namespace RestaurantManagementSystem.UserControls
 
                 foreach (var recenzija in recenzije)
                 {
-                    var korisnik = korisnikServices.GetKorisnikById(recenzija.Korisnik_id_korisnik);
+                    var korisnik = await korisnikServices.GetKorisnikByIdAsync(recenzija.Korisnik_id_korisnik);
                     recenzija.Korisnik = korisnik;
                     comments.Add(recenzija);
                 }
@@ -57,18 +58,25 @@ namespace RestaurantManagementSystem.UserControls
                 var comment = textBlock.DataContext as Recenzija;
                 if (comment != null)
                 {
-                    MessageBoxResult result = MessageBox.Show("Želite li stvarno obrisati ovaj komentar?", "Potvrda brisanja", MessageBoxButton.YesNo);
-                    if (result == MessageBoxResult.Yes)
+                    if(comment.Korisnik_id_korisnik == trenutniKorisnik.id_korisnik || trenutniKorisnik.uloga == "Administrator")
                     {
-                        try
+                        MessageBoxResult result = MessageBox.Show("Želite li stvarno obrisati ovaj komentar?", "Potvrda brisanja", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
                         {
-                            recenzijaServices.RemoveRecenziju(comment);
-                            comments.Remove(comment);
+                            try
+                            {
+                                recenzijaServices.RemoveRecenziju(comment);
+                                comments.Remove(comment);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Greška prilikom brisanja: {ex.Message}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Greška prilikom brisanja: {ex.Message}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Možete brisati samo svoje komentare!");
                     }
                 }
             }

@@ -79,6 +79,7 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
+                        
                         <!-- Column for Image -->
                         <DataGridTemplateColumn Width="Auto">
                             <DataGridTemplateColumn.CellTemplate>
