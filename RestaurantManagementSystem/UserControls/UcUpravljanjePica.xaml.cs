@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
-using System.Text.RegularExpressions;
-using System.Text;
-using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace RestaurantManagementSystem.UserControls
 {

@@ -32,7 +32,9 @@ namespace RestaurantManagementSystem.UserControls
                 loadingText.Visibility = Visibility.Visible;
 
                 var recenzije = await recenzijaServices.GetRecenzijePicaByIdAsync(selectedPice.id_pice);
-                comments.Clear(); // Očisti postojeće komentare
+
+                // Očistite postojeće komentare prije dodavanja novih
+                comments.Clear();
 
                 foreach (var recenzija in recenzije)
                 {

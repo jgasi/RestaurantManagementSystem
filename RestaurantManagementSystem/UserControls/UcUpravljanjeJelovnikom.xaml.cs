@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 using Microsoft.Win32;

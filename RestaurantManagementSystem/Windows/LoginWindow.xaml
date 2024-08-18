@@ -155,7 +155,7 @@
                                HorizontalAlignment="Center">
                     </TextBlock>
 
-                    <TextBlock Text="Nekakav dodatan tekst ispod imena restorana da lijepo izgleda napisi to kasnije lijepi pozdrav."
+                    <TextBlock Text="Svako dobro jelo je poput putovanja kroz uspomene, svaki zalogaj priča svoju priču."
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"

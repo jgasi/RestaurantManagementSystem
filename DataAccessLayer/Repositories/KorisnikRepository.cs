@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using EntitiesLayer.Entities;
 
@@ -53,7 +50,7 @@ namespace DataAccessLayer.Repositories
             var query = from k in Entities
                         where k.id_korisnik == id
                         select k;
-            return query.FirstOrDefault();
+            return await query.FirstOrDefaultAsync();
         }
 
         public override int Add(Korisnik entity, bool saveChanges = true)

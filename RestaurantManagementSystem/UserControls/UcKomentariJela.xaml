@@ -77,7 +77,7 @@
         </ListView>
 
         <!-- Loading indicator -->
-        <TextBlock x:Name="loadingText" Grid.Row="1" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="White" Visibility="Collapsed"/>
+        <TextBlock x:Name="loadingText" Grid.Row="1" Text="LOADING..." FontFamily="{StaticResource CustomFont4}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="52" Foreground="Black" Visibility="Collapsed"/>
 
         <!-- Spacer (empty row) -->
         <Rectangle Grid.Row="2" Fill="Transparent" Height="150"/>

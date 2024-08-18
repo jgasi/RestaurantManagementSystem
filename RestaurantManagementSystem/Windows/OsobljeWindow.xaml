@@ -61,8 +61,8 @@
                     </RadioButton>
 
                     <RadioButton Style="{StaticResource menuButton}"
-             Tag="{StaticResource color11}"
-             Click="PregledJelovnikaButton_Click">
+                                 Tag="{StaticResource color11}"
+                                 Click="PregledJelovnikaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Utensils" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
                             <TextBlock Text="Pregled jelovnika" Style="{StaticResource menuButtonText}"></TextBlock>
@@ -83,7 +83,7 @@
                                  Click="UpravljanjeNarudzbamaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ListCheck" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
-                            <TextBlock Text="Upravljanje narudžbama" Style="{StaticResource menuButtonText}"></TextBlock>
+                            <TextBlock Text="Upravljanje narudžbama" FontSize="13" Style="{StaticResource menuButtonText}"></TextBlock>
                         </StackPanel>
                     </RadioButton>
 

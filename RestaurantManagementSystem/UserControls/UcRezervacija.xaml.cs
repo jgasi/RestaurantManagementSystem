@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 using Microsoft.Extensions.Caching.Memory;

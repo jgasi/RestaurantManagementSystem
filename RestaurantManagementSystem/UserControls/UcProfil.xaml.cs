@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
-using RestaurantManagementSystem.Autentikacija;
 
 namespace RestaurantManagementSystem.UserControls
 {
