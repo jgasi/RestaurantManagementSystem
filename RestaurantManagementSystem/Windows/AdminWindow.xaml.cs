@@ -126,6 +126,22 @@ namespace RestaurantManagementSystem
             this.Close();
         }
 
+        private void PregledJelovnikaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.Utensils;
+            pageTitle.Text = "Pregled jelovnika";
+            var ucPregledJelovnika = new UcPregledJelovnika(TrenutniKorisnik);
+            GuiManager.OpenContent(ucPregledJelovnika);
+        }
+
+        private void PregledPicaButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageIcon.Icon = IconChar.WineBottle;
+            pageTitle.Text = "Pregled pića";
+            var ucPregledPica = new UcPregledPica(TrenutniKorisnik);
+            GuiManager.OpenContent(ucPregledPica);
+        }
+
         private void OnProfileImageChanged(object sender, EventArgs e)
         {
             UcitajSlikuProfila();

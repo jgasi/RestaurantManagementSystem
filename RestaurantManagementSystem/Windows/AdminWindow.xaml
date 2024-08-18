@@ -62,6 +62,24 @@
 
                     <RadioButton Style="{StaticResource menuButton}"
                                  Tag="{StaticResource color11}"
+                                 Click="PregledJelovnikaButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Utensils" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock Text="Pregled jelovnika" Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color11}"
+                                 Click="PregledPicaButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="WineBottle" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
+                            <TextBlock Text="Pregled pića" Style="{StaticResource menuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource menuButton}"
+                                 Tag="{StaticResource color11}"
                                  Click="UpravljanjeKorisnicimaButton_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Users" Style="{StaticResource menuButtonIcon}"></fa:IconImage>
