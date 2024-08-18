@@ -111,7 +111,7 @@
                         <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Odabrana Pića:" Foreground="White" FontWeight="Bold" Margin="0,20,100,10"/>
                     </StackPanel>
 
-                    
+
                     <ItemsControl Name="SelectedDrinkItemsControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -135,22 +135,22 @@
                     <!-- Total price section -->
                     <TextBlock FontFamily="{StaticResource CustomFont2}" FontSize="14" Text="Ukupna cijena:" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
                     <TextBlock x:Name="TotalPriceTextBlock" FontFamily="{StaticResource CustomFont2}" Foreground="White"/>
+
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Label Foreground="White" FontFamily="{StaticResource CustomFont2}" FontWeight="Bold">Prilagodbe:</Label>
+
+                        <Border BorderBrush="white" BorderThickness="4" CornerRadius="10" Margin="10" VerticalAlignment="Bottom">
+                            <TextBox x:Name="txtPrilagodbe" FontFamily="{StaticResource CustomFont2}" Height="100" Width="auto" Padding="5" 
+                                     BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap" 
+                                     VerticalScrollBarVisibility="Auto"/>
+                        </Border>
+
+                        <Button Style="{StaticResource btnDoKomentara}" Content="Rezerviraj" FontWeight="Bold" FontSize="16" Width="150" Height="50" Click="Rezerviraj_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,50"/>
+                    </StackPanel>
                 </StackPanel>
+                <!--kraj stack panela desne strane ekrana-->
+
             </ScrollViewer>
-            <!-- Reservation button stays at bottom right corner -->
-            <StackPanel VerticalAlignment="Bottom">
-                <Label Foreground="White" FontFamily="{StaticResource CustomFont2}" FontWeight="Bold">Prilagodbe:</Label>
-
-                <Border BorderBrush="white" BorderThickness="4" CornerRadius="10" Margin="10" VerticalAlignment="Bottom">
-                    <TextBox x:Name="txtPrilagodbe" FontFamily="{StaticResource CustomFont2}" Height="100" Width="auto" Padding="5" 
-                 BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap" 
-                 VerticalScrollBarVisibility="Auto"/>
-                </Border>
-
-                <Button Style="{StaticResource btnDoKomentara}" Content="Rezerviraj" FontWeight="Bold" FontSize="16" Width="150" Height="50" Click="Rezerviraj_Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,10,50"/>
-            </StackPanel>
-
-
         </Grid>
     </Grid>
 </UserControl>

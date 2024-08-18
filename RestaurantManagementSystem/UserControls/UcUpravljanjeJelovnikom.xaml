@@ -182,11 +182,11 @@
                     <TextBox x:Name="tbCijena" FontFamily="{StaticResource CustomFont2}" Grid.Row="4" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Nutritivne informacije -->
-                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije jela: " Grid.Row="5"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije jela (odvojeni zarezom): " Grid.Row="5"/>
                     <TextBox x:Name="tbNutrivneInformacije" FontFamily="{StaticResource CustomFont2}" Grid.Row="6" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Alergeni -->
-                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela: " Grid.Row="7"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela (odvojeni zarezom): " Grid.Row="7"/>
                     <TextBox x:Name="tbAlergeni" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Inventar -->
@@ -237,11 +237,11 @@
                     <TextBox x:Name="tbCijenaUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="4" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Nutritivne informacije -->
-                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije jela: " Grid.Row="5"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Nutrivne informacije jela (odvojeni zarezom): " Grid.Row="5"/>
                     <TextBox x:Name="tbNutrivneInformacijeUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="6" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     <!-- Alergeni -->
-                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela: " Grid.Row="7"/>
+                    <TextBlock FontFamily="{StaticResource CustomFont2}" Text="Alergeni jela (odvojeni zarezom): " Grid.Row="7"/>
                     <TextBox x:Name="tbAlergeniUredi" FontFamily="{StaticResource CustomFont2}" Grid.Row="8" Width="300" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                    
                     <!-- Inventar -->

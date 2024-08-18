@@ -8,6 +8,7 @@ using BusinessLogicLayer.Services;
 using EntitiesLayer.Entities;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Windows.Media;
 
 namespace RestaurantManagementSystem.UserControls
 {
@@ -47,6 +48,7 @@ namespace RestaurantManagementSystem.UserControls
             finally
             {
                 loadingText.Visibility = Visibility.Collapsed;
+                loadingText.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
 
@@ -78,10 +80,10 @@ namespace RestaurantManagementSystem.UserControls
             string idInventara = tbInventar.Text.Trim();
 
             // Validacija pomoću regex-a
-            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-zA-Z\s-]+$");
+            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-žA-Ž\s-]+$");
             bool isCijenaPicaValid = Regex.IsMatch(cijenaPica, @"^\d+(\.\d{1,2})?$");
-            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
-            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-žA-Ž0-9\s\-\.:]+(,[a-žA-Ž0-9\s\-\.:]+)*)?$");
+            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-žA-Ž\s-]+(,[a-žA-Ž\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
             bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
 
@@ -96,7 +98,7 @@ namespace RestaurantManagementSystem.UserControls
             }
             if (!isNutritivneInformacijeValid)
             {
-                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova, brojeve te znakove ':', '.' i '-'.\n     Npr: prva: 1.1g, druga-druga: 2.2g, treca: 3.3g");
             }
             if (!isAlergeniValid)
             {
@@ -194,6 +196,7 @@ namespace RestaurantManagementSystem.UserControls
                         try
                         {
                             piceServices.RemovePice(pice);
+                            loadingText.Visibility = Visibility.Visible;
                             UcitajPica();
                         }
                         catch (Exception ex)
@@ -303,10 +306,10 @@ namespace RestaurantManagementSystem.UserControls
             string idInventara = tbInventarUredi.Text.Trim();
 
             // Validacija pomoću regex-a
-            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-zA-Z\s-]+$");
+            bool isNazivPicaValid = Regex.IsMatch(nazivPica, @"^[a-žA-Ž\s-]+$");
             bool isCijenaPicaValid = Regex.IsMatch(cijenaPica, @"^\d+(\.\d{1,2})?$");
-            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
-            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-zA-Z\s-]+(,[a-zA-Z\s-]+)*)?$");
+            bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-žA-Ž0-9\s\-\.:]+(,[a-žA-Ž0-9\s\-\.:]+)*)?$");
+            bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-žA-Ž\s-]+(,[a-žA-Ž\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
             bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
 
@@ -322,7 +325,7 @@ namespace RestaurantManagementSystem.UserControls
             }
             if (!isNutritivneInformacijeValid)
             {
-                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
+                errorMessage.AppendLine("Nutritivne informacije moraju biti odvojene zarezom te smiju sadržavati samo slova, brojeve te znakove ':', '.' i '-'.\n     Npr: prva: 1.1g, druga-druga: 2.2g, treca: 3.3g");
             }
             if (!isAlergeniValid)
             {
