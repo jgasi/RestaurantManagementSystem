@@ -86,9 +86,22 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-žA-Ž0-9\s\-\.:]+(,[a-žA-Ž0-9\s\-\.:]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-žA-Ž\s-]+(,[a-žA-Ž\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
-            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
+            int parsedId;
 
             // Provjera grešaka
+            if (int.TryParse(idInventara, out parsedId))
+            {
+                bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(parsedId.ToString())) != null;
+                if (!doesIDInventaraExist)
+                {
+                    errorMessage.AppendLine("Upisani ID inventara ne postoji.");
+                }
+            }
+            if (!isIDInventaraValid)
+            {
+                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+
             if (!isNazivJelaValid)
             {
                 errorMessage.AppendLine("Naziv jela može sadržavati samo slova i znak '-'.");
@@ -104,14 +117,6 @@ namespace RestaurantManagementSystem.UserControls
             if (!isAlergeniValid)
             {
                 errorMessage.AppendLine("Alergeni moraju biti odvojeni zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
-            }
-            if (!isIDInventaraValid)
-            {
-                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
-            }
-            if (!doesIDInventaraExist)
-            {
-                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
             }
 
             // Ako postoje greške, prikaži poruku
@@ -318,9 +323,23 @@ namespace RestaurantManagementSystem.UserControls
             bool isNutritivneInformacijeValid = Regex.IsMatch(nutritivneInformacije, @"^([a-žA-Ž0-9\s\-\.:]+(,[a-žA-Ž0-9\s\-\.:]+)*)?$");
             bool isAlergeniValid = Regex.IsMatch(alergeni, @"^([a-žA-Ž\s-]+(,[a-žA-Ž\s-]+)*)?$");
             bool isIDInventaraValid = Regex.IsMatch(idInventara, @"^\d+$");
-            bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(idInventara)) != null;
+            int parsedId;
+
 
             // Provjera grešaka
+            if (int.TryParse(idInventara, out parsedId))
+            {
+                bool doesIDInventaraExist = inventarServices.GetInventarById(int.Parse(parsedId.ToString())) != null;
+                if (!doesIDInventaraExist)
+                {
+                    errorMessage.AppendLine("Upisani ID inventara ne postoji.");
+                }
+            }
+            if (!isIDInventaraValid)
+            {
+                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
+            }
+
             if (!isNazivJelaValid)
             {
                 errorMessage.AppendLine("Naziv jela može sadržavati samo slova i znak '-'.");
@@ -336,14 +355,6 @@ namespace RestaurantManagementSystem.UserControls
             if (!isAlergeniValid)
             {
                 errorMessage.AppendLine("Alergeni moraju biti odvojeni zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
-            }
-            if (!isIDInventaraValid)
-            {
-                errorMessage.AppendLine("ID inventara mora biti isključivo broj.");
-            }
-            if (!doesIDInventaraExist)
-            {
-                errorMessage.AppendLine("Upisani ID inventara ne postoji.");
             }
 
             // Ako postoje greške, prikaži poruku
