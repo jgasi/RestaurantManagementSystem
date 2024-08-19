@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,8 +17,16 @@ namespace RestaurantManagementSystem.UserControls
     {
         private PiceServices piceServices = new PiceServices();
         private InventarServices inventarServices = new InventarServices();
+        private Stavka_narudzbeServices stavka_NarudzbeServices = new Stavka_narudzbeServices();
+        private NarudzbaServices narudzbaServices = new NarudzbaServices();
+        private RezervacijaServices rezervacijaServices = new RezervacijaServices();
+        private RecenzijaServices recenzijaServices = new RecenzijaServices();
+
         private bool isImageChanged = false;
         Pice globalnoPiceEdit;
+
+        public List<Stavka_narudzbe> stavkeZaBrisanje;
+        public List<Narudzba> narudzbeZaBrisanje;
 
         public UcUpravljanjePica()
         {
@@ -188,7 +197,7 @@ namespace RestaurantManagementSystem.UserControls
             return data;
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (button != null)
@@ -201,6 +210,50 @@ namespace RestaurantManagementSystem.UserControls
                     {
                         try
                         {
+                            //obrisi recenzije vezane za pice
+                            List<Recenzija> vezaneRecenzije = await recenzijaServices.GetRecenzijePicaByIdAsync(pice.id_pice);
+
+                            foreach (var piceZaBrisanje in vezaneRecenzije)
+                            {
+                                recenzijaServices.RemoveRecenziju(piceZaBrisanje);
+                            }
+
+                            // Uklonite sve stavke narudžbi povezane s pićem
+                            stavkeZaBrisanje = await stavka_NarudzbeServices.GetAllStavkeNarudzbeByPiceIdAsync(pice.id_pice);
+
+                            // Koristite HashSet za jedinstvene narudžbe
+                            HashSet<int> narudzbeZaBrisanjeId = new HashSet<int>();
+
+                            foreach (var stavkaNarudzbe in stavkeZaBrisanje)
+                            {
+                                int idHelper = stavkaNarudzbe.Narudzba_id_narudzba;
+                                narudzbeZaBrisanjeId.Add(idHelper);
+                            }
+
+                            // Dohvatite jedinstvene narudžbe iz baze
+                            List<Narudzba> narudzbeZaBrisanjeLista = new List<Narudzba>();
+                            foreach (var narudzbaId in narudzbeZaBrisanjeId)
+                            {
+                                var narudzba = await narudzbaServices.GetNarudzbuByIdAsync(narudzbaId);
+                                if (narudzba != null)
+                                {
+                                    narudzbeZaBrisanjeLista.Add(narudzba);
+                                }
+                            }
+
+                            // Dalje brisanje stavki i narudžbi kao prije
+                            foreach (var narudzbaObrisi in narudzbeZaBrisanjeLista)
+                            {
+                                List<Stavka_narudzbe> stavkeHelper = await stavka_NarudzbeServices.GetAllStavkeNarudzbeByNarudzbaIdAsync(narudzbaObrisi.id_narudzba);
+
+                                foreach (var obrisiPreostale in stavkeHelper)
+                                {
+                                    stavka_NarudzbeServices.RemoveStavkeNarudzbe(obrisiPreostale);
+                                }
+
+                                narudzbaServices.RemoveNarudzbu(narudzbaObrisi);
+                            }
+
                             piceServices.RemovePice(pice);
                             loadingText.Visibility = Visibility.Visible;
                             UcitajPica();

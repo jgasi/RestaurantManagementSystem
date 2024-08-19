@@ -27,6 +27,51 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeWhereThereIsJeloIdAsync()
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetAllWhereThereIsJeloId().ToListAsync();
+                return stavkeNarudzbe;
+            }
+        }
+
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeWhereThereIsPiceIdAsync()
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetAllWhereThereIsPiceId().ToListAsync();
+                return stavkeNarudzbe;
+            }
+        }
+
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeByJeloIdAsync(int id)
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetStavkeByJeloId(id).ToListAsync();
+                return stavkeNarudzbe;
+            }
+        }
+
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeByPiceIdAsync(int id)
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetStavkeByPiceId(id).ToListAsync();
+                return stavkeNarudzbe;
+            }
+        }
+
+        public async Task<List<Stavka_narudzbe>> GetAllStavkeNarudzbeByNarudzbaIdAsync(int id)
+        {
+            using (var repo = new Stavka_narudzbeRepository())
+            {
+                List<Stavka_narudzbe> stavkeNarudzbe = await repo.GetStavkeByNarudzbaId(id).ToListAsync();
+                return stavkeNarudzbe;
+            }
+        }
+
         public bool AddStavkeNarudzbe(Stavka_narudzbe stavkaNarudzbe)
         {
             bool isSuccessful = false;

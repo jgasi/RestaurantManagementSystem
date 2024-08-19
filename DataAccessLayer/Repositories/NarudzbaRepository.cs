@@ -45,6 +45,7 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+
         public IQueryable<Narudzba> GetByDate(DateTime? startDate, DateTime? endDate)
         {
             var query = from n in Entities

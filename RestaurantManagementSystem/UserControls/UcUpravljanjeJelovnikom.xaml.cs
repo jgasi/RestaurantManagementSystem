@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,9 +16,18 @@ namespace RestaurantManagementSystem.UserControls
     public partial class UcUpravljanjeJelovnikom : UserControl
     {
         private JeloServices jeloServices = new JeloServices();
+        private PiceServices piceServices = new PiceServices();
         private InventarServices inventarServices = new InventarServices();
+        private Stavka_narudzbeServices stavka_NarudzbeServices = new Stavka_narudzbeServices();
+        private NarudzbaServices narudzbaServices = new NarudzbaServices();
+        private RezervacijaServices rezervacijaServices = new RezervacijaServices();
+        private RecenzijaServices recenzijaServices = new RecenzijaServices();
+
         private bool isImageChanged = false;
         Jelo globalnoJeloEdit;
+
+        public List<Stavka_narudzbe> stavkeZaBrisanje;
+        public List<Narudzba> narudzbeZaBrisanje;
 
         public UcUpravljanjeJelovnikom()
         {
@@ -190,7 +200,7 @@ namespace RestaurantManagementSystem.UserControls
             return data;
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (button != null)
@@ -203,6 +213,54 @@ namespace RestaurantManagementSystem.UserControls
                     {
                         try
                         {
+                            //obrisi recenzije vezane za jelo
+                            List<Recenzija> vezaneRecenzije = await recenzijaServices.GetRecenzijeByIdAsync(jelo.id_jelo);
+
+                            foreach (var jeloZaBrisanje in vezaneRecenzije)
+                            {
+                                recenzijaServices.RemoveRecenziju(jeloZaBrisanje);
+                            }
+
+
+
+                            //obrisi sve vezane stavke narudzbe i narudzbe, pa onda jelo
+                            stavkeZaBrisanje = await stavka_NarudzbeServices.GetAllStavkeNarudzbeByJeloIdAsync(jelo.id_jelo);
+
+                            HashSet<int> narudzbeZaBrisanjeId = new HashSet<int>();
+
+                            foreach (var stavkaNarudzbe in stavkeZaBrisanje)
+                            {
+                                int idHelper = stavkaNarudzbe.Narudzba_id_narudzba;
+                                narudzbeZaBrisanjeId.Add(idHelper);
+                            }
+
+
+                            // Dohvatite jedinstvene narudžbe iz baze
+                            List<Narudzba> narudzbeZaBrisanjeLista = new List<Narudzba>();
+
+                            foreach (var narudzbaId in narudzbeZaBrisanjeId)
+                            {
+                                var narudzba = await narudzbaServices.GetNarudzbuByIdAsync(narudzbaId);
+                                if (narudzba != null)
+                                {
+                                    narudzbeZaBrisanjeLista.Add(narudzba);
+                                }
+                            }
+
+                            // Dalje brisanje stavki i narudžbi kao prije
+                            foreach (var narudzbaObrisi in narudzbeZaBrisanjeLista)
+                            {
+                                List<Stavka_narudzbe> stavkeHelper = await stavka_NarudzbeServices.GetAllStavkeNarudzbeByNarudzbaIdAsync(narudzbaObrisi.id_narudzba);
+
+                                foreach (var obrisiPreostale in stavkeHelper)
+                                {
+                                    stavka_NarudzbeServices.RemoveStavkeNarudzbe(obrisiPreostale);
+                                }
+
+                                narudzbaServices.RemoveNarudzbu(narudzbaObrisi);
+                            }
+
+
                             jeloServices.RemoveJelo(jelo);
                             loadingText.Visibility = Visibility.Visible;
                             UcitajJela();

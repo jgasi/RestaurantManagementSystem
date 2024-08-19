@@ -20,6 +20,51 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Stavka_narudzbe> GetAllWhereThereIsJeloId()
+        {
+            var query = from sn in Entities
+                        where sn.Jelo_id_jelo != null
+                        select sn;
+
+            return query;
+        }
+
+        public IQueryable<Stavka_narudzbe> GetAllWhereThereIsPiceId()
+        {
+            var query = from sn in Entities
+                        where sn.Pice_id_pice != null
+                        select sn;
+
+            return query;
+        }
+
+        public IQueryable<Stavka_narudzbe> GetStavkeByJeloId(int id)
+        {
+            var query = from sn in Entities
+                        where sn.Jelo_id_jelo == id
+                        select sn;
+
+            return query;
+        }
+
+        public IQueryable<Stavka_narudzbe> GetStavkeByPiceId(int id)
+        {
+            var query = from sn in Entities
+                        where sn.Pice_id_pice == id
+                        select sn;
+
+            return query;
+        }
+
+        public IQueryable<Stavka_narudzbe> GetStavkeByNarudzbaId(int id)
+        {
+            var query = from sn in Entities
+                        where sn.Narudzba_id_narudzba == id
+                        select sn;
+
+            return query;
+        }
+
         public override int Add(Stavka_narudzbe entity, bool saveChanges = true)
         {
             //var narudzba = Context.Narudzba.SingleOrDefault(n => n.id_narudzba == entity.Narudzba.id_narudzba);

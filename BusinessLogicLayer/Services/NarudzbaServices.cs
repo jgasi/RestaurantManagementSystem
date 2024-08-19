@@ -57,6 +57,15 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Narudzba>> GetNarudzbeByIdAsync(int idNarudzbe)
+        {
+            using (var repo = new NarudzbaRepository())
+            {
+                List<Narudzba> narudzbe = await repo.GetByIdNarudzbu(idNarudzbe).ToListAsync();
+                return narudzbe;
+            }
+        }
+
         public Narudzba GetLastNarudzbaByKorisnik(int korisnikId)
         {
             using (var repo = new NarudzbaRepository())
