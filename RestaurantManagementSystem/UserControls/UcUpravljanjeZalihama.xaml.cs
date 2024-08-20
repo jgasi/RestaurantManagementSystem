@@ -76,7 +76,7 @@ namespace RestaurantManagementSystem.UserControls
             // Validacija pomoću regex-a
             bool isKolicinaNaZalihiValid = Regex.IsMatch(kolicinaNaZalihi, @"^\d+$");
             bool isMinimalnaKolicinaNarudzbeValid = Regex.IsMatch(minimalnaKolicinaNarudzbe, @"^\d+$");
-            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-zA-Z0-9\-\.\s]+$");
+            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-žA-Ž0-9\-\.\s]+$");
             bool isCijenaValid = Regex.IsMatch(cijena, @"^\d+(\.\d{1,2})?$");
 
             // Provjera grešaka
@@ -146,7 +146,7 @@ namespace RestaurantManagementSystem.UserControls
             // Validacija pomoću regex-a
             bool isKolicinaNaZalihiValid = Regex.IsMatch(kolicinaNaZalihi, @"^\d+$");
             bool isMinimalnaKolicinaNarudzbeValid = Regex.IsMatch(minimalnaKolicinaNarudzbe, @"^\d+$");
-            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-zA-Z0-9\-\.\s]+$");
+            bool isDostavljacValid = Regex.IsMatch(dostavljac, @"^[a-žA-Ž0-9\-\.\s]+$");
             bool isCijenaValid = Regex.IsMatch(cijena, @"^\d+(\.\d{1,2})?$");
 
             // Provjera grešaka
@@ -223,19 +223,28 @@ namespace RestaurantManagementSystem.UserControls
             {
                 trenutniInventar = inventar;
 
-                bool jelIventarPrazan = await ProvjeriJelInventarZauzet(inventar.id_inventar);
-                if (jelIventarPrazan)
-                {
-                    inventarServices.RemoveInventar(inventar);
-                    UcitajInventar();
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show("Inventar nije prazan!\nNajprije obriši jela ili pića iz inventara kako bi ga obrisao.");
-                }
+                // Prikazivanje MessageBoxa za potvrdu
+                var result = MessageBox.Show("Jeste li sigurni da želite obrisati inventar?", "Potvrda",
+                                                            MessageBoxButton.YesNo,
+                                                            MessageBoxImage.Question);
 
+                if (result == MessageBoxResult.Yes)
+                {
+                    bool jelIventarPrazan = await ProvjeriJelInventarZauzet(inventar.id_inventar);
+                    if (jelIventarPrazan)
+                    {
+                        inventarServices.RemoveInventar(inventar);
+                        UcitajInventar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Inventar nije prazan!\nNajprije obrišite jela ili pića iz inventara kako bi ga obrisali.");
+                    }
+                }
+                // Ako je korisnik odabrao "No", ne radi ništa
             }
         }
+
 
         private async Task<bool> ProvjeriJelInventarZauzet(int id)
         {

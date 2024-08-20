@@ -96,7 +96,7 @@ namespace DataAccessLayer.Repositories
             pice.nutrivne_informacije = entity.nutrivne_informacije;
             pice.alergeni = entity.alergeni;
             pice.slika = entity.slika;
-            pice.Inventar_id_inventar = 1;
+            pice.Inventar_id_inventar = entity.Inventar_id_inventar;
 
             if (saveChanges)
             {

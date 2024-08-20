@@ -460,7 +460,7 @@ namespace RestaurantManagementSystem.UserControls
 
             if (string.IsNullOrWhiteSpace(searchTekst))
             {
-                UcitajPica();
+                //UcitajPica();
             }
         }
     }

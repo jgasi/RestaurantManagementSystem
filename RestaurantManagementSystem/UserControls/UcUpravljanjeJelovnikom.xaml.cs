@@ -353,7 +353,6 @@ namespace RestaurantManagementSystem.UserControls
 
         private void btnSpremiUredi_Click(object sender, RoutedEventArgs e)
         {
-
             // Provjera da li su sva polja popunjena
             if (string.IsNullOrEmpty(tbNazivJelaUredi.Text) || string.IsNullOrEmpty(tbCijenaUredi.Text) ||
                 string.IsNullOrEmpty(tbNutrivneInformacijeUredi.Text) || string.IsNullOrEmpty(tbAlergeniUredi.Text) ||
@@ -414,6 +413,7 @@ namespace RestaurantManagementSystem.UserControls
                 errorMessage.AppendLine("Alergeni moraju biti odvojeni zarezom te smiju sadržavati samo slova i znak '-'.\n     Npr: prva, druga-druga, treca");
             }
 
+
             // Ako postoje greške, prikaži poruku
             if (errorMessage.Length > 0)
             {
@@ -469,7 +469,7 @@ namespace RestaurantManagementSystem.UserControls
 
             if (string.IsNullOrWhiteSpace(searchTekst))
             {
-                UcitajJela();
+                //UcitajJela();
             }
         }
     }
