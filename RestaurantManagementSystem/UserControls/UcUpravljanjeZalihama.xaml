@@ -71,7 +71,7 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id_inventar}" FontFamily="{StaticResource CustomFont2}" Width="40">
+                        <DataGridTextColumn Header="ID" Binding="{Binding id_inventar}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -79,7 +79,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Količina jedinica na zalihi" Binding="{Binding kolicina_na_zalihi}" FontFamily="{StaticResource CustomFont2}" Width="225">
+                        <DataGridTextColumn Header="Količina jedinica na zalihi" Binding="{Binding kolicina_na_zalihi}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -87,7 +87,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Min. količina narudžbe" Binding="{Binding minimalna_kolicina_narudzbe}" FontFamily="{StaticResource CustomFont2}" Width="204">
+                        <DataGridTextColumn Header="Min. količina narudžbe" Binding="{Binding minimalna_kolicina_narudzbe}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -95,7 +95,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Datum nabave" Binding="{Binding datum_nabave}" FontFamily="{StaticResource CustomFont2}" Width="150">
+                        <DataGridTextColumn Header="Datum nabave" Binding="{Binding datum_nabave}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -103,7 +103,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Dostavljač" Binding="{Binding dostavljac}" FontFamily="{StaticResource CustomFont2}" Width="200">
+                        <DataGridTextColumn Header="Dostavljač" Binding="{Binding dostavljac}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -111,7 +111,7 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="Cijena zadnje nabave" Binding="{Binding cijena}" FontFamily="{StaticResource CustomFont2}" Width="200">
+                        <DataGridTextColumn Header="Cijena zadnje nabave" Binding="{Binding cijena}" FontFamily="{StaticResource CustomFont2}" Width="*">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center" />
