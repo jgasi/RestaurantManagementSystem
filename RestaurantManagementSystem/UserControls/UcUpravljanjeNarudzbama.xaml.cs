@@ -34,7 +34,6 @@ namespace RestaurantManagementSystem.UserControls
 
             foreach (var narudzba in narudzbe)
             {
-                // Pronađi sve rezervacije koje odgovaraju vremenu narudžbe
                 var rezervacije = await rezervacijaServices.GetAllRezervacijeByDatum(narudzba.datum_vrijeme);
 
                 // Uzimamo sve jedinstvene ID-ove stolova
@@ -65,7 +64,6 @@ namespace RestaurantManagementSystem.UserControls
                 // Ako stol ID nije pronađen, postavi na 0
                 if (stolId == null)
                 {
-                    // Ako nema slobodnog stola, dodajte novu logiku za dodavanje ID-a
                     stolId = zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Count + 1;
                     zauzetiStoloviPoDatumu[narudzba.datum_vrijeme.Value.Date].Add(stolId.Value); // Dodaj novog stol u zauzete
                 }
@@ -78,7 +76,6 @@ namespace RestaurantManagementSystem.UserControls
                 var prilagodbeZaPrikaz = prilagodba != null ? SplitPrilagodbe(prilagodba, 35) : string.Empty;
 
 
-                // Pravimo ViewModel za narudžbu
                 narudzbaViewModels.Add(new NarudzbaViewModel
                 {
                     narudzba_Id = narudzba.id_narudzba,
@@ -126,7 +123,6 @@ namespace RestaurantManagementSystem.UserControls
                         narudzbaa.status = radioButton.Content.ToString();
                         narudzbaServices.UpdateNarudzbu(narudzbaa);
 
-                        // Ovdje možete izravno ažurirati narudzbaViewModels ako je potrebno
                         narudzbaViewModels.FirstOrDefault(n => n.narudzba_Id == narudzbaa.id_narudzba).status = narudzbaa.status;
 
                         dgNarudzbe.Items.Refresh();

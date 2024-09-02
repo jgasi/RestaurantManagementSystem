@@ -5,9 +5,6 @@ using EntitiesLayer.Entities;
 
 namespace RestaurantManagementSystem.UserControls
 {
-    /// <summary>
-    /// Interaction logic for UcPovijestNarudzbi.xaml
-    /// </summary>
     public partial class UcPovijestNarudzbi : UserControl
     {
         private Korisnik korisnik;

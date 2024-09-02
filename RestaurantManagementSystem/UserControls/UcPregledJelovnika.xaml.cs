@@ -36,14 +36,18 @@ namespace RestaurantManagementSystem.UserControls
         {
             var allItems = new List<Jelo>();
 
-            var first = await jeloServices.GetFirstThreeJelaAsync(2);
-            allItems.AddRange(first);
+            List<Jelo> items = new List<Jelo>();
+            items = await jeloServices.GetFirstThreeJelaByIdAsync();
+            allItems.AddRange(items);
 
-            var second = await jeloServices.GetFirstThreeJelaAsync(3);
-            allItems.AddRange(second);
+            //var first = await jeloServices.GetFirstThreeJelaAsync(2);
+            //allItems.AddRange(first);
 
-            var third = await jeloServices.GetFirstThreeJelaAsync(4);
-            allItems.AddRange(third);
+            //var second = await jeloServices.GetFirstThreeJelaAsync(3);
+            //allItems.AddRange(second);
+
+            //var third = await jeloServices.GetFirstThreeJelaAsync(4);
+            //allItems.AddRange(third);
 
             foreach (var item in allItems)
             {

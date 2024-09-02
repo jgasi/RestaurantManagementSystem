@@ -33,7 +33,7 @@ namespace RestaurantManagementSystem.UserControls
 
                 var recenzije = await recenzijaServices.GetRecenzijeByIdAsync(selectedJelo.id_jelo);
 
-                // Očistite postojeće komentare prije dodavanja novih
+                // Očisti postojeće komentare prije dodavanja novih
                 comments.Clear();
 
                 foreach (var recenzija in recenzije)

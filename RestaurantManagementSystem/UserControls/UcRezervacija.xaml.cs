@@ -193,16 +193,13 @@ namespace RestaurantManagementSystem.UserControls
 
         private async void Rezerviraj_Click(object sender, RoutedEventArgs e)
         {
-            // Inicijaliziraj listu za poruke o greškama
             List<string> errorMessages = new List<string>();
 
-            // Provjeri jesu li jela ili pića odabrani
             if (_selectedFoodItems.Count == 0 && _selectedDrinkItems.Count == 0)
             {
                 errorMessages.Add("Odaberi barem jedno jelo ili piće!");
             }
 
-            // Provjeri je li datum i vrijeme rezervacije odabrano i jel u budućnosti
             DateTime? selectedDateTime = ReservationDateTimePicker.Value;
             if (selectedDateTime == null)
             {
@@ -213,27 +210,22 @@ namespace RestaurantManagementSystem.UserControls
                 errorMessages.Add("Datum i vrijeme rezervacije moraju biti u budućnosti!");
             }
 
-            // Ako postoje poruke o greškama, prikaži ih
             if (errorMessages.Count > 0)
             {
                 System.Windows.Forms.MessageBox.Show(string.Join("\n", errorMessages));
                 return;
             }
 
-            // Calculate end time as 2 hours after selectedDateTime
             DateTime endTime = selectedDateTime.Value.AddHours(2);
 
-            // Retrieve all reservations within the selected time slot
             var sveRezervacije = await _rezervacijaServices.GetAllRezervacijeAsync();
             var overlappingReservations = sveRezervacije
                 .Where(r => r.datum_vrijeme < endTime && r.datum_vrijeme.Value.AddHours(2) > selectedDateTime)
                 .ToList();
 
 
-            // Get available tables (stolovi)
             var stolovi = await _stolServices.GetSlobodneStolove();
 
-            // Find the first available table that is not reserved in the overlapping time slot
             int? tableId = null;
             foreach (var stol in stolovi)
             {
@@ -247,7 +239,6 @@ namespace RestaurantManagementSystem.UserControls
 
             if (tableId == null)
             {
-                // No available table found for the selected time slot
                 System.Windows.Forms.MessageBox.Show("Nema dostupnog stola za odabrani termin.");
                 return;
             }

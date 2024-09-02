@@ -62,6 +62,14 @@ namespace BusinessLogicLayer.Services
             }
         }
 
+        public async Task<List<Jelo>> GetFirstThreeJelaByIdAsync()
+        {
+            using (var repo = new JeloRepository())
+            {
+                return await repo.GetFirstThree().ToListAsync();
+            }
+        }
+
         public async Task<List<Jelo>> GetJelaByNameAsync(string name)
         {
             using (var repo = new JeloRepository())

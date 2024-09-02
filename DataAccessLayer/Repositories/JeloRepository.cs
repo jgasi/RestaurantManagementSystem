@@ -37,6 +37,15 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public IQueryable<Jelo> GetFirstThree()
+        {
+            var query = from j in Entities
+                        orderby j.id_jelo
+                        select j;
+
+            return query.Take(3);
+        }
+
         public IQueryable<Jelo> GetJeloByIdInventara(int givenId)
         {
             var query = from j in Entities
