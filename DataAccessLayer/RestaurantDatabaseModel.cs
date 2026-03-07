@@ -8,9 +8,10 @@ namespace DataAccessLayer
 {
     public partial class RestaurantDatabaseModel : DbContext
     {
-        public RestaurantDatabaseModel()
-            : base("name=RestaurantDatabaseModel")
+        public RestaurantDatabaseModel() : base("name=RestaurantDatabaseModel")
         {
+            Database.SetInitializer(
+                new CreateDatabaseIfNotExists<RestaurantDatabaseModel>());
         }
 
         public virtual DbSet<Informacije> Informacije { get; set; }

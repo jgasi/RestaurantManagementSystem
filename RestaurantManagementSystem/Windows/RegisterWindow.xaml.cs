@@ -8,9 +8,6 @@ using EntitiesLayer.Entities;
 
 namespace RestaurantManagementSystem
 {
-    /// <summary>
-    /// Interaction logic for RegisterWindow.xaml
-    /// </summary>
     public partial class RegisterWindow : Window
     {
         private KorisnikServices korisnikServices = new KorisnikServices();

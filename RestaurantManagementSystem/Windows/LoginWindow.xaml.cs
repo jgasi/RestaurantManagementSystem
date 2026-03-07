@@ -6,12 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using BusinessLogicLayer.Services;
+using DataAccessLayer;
 
 namespace RestaurantManagementSystem
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
 
@@ -79,7 +77,7 @@ namespace RestaurantManagementSystem
                 {
                     //CurrentUser.LoggedInUser = korisnik;
 
-                    if(korisnik.uloga == "Običan korisnik")
+                    if(korisnik.uloga == "Obican korisnik")
                     {
                         MainWindow mainWindow = new MainWindow(korisnik);
                         mainWindow.Show();
@@ -120,7 +118,7 @@ namespace RestaurantManagementSystem
                 BitmapImage bitmap = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    JpegBitmapEncoder encoder = new JpegBitmapEncoder(); // Prilagodite kodera ovisno o vrsti slike
+                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                     encoder.Frames.Add(BitmapFrame.Create(bitmap));
                     encoder.Save(ms);
                     return ms.ToArray();
